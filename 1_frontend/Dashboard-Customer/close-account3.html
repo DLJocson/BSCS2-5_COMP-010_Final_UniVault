@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="close-account3.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="username-password-page">
+      <h1 class="title">Username & Password</h1>
+      <div class="text-box">
+        <label>Enter Username</label>
+        <input type="text" id="username" placeholder="Enter Account Number" />
+        <div class="error-message"></div>
+
+        <label>Enter Password</label>
+        <input type="password" id="password" placeholder="Enter Password" />
+        <div class="error-message"></div>
+      </div>
+
+      <div class="password-note">
+        <h4>Password must:</h4>
+        <br />
+        <ul class="description">
+          <li>Have 8 to 30 characters</li>
+          <li>Have 1 number</li>
+          <li>Contain special characters ‘-!@#$%^&*_+’</li>
+          <li>Contain both lowercase and uppercase letters</li>
+          <li>
+            Not contain number or letter sequences like ‘abc’, ‘123’, and ‘9999
+          </li>
+        </ul>
+      </div>
+
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='close-account2.html'" id="back">
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+      <script src="close-account3.js"></script>
+    </div>
+  </body>
+</html>

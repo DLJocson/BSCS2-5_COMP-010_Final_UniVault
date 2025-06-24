@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Account Type</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="registration2.css" />
+  </head>
+
+  <body>
+    <div class="account-type-page">
+      <h1 class="direction-text">Select Account Type</h1>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="deposit" name="account_type" value="Deposit Account" />
+        <label for="deposit" class="label-text">
+          <span class="title">Deposit Account</span><br />
+          <span class="description">Store money safely in your account.</span>
+        </label>
+      </div>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="card" name="account_type" value="Card Account" />
+        <label for="card" class="label-text">
+          <span class="title">Card Account</span><br />
+          <span class="description"
+            >Spend or access your money with a secure card.</span
+          >
+        </label>
+      </div>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="loan" name="account_type" value="Loan Account" />
+        <label for="loan" class="label-text">
+          <span class="title">Loan Account</span><br />
+          <span class="description"
+            >Borrow money and pay it back over time.</span
+          >
+        </label>
+      </div>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="wealth-management" name="account_type" value="Wealth Management Account" />
+        <label for="wealth-management" class="label-text">
+          <span class="title">Wealth Management Account</span><br />
+          <span class="description">Get expert help to grow your savings.</span>
+        </label>
+      </div>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="insurance" name="account_type" value="Insurance Account" />
+        <label for="insurance" class="label-text">
+          <span class="title">Insurance Account</span><br />
+          <span class="description"
+            >Protect yourself financially from unexpected events.</span
+          >
+        </label>
+      </div>
+
+      <div
+        id="error-message"
+        class="error-message"
+        style="font-size: 20px; color: red; padding-left: 40px"
+      ></div>
+
+      <div class="button">
+        <div class="back">
+          <button
+            onclick="location.href='registration1.html'"
+            id="back"
+            type="button"
+          >
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed" type="button">Proceed</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="registration2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Type Selection</title>
+    <link rel="stylesheet" href="registration1.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="customer-type-page">
+      <h1 class="direction-text">Customer Type</h1>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const accountOwner = document.getElementById('account-owner');
+          const businessOwner = document.getElementById('business-owner');
+          const form = document.querySelector('.checkbox-container');
+          const errorMessage = document.getElementById('error-message');
+
+          accountOwner.addEventListener('change', function() {
+            if (this.checked) {
+              businessOwner.checked = false;
+            }
+            errorMessage.textContent = '';
+          });
+
+          businessOwner.addEventListener('change', function() {
+            if (this.checked) {
+              accountOwner.checked = false;
+            }
+            errorMessage.textContent = '';
+          });
+
+          document.getElementById('back').addEventListener('click', function() {
+            window.location.href = 'entry.html';
+          });
+
+          form.addEventListener('submit', function(e) {
+            if (!accountOwner.checked && !businessOwner.checked) {
+              e.preventDefault();
+              errorMessage.textContent = 'Please select either Account Owner or Business Owner.';
+            }
+          });
+        });
+      </script>
+      <form class="checkbox-container" action="registration2.html">
+        <div class="checkbox">
+          <input type="checkbox" id="account-owner" />
+          <label>
+            <span class="title">Account Owner</span><br />
+            <span class="description">
+              For individuals opening a personal account for their own use.
+            </span>
+          </label>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" id="business-owner" name="customerType" />
+          <label>
+            <span class="title">Business Owner / Officer / Signatory</span
+            ><br />
+            <span class="description">
+              For individuals registering on behalf of a business or
+              organization.
+            </span>
+
+            <h5 class="additional-description">
+              <span class="blue-text">
+                Includes business owners, company officers, or authorized
+                signatories.
+              </span>
+            </h5>
+          </label>
+        </div>
+
+        <div
+          id="error-message"
+          class="error-message"
+          style="font-size: 20px; color: red; padding-left: 40px"
+        ></div>
+
+        <div class="button-container">
+          <button id="back" type="button">Back</button>
+          <button id="proceed" type="submit">Proceed</button>
+        </div>
+      </form>
+      <script type="module" src="registration1.js"></script>
+    </div>
+  </body>
+</html>

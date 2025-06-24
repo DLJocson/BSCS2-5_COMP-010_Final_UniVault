@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="update-work-nature2.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="verification-page">
+      <h1 class="title">Verification</h1>
+      <div class="first-container">
+        <h2 class="subtitle">ID 1</h2>
+        <div class="id1">
+          <div class="select-id">
+            <label for="select-id1">Select ID Type</label>
+            <select id="select-id1">
+              <option value="" disabled selected>Select</option>
+              <option value="passport">Passport</option>
+              <option value="driver">Driver's License</option>
+            </select>
+            <div class="error-message" id="error-select-id1"></div>
+            <div class="error-message" id="error-select-id1"></div>
+          </div>
+
+          <div class="id-num">
+            <label for="">ID Number</label>
+            <input id="id1-num" type="text" placeholder="Enter ID Number" />
+            <div class="error-message" id="error-id1-num"></div>
+          </div>
+        </div>
+
+        <h2 class="subtitle">ID 1 Expiration Date</h2>
+        <div class="date-container">
+          <div class="date">
+            <label for="month">Month</label>
+            <select id="month">
+              <option value="" disabled selected>Select Month</option>
+            </select>
+            <div class="error-message" id="error-month"></div>
+          </div>
+
+          <div class="date">
+            <label for="day">Day</label>
+            <select id="day">
+              <option value="" disabled selected>Select Day</option>
+            </select>
+            <div class="error-message" id="error-day"></div>
+          </div>
+
+          <div class="date">
+            <label for="year">Year</label>
+            <select id="year">
+              <option value="" disabled selected>Select Year</option>
+            </select>
+            <div class="error-message" id="error-year"></div>
+          </div>
+        </div>
+
+        <div class="upload-box">
+          <div class="icon">
+            <img src="/assets/upload-logo.png" alt="" />
+          </div>
+          <p class="direction">Upload Front of ID 1</p>
+          <label for="front-id-1">Browse</label>
+          <input type="file" id="front-id-1" accept=".png,.jpeg,.jpg" />
+          <br />
+          <p>drop a file here</p>
+          <div class="note">
+            <span class="red-text">* </span>File supported: .png & .jpeg
+          </div>
+          <br />
+          <div class="error-message" id="error-front-id-1"></div>
+        </div>
+
+        <div class="upload-box">
+          <div class="icon">
+            <img src="/assets/upload-logo.png" alt="" />
+          </div>
+          <p class="direction">Upload Back of ID 1</p>
+          <label for="back-id-1">Browse</label>
+          <input type="file" id="back-id-1" accept=".png,.jpeg,.jpg" />
+          <br />
+          <p>drop a file here</p>
+          <div class="note">
+            <span class="red-text">* </span>File supported: .png & .jpeg
+          </div>
+          <br />
+          <div class="error-message" id="error-back-id-1"></div>
+        </div>
+      </div>
+
+      <div class="second-container">
+        <h2 class="subtitle">ID 2</h2>
+        <div class="id2">
+          <div class="select-id">
+            <label for="select-id2">Select ID Type</label>
+            <select id="select-id2">
+              <option value="" disabled selected>Select</option>
+              <option value="passport">Passport</option>
+              <option value="driver">Driver's License</option>
+            </select>
+            <div class="error-message" id="error-select-id2"></div>
+          </div>
+
+          <div class="id-num">
+            <label for="">ID Number</label>
+            <input id="id2-num" type="text" placeholder="Enter ID Number" />
+            <div class="error-message" id="error-id2-num"></div>
+          </div>
+        </div>
+
+        <div class="id2-expiration">
+          <h2 class="subtitle">ID 2 Expiration Date</h2>
+          <div class="date-container">
+            <div class="date">
+              <label for="month-id2">Month</label>
+              <select id="month-id2">
+                <option value="" disabled selected>Select Month</option>
+              </select>
+              <div class="error-message" id="error-month-id2"></div>
+            </div>
+
+            <div class="date">
+              <label for="day-id2">Day</label>
+              <select id="day-id2">
+                <option value="" disabled selected>Select Day</option>
+              </select>
+              <div class="error-message" id="error-day-id2"></div>
+            </div>
+
+            <div class="date">
+              <label for="year-id2">Year</label>
+              <select id="year-id2">
+                <option value="" disabled selected>Select Year</option>
+              </select>
+              <div class="error-message" id="error-year-id2"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="upload-box">
+          <div class="icon">
+            <img src="/assets/upload-logo.png" alt="" />
+          </div>
+          <p class="direction">Upload Front of ID 2</p>
+          <label for="front-id-2">Browse</label>
+          <input type="file" id="front-id-2" accept=".png,.jpeg,.jpg" />
+          <br />
+          <p>drop a file here</p>
+          <div class="note">
+            <span class="red-text">* </span> File supported: .png & .jpeg
+          </div>
+          <br />
+          <div class="error-message" id="error-front-id-2"></div>
+        </div>
+
+        <div class="upload-box">
+          <div class="icon">
+            <img src="/assets/upload-logo.png" alt="" />
+          </div>
+          <p class="direction">Upload Back of ID 2</p>
+          <label for="back-id-2">Browse</label>
+          <input type="file" id="back-id-2" accept=".png,.jpeg,.jpg" />
+          <br />
+          <p>drop a file here</p>
+          <div class="note">
+            <span class="red-text">* </span>File supported: .png & .jpeg
+          </div>
+          <br />
+          <div class="error-message" id="error-back-id-2"></div>
+        </div>
+
+        <h2 class="subtitle">Supporting Documents</h2>
+        <div id="supporting-documents" class="upload-box">
+          <div class="icon">
+            <img src="/assets/upload-logo.png" alt="" />
+          </div>
+          <p class="direction">Upload Supporting Document</p>
+          <label for="supporting-doc">Browse</label>
+          <input
+            type="file"
+            id="supporting-doc"
+            accept=".png,.jpeg,.jpg,.pdf"
+          />
+          <br />
+          <p>drop a file here</p>
+          <div class="note">
+            <span class="red-text">* </span>File supported: .png, .jpeg, .jpg, &
+            .pdf
+          </div>
+          <br />
+          <div class="error-message" id="error-supporting-doc"></div>
+        </div>
+      </div>
+
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='update-work-nature1.html'" id="back">
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+      <script src="update-work-nature2.js"></script>
+    </div>
+  </body>
+</html>

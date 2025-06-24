@@ -1,0 +1,4 @@
+Upload all files related to the documentation here:
+    1. PDF files
+    2. Images
+    3. Spreadsheets

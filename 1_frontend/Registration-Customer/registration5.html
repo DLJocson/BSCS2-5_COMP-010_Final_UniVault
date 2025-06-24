@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="registration5.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="employment-page">
+      <div class="title">
+        <h1 class="title">Create Account</h1>
+        <h2 class="employment">Employment & Financial Data</h2>
+      </div>
+
+      <div class="checkbox">
+        <label class="question" for="">Are you currently employed?</label>
+
+        <input id="yes" type="checkbox" />
+        <label class="yes" for="">Yes</label>
+      </div>
+      <div class="containers">
+        <div class="first-container">
+          <div class="work-business-email">
+            <label for="">Work/Business Email Address</label>
+            <div>
+              <input
+              id="work-email"
+              type="text"
+              placeholder="e.g. business@gmail.com"
+              />
+              <div class="error-message"></div>
+            </div>
+          </div>
+
+          <div class="work-business-number">
+            <label for="">Work/Business Phone Number</label>
+            <div class="work-business-text">
+              <div>
+                <input id="work" type="text" placeholder="e.g. 63" />
+                <div class="error-message"></div>
+              </div>
+              <div>
+                <input
+                  id="business-number"
+                  type="text"
+                  placeholder="e.g. 9171112222"
+                />
+                <div class="error-message"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tin">
+            <label for="">TIN Number</label>
+            <div>
+              <input id="tin" type="text" placeholder="e.g. 123456789000" maxlength="25" />
+              <div class="error-message"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="second-container">
+          <h3 class="work-address">Work Address</h3>
+
+          <div class="unit-building">
+            <label for="">Unit</label>
+            <label for="">Building</label>
+          </div>
+          <div class="unit-building-text">
+            <div>
+              <input id="work-unit" type="text" placeholder="e.g. 1234" />
+              <div class="error-message"></div>
+            </div>
+
+            <div>
+              <input id="work-building" type="text" placeholder="e.g. Building 1" />
+              <div class="error-message"></div>
+            </div>
+          </div>
+
+          <div class="street-subdivision">
+            <label for="">Street</label>
+            <label for="">Subdivision</label>
+          </div>
+          <div class="street-subdivision-text">
+            <div>
+              <input id="work-street" type="text" placeholder="e.g. 123 Street" />
+              <div class="error-message"></div>
+            </div>
+
+            <div>
+              <input
+                id="work-subdivision"
+                type="text"
+                placeholder="e.g. Subdivision 1"
+              />
+              <div class="error-message"></div>
+            </div>
+          </div>
+
+          <div class="barangay-city">
+            <label for="">Barangay</label>
+            <label for="">City</label>
+          </div>
+          <div class="barangay-city-text">
+            <div>
+              <input
+                id="work-barangay"
+                type="text"
+                placeholder="e.g. Barangay 123"
+              />
+              <div class="error-message"></div>
+            </div>
+
+            <div>
+              <input id="work-city" type="text" placeholder="e.g. Makati" />
+              <div class="error-message"></div>
+            </div>
+          </div>
+
+          <div class="province-country">
+            <label for="">Province</label>
+            <label for="">Country</label>
+          </div>
+          <div class="province-country-text">
+            <div>
+              <input
+                id="work-province"
+                type="text"
+                placeholder="e.g. Metro Manila"
+              />
+              <div class="error-message"></div>
+            </div>
+
+            <div>
+              <input id="work-country" type="text" placeholder="e.g. Philippines" />
+              <div class="error-message"></div>
+            </div>
+          </div>
+          <div class="zip-code">
+            <label for="">Zip Code</label>
+            <input id="work-zip-code" type="text" placeholder="e.g. 1234" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Only keep the multi-select dropdown for Source of Funds -->
+      <div id="source-of" class="source-of-funds">
+        <label for="">Source(s) of Funds</label>
+        <div class="dropdown-multiselect" style="position: relative; display: inline-block; width: 100%;">
+          <button type="button" id="dropdownBtn" style="width: 100%; text-align: left; padding: 8px; border: 1px solid #ccc; background: #fff;">
+            Select Source(s) of Funds
+          </button>
+          <div id="dropdownMenu" style="display: none; position: absolute; width: 100%; background: #fff; border: 1px solid #ccc; z-index: 10; max-height: 200px; overflow-y: auto;">
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Employed - Fixed Income"> Employed - Fixed Income</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Employed - Variable Income"> Employed - Variable Income</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Self-Employed - Business Income"> Self-Employed - Business Income</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Remittances"> Remittances</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Pension"> Pension</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Personal Savings / Retirement Proceeds"> Personal Savings / Retirement Proceeds</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Allowance"> Allowance</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Inheritance"> Inheritance</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Investment/Dividend Income"> Investment/Dividend Income</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Rental Income"> Rental Income</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Sale of Asset / Property"> Sale of Asset / Property</label>
+            <label style="display:block; padding: 5px;"><input type="checkbox" value="Other Sources (Lottery, Donations, Tax Refunds, and Insurance/Legal Claims)"> Other Sources (Lottery, Donations, Tax Refunds, and Insurance/Legal Claims)</label>
+          </div>
+          <input type="hidden" id="source-of-funds-multi" name="source-of-funds-multi">
+        </div>
+        <p>Please refer to <a href="#">Instruction</a> for more information.</p>
+        <div class="error-message"></div>
+      </div>
+
+      <div class="containers2">
+        <div class="instruction">
+          <br />
+
+          <p>
+            If <span class="blue-text">Source of Funds</span> is
+            <span class="blue-text">004 - Remittances</span>, provide the
+            following:
+          </p>
+        </div>
+        <div class="third-container">
+          <div class="remittance">
+            <label for="">Remittance Country</label>
+            <label for="">Remittance Purpose</label>
+          </div>
+
+            <div class="remittance-dropdown">
+            <div>
+              <select name="" id="remittance-country">
+              <option value="" hidden selected>Select</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+              <option value="Andorra">Andorra</option>
+              <option value="Angola">Angola</option>
+              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Armenia">Armenia</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Azerbaijan">Azerbaijan</option>
+              <option value="Bahamas">Bahamas</option>
+              <option value="Bahrain">Bahrain</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Barbados">Barbados</option>
+              <option value="Belarus">Belarus</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Belize">Belize</option>
+              <option value="Benin">Benin</option>
+              <option value="Bhutan">Bhutan</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Bosnia and Herzegovina">
+                Bosnia and Herzegovina
+              </option>
+              <option value="Botswana">Botswana</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Brunei">Brunei</option>
+              <option value="Bulgaria">Bulgaria</option>
+              <option value="Burkina Faso">Burkina Faso</option>
+              <option value="Burundi">Burundi</option>
+              <option value="Cabo Verde">Cabo Verde</option>
+              <option value="Cambodia">Cambodia</option>
+              <option value="Cameroon">Cameroon</option>
+              <option value="Canada">Canada</option>
+              <option value="Central African Republic">
+                Central African Republic
+              </option>
+              <option value="Chad">Chad</option>
+              <option value="Chile">Chile</option>
+              <option value="China">China</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Comoros">Comoros</option>
+              <option value="Congo (Brazzaville)">Congo (Brazzaville)</option>
+              <option value="Congo (Kinshasa)">Congo (Kinshasa)</option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="Croatia">Croatia</option>
+              <option value="Cuba">Cuba</option>
+              <option value="Cyprus">Cyprus</option>
+              <option value="Czech Republic">Czech Republic</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Djibouti">Djibouti</option>
+              <option value="Dominica">Dominica</option>
+              <option value="Dominican Republic">Dominican Republic</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Egypt">Egypt</option>
+              <option value="El Salvador">El Salvador</option>
+              <option value="Equatorial Guinea">Equatorial Guinea</option>
+              <option value="Eritrea">Eritrea</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Eswatini">Eswatini</option>
+              <option value="Ethiopia">Ethiopia</option>
+              <option value="Fiji">Fiji</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Gabon">Gabon</option>
+              <option value="Gambia">Gambia</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Germany">Germany</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Greece">Greece</option>
+              <option value="Grenada">Grenada</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Guinea">Guinea</option>
+              <option value="Guinea-Bissau">Guinea-Bissau</option>
+              <option value="Guyana">Guyana</option>
+              <option value="Haiti">Haiti</option>
+              <option value="Honduras">Honduras</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Iceland">Iceland</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Iran">Iran</option>
+              <option value="Iraq">Iraq</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Israel">Israel</option>
+              <option value="Italy">Italy</option>
+              <option value="Jamaica">Jamaica</option>
+              <option value="Japan">Japan</option>
+              <option value="Jordan">Jordan</option>
+              <option value="Kazakhstan">Kazakhstan</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Kiribati">Kiribati</option>
+              <option value="Kuwait">Kuwait</option>
+              <option value="Kyrgyzstan">Kyrgyzstan</option>
+              <option value="Laos">Laos</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lebanon">Lebanon</option>
+              <option value="Lesotho">Lesotho</option>
+              <option value="Liberia">Liberia</option>
+              <option value="Libya">Libya</option>
+              <option value="Liechtenstein">Liechtenstein</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Luxembourg">Luxembourg</option>
+              <option value="Madagascar">Madagascar</option>
+              <option value="Malawi">Malawi</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Mali">Mali</option>
+              <option value="Malta">Malta</option>
+              <option value="Marshall Islands">Marshall Islands</option>
+              <option value="Mauritania">Mauritania</option>
+              <option value="Mauritius">Mauritius</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Micronesia">Micronesia</option>
+              <option value="Moldova">Moldova</option>
+              <option value="Monaco">Monaco</option>
+              <option value="Mongolia">Mongolia</option>
+              <option value="Montenegro">Montenegro</option>
+              <option value="Morocco">Morocco</option>
+              <option value="Mozambique">Mozambique</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Namibia">Namibia</option>
+              <option value="Nauru">Nauru</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Niger">Niger</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="North Korea">North Korea</option>
+              <option value="North Macedonia">North Macedonia</option>
+              <option value="Norway">Norway</option>
+              <option value="Oman">Oman</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Palau">Palau</option>
+              <option value="Palestine">Palestine</option>
+              <option value="Panama">Panama</option>
+              <option value="Papua New Guinea">Papua New Guinea</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Peru">Peru</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Qatar">Qatar</option>
+              <option value="Romania">Romania</option>
+              <option value="Russia">Russia</option>
+              <option value="Rwanda">Rwanda</option>
+              <option value="Saint Kitts and Nevis">
+                Saint Kitts and Nevis
+              </option>
+              <option value="Saint Lucia">Saint Lucia</option>
+              <option value="Saint Vincent and the Grenadines">
+                Saint Vincent and the Grenadines
+              </option>
+              <option value="Samoa">Samoa</option>
+              <option value="San Marino">San Marino</option>
+              <option value="Sao Tome and Principe">
+                Sao Tome and Principe
+              </option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Senegal">Senegal</option>
+              <option value="Serbia">Serbia</option>
+              <option value="Seychelles">Seychelles</option>
+              <option value="Sierra Leone">Sierra Leone</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Slovakia">Slovakia</option>
+              <option value="Slovenia">Slovenia</option>
+              <option value="Solomon Islands">Solomon Islands</option>
+              <option value="Somalia">Somalia</option>
+              <option value="South Africa">South Africa</option>
+              <option value="South Korea">South Korea</option>
+              <option value="South Sudan">South Sudan</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Sudan">Sudan</option>
+              <option value="Suriname">Suriname</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Syria">Syria</option>
+              <option value="Taiwan">Taiwan</option>
+              <option value="Tajikistan">Tajikistan</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Timor-Leste">Timor-Leste</option>
+              <option value="Togo">Togo</option>
+              <option value="Tonga">Tonga</option>
+              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+              <option value="Tunisia">Tunisia</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Turkmenistan">Turkmenistan</option>
+              <option value="Tuvalu">Tuvalu</option>
+              <option value="Uganda">Uganda</option>
+              <option value="Ukraine">Ukraine</option>
+              <option value="United Arab Emirates">
+                United Arab Emirates
+              </option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Uzbekistan">Uzbekistan</option>
+              <option value="Vanuatu">Vanuatu</option>
+              <option value="Vatican City">Vatican City</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Yemen">Yemen</option>
+              <option value="Zambia">Zambia</option>
+              <option value="Zimbabwe">Zimbabwe</option>
+              </select>
+              <div class="error-message"></div>
+            </div>
+
+            <div>
+              <input type="text" id="remittance-purpose" placeholder="Enter remittance purpose" />
+              <div class="error-message"></div>
+            </div>
+            </div>
+
+          <div class="business-nature">
+            <label for="">Work/Business Nature</label>
+            <div class="dropdown-multiselect" style="position: relative; display: inline-block; width: 100%;">
+              <button type="button" id="businessNatureDropdownBtn" style="width: 100%; text-align: left; padding: 8px; border: 1px solid #ccc; background: #fff;">
+                Select Work/Business Nature
+              </button>
+              <div id="businessNatureDropdownMenu" style="display: none; position: absolute; width: 100%; background: #fff; border: 1px solid #ccc; z-index: 10; max-height: 200px; overflow-y: auto;">
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="accounting"> Accounting/Auditing/Tax Practice Services</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="legal"> Legal Services</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="architecture"> Architecture/Engineering</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="consultancy"> Other Professional Services / Consultancy / Coaching</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="pawnshop"> Pawnshop</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="lending"> Lending</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="msb_emi"> Money Service Business - Electronic Money Issuer</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="msb_virtual_currency"> Money Service Business - Virtual Currency Exchange</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="msb_remittance"> Money Service Business - Remittance Transfer Company</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="msb_forex_dealer"> Money Service Business - Foreign Exchange Dealer / Money Changer</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="banking"> Banking</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="insurance"> Insurance</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="securities"> Securities Broker / Dealer</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="construction"> Construction and Civil Engineering</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="real_estate"> Real Estate Brokerage and Sales</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="media"> Media</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="arts"> Arts/Entertainment/Recreation</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="sports"> Sports/eSports</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="gambling"> Gambling/Casino/eGames</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="healthcare"> Healthcare (Doctor, Dentist, Nurse, Psychiatrist and others)</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="social_work"> Social Work / Non-Government and Non-Profit Organizations</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="education"> Education / Online Education</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="ict"> Information/Communication/Telecommunication</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="publishing"> Publishing/Printing</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="advertising"> Advertising/Marketing</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="tech"> Robotics/AI/Cloud/Data Engineering/Software Development/Cybersecurity</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="manufacturing"> Manufacturing/Packaging</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="firearms"> Manufacturing/Trading of Firearms and Ammunition</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="antiques"> Art / Antiques Dealership</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="vehicle_dealership"> Car/Boat/Plane Dealership</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="jewelry"> Jewelry / Precious Metals / Precious Stones Dealership</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="retail"> Wholesale / Retail Trade / E-Commerce / Online Selling</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="repair"> Repair Services</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="transport"> Transportation (Land, Sea and Air)</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="shipping"> Shipping/Cargo / Storage</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="seafarer"> Seaman / Seafarer</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="agriculture"> Agriculture / Fishing</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="forestry"> Forestry</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="mining"> Mining/Quarrying</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="electric"> Electric Utilities</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="oil"> Oil/Gasoline</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="water"> Water Supply/Sewerage/Waste Management</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="government"> Public Administration / Government</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="peace_order"> Peace and Order (Military, Police, Fireman, Jail Warden and Others)</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="hospitality"> Hotel/Accommodation/Restaurant/Food Services</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="diplomatic"> Embassies/Diplomatic Services / Attached Offices</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="travel"> Travel / Travel Agencies</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="employment_agency"> Employment Agency / Human Resources</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="security_agency"> Security Agency / Services</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="other_services"> Other Service Activities (Hairdresser, Manicurist, Masseuse and others)</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="household"> Private Household / Household Employee / Household Staff</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="religious"> Religious Organization</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="designated_non_financial_business_professions"> Designated Non Financial Business And Professions (DNFBP)</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="pogo_direct"> Direct OGB/POGO Licensee and Authorized Gaming Agent</label>
+                <label style="display:block; padding: 5px;"><input type="checkbox" value="pogo_indirect"> Indirect OGB/POGO Allied Service Provider</label>
+              </div>
+              <input type="hidden" id="business-nature-multi" name="business-nature-multi">
+            </div>
+            <div class="error-message"></div>
+          </div>
+
+          <div class="primary-employer">
+            <label for="">Primary Employer/Business</label>
+            <input
+              id="primary-employer"
+              type="text"
+              placeholder="e.g. Pedro Cruz"
+            />
+            <div class="error-message"></div>
+          </div>
+
+          <div class="position">
+            <label for="">Position/Job Title (If employed)</label>
+            <select name="" id="position">
+              <option value="" hidden selected>Select</option>
+              <option value="Owner / Director / Officer">
+                Owner / Director / Officer
+              </option>
+              <option value="Non-Officer / Employee">
+                Non-Officer / Employee
+              </option>
+              <option value="Contractual / Part-Time">
+                Contractual / Part-Time
+              </option>
+              <option value="Elected / Appointee">Elected / Appointee</option>
+              <option value="Employee">Employee</option>
+            </select>
+            <div class="error-message"></div>
+          </div>
+
+          <div class="employment-start-date">
+            <label for="">Employment Start Date (Optional)</label>
+            <input
+              id="employment-start-date"
+              type="date"
+              title="When did you start working at this employer? Leave blank if unsure."
+            />
+            <div class="error-message"></div>
+            <small style="color: #666; font-size: 12px;">If left blank, we'll use a default date</small>
+          </div>
+        </div>
+      </div>
+
+      <div id="gross-inc" class="gross-income">
+        <label for="">Gross Income</label>
+        <input id="gross-income" type="text" placeholder="e.g. 120000" />
+        <div class="error-message"></div>
+      </div>
+
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='registration4.html'" id="back">
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+      <script src="registration5.js"></script>
+    </div>
+  </body>
+</html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function setEmploymentDetailsVisibility(visible) {
+    document.querySelector(".containers").style.display = visible ? "" : "none";
+    document.querySelector(".containers2").style.display = visible ? "" : "none";
+    document.getElementById("source-of").style.display = "";
+    document.getElementById("gross-inc").style.display = "";
+  }
+
+  setEmploymentDetailsVisibility(false);
+
+  const employedCheckbox = document.getElementById("yes");
+  employedCheckbox.addEventListener("change", function () {
+    setEmploymentDetailsVisibility(this.checked);
+  });
+
+  // Dropdown multiselect logic for Source of Funds
+  const dropdownBtn = document.getElementById("dropdownBtn");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const hiddenInput = document.getElementById("source-of-funds-multi");
+
+  dropdownBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.style.display = "none";
+    }
+  });
+
+  dropdownMenu.addEventListener("change", function () {
+    const checked = Array.from(dropdownMenu.querySelectorAll("input[type=checkbox]:checked"));
+    const values = checked.map(cb => cb.value);
+    hiddenInput.value = values.join(",");
+    dropdownBtn.textContent = values.length ? checked.map(cb => cb.parentNode.textContent.trim()).join(", ") : "Select Source(s) of Funds";
+  });
+
+  // Dropdown multiselect logic for Work/Business Nature
+  const businessNatureDropdownBtn = document.getElementById("businessNatureDropdownBtn");
+  const businessNatureDropdownMenu = document.getElementById("businessNatureDropdownMenu");
+  const businessNatureHiddenInput = document.getElementById("business-nature-multi");
+
+  businessNatureDropdownBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    businessNatureDropdownMenu.style.display = businessNatureDropdownMenu.style.display === "block" ? "none" : "block";
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!businessNatureDropdownBtn.contains(e.target) && !businessNatureDropdownMenu.contains(e.target)) {
+      businessNatureDropdownMenu.style.display = "none";
+    }
+  });
+
+  businessNatureDropdownMenu.addEventListener("change", function () {
+    const checked = Array.from(businessNatureDropdownMenu.querySelectorAll("input[type=checkbox]:checked"));
+    const values = checked.map(cb => cb.value);
+    businessNatureHiddenInput.value = values.join(",");
+    businessNatureDropdownBtn.textContent = values.length ? checked.map(cb => cb.parentNode.textContent.trim()).join(", ") : "Select Work/Business Nature";
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function addAsterisk(label) {
+    if (!label.querySelector('.required-asterisk')) {
+      const span = document.createElement('span');
+      span.className = 'required-asterisk';
+      span.textContent = '*';
+      label.appendChild(span);
+    }
+  }
+
+  // List of label texts to skip for asterisk
+  const skipAsterisk = [
+    "Are you currently employed?",
+    "Unit",
+    "Building",
+    "Street",
+    "Subdivision",
+    "Barangay"
+  ];
+
+  document.querySelectorAll('label').forEach(label => {
+    // Skip if label text matches any in skipAsterisk
+    if (skipAsterisk.includes(label.textContent.trim())) return;
+
+    const next = label.nextElementSibling;
+    if (
+      next &&
+      (
+        next.tagName === 'INPUT' ||
+        next.tagName === 'SELECT' ||
+        (next.tagName === 'DIV' && next.classList.contains('dropdown-multiselect'))
+      )
+    ) {
+      addAsterisk(label);
+    }
+  });
+
+  document.querySelectorAll('.dropdown-multiselect').forEach(drop => {
+    let prev = drop.previousElementSibling;
+    while (prev && prev.tagName !== 'LABEL') prev = prev.previousElementSibling;
+    if (prev && !skipAsterisk.includes(prev.textContent.trim())) addAsterisk(prev);
+  });
+
+  [
+    '.unit-building',
+    '.street-subdivision',
+    '.barangay-city',
+    '.province-country',
+    '.remittance',
+  ].forEach(selector => {
+    document.querySelectorAll(selector + ' label').forEach(label => {
+      if (!skipAsterisk.includes(label.textContent.trim())) addAsterisk(label);
+    });
+  });
+
+  [
+    '#work-zip-code',
+    '#gross-income',
+    '#primary-employer',
+    '#tin',
+    '#work-email',
+    '#work',
+    '#business-number',
+    '#remittance-purpose',
+    '#remittance-country',
+    '#position'
+  ].forEach(id => {
+    const input = document.getElementById(id.replace('#', ''));
+    if (input) {
+      let label = input.parentElement.querySelector('label');
+      if (!label) {
+        let prev = input.previousElementSibling;
+        if (prev && prev.tagName === 'LABEL') label = prev;
+      }
+      if (!label) {
+        let prev = input.parentElement.previousElementSibling;
+        if (prev && prev.tagName === 'LABEL') label = prev;
+      }
+      if (label && !skipAsterisk.includes(label.textContent.trim())) addAsterisk(label);
+    }
+  });
+
+  // Add asterisk to "Work/Business Phone Number" label
+  const phoneLabel = document.querySelector('.work-business-number > label');
+  if (phoneLabel) addAsterisk(phoneLabel);
+});
+</script>

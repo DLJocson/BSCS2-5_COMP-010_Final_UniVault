@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="apply-account5.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="issuance-consent-page">
+      <div class="first-container">
+        <h1 class="title">Consent For The Issuance of a BDO Credit Card</h1>
+        <p>
+          By signing, I agree that this shall serve as my application for
+          issuance of a BDO Credit Card and I undertake to submit documents as
+          may be deemed necessary by BDO. I authorize BDO to conduct random
+          verification with government agencies or third parties to establish
+          authenticity of the information declared and/or documents submitted
+          and hereby waive confidentiality of the rules and laws as applicable.
+          I understand that the issuance of a BDO Credit Card shall be subject
+          to credit evaluation and discretion of BDO.
+        </p>
+      </div>
+
+      <div class="second-container">
+        <div class="checkbox-item">
+          <input type="checkbox" id="deposit" />
+          <label for="deposit" class="label-text">
+            <span class="description"
+              >I agree to the terms for the issuance of a BDO Credit Card.</span
+            >
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input type="checkbox" id="deposit" />
+          <label for="deposit" class="label-text">
+            <span class="description"
+              >I do not agree to the terms for the issuance of a BDO Credit
+              Card.</span
+            >
+          </label>
+        </div>
+        <div id="error-message" class="error-message"></div>
+      </div>
+
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='apply-account4.html'" id="back">
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+      <script src="apply-account5.js"></script>
+    </div>
+  </body>
+</html>

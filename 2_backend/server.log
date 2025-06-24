@@ -1,0 +1,7 @@
+
+> univault-backend@1.0.0 dev
+> set NODE_ENV=development && node server.js
+
+Server running on http://localhost:3000
+Environment: development 
+Connected to MySQL database!

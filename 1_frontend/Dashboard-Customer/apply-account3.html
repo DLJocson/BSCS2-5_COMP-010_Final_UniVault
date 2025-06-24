@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="apply-account3.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="regulatory-page">
+      <h1 class="title">Regulatory Requirements</h1>
+      <div class="first-container">
+        <h5>Political Relations and Affiliations Questionnaire</h5>
+
+        <div class="checkbox">
+          <label for=""
+            >Do you have previous and current affiliation/dealings with the
+            Government and/or relations to any official of a government in any
+            country, territory, or of an intergovernmental or international
+            organization?</label
+          >
+
+          <div class="yes">
+            <input type="checkbox" />
+            <label for="">Yes</label>
+          </div>
+          <div class="no">
+            <input type="checkbox" />
+            <label for="">No</label>
+          </div>
+        </div>
+      </div>
+      <div id="error-message"></div>
+
+      <div class="second-container">
+        <h5>Foreign Account Tax Compliance Act (FATCA) Questionnaire</h5>
+        <h6>
+          Refer to <span class="blue-text">'Instructions'</span> for details on
+          the <span class="blue-text">'Substantial Presence Test'.</span>
+        </h6>
+
+        <div class="checkbox">
+          <label for=""
+            >Are you obligated to pay taxes to the U.S. IRS because of your
+            citizenship, residency, or other reasons such as meeting the
+            'Substantial Presence Test'?</label
+          >
+          <div class="yes">
+            <input type="checkbox" />
+            <label for="">Yes</label>
+          </div>
+          <div class="no">
+            <input type="checkbox" />
+            <label for="">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="third-container">
+        <h5>
+          Designated Non-Financial Business and Professions (DNFBPs)
+          Questionnaire
+        </h5>
+        <h6>
+          Refer to <span class="blue-text">'Instructions'</span> for details on
+          <span class="blue-text">'DNFBPs'</span> and
+          <span class="blue-text">'OGBs'</span>.
+        </h6>
+
+        <div class="third-checkbox">
+          <label for=""
+            >Does your work/business fall under the classification of a
+            DNFBP?</label
+          >
+          <div class="yes-no">
+            <div class="yes">
+              <input type="checkbox" />
+              <label for="yes">Yes</label>
+            </div>
+            <div class="no">
+              <input type="checkbox" />
+              <label for="no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <label for=""
+            >Does your work/business provide service, process transactions, have
+            transactions or related interests/relationships with any business or
+            service provider in the online gaming industry?</label
+          >
+          <div class="yes">
+            <input type="checkbox" />
+            <label for="">Yes</label>
+          </div>
+          <div class="no">
+            <input type="checkbox" />
+            <label for="">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="fourth-container">
+        <h5>Beneficial Ownership</h5>
+        <div class="fourth-checkbox">
+          <label for=""
+            >Are you opening this account on behalf of someone else?</label
+          >
+          <div class="yes-no">
+            <div class="yes">
+              <input type="checkbox" />
+              <label for="yes">Yes</label>
+            </div>
+            <div class="no">
+              <input type="checkbox" />
+              <label for="no">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='apply-account2.html'" id="back">
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+    </div>
+    <script src="apply-account3.js"></script>
+  </body>
+</html>

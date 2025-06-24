@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="registration3.css" />
+  </head>
+  <body>
+    <div class="create-account-page">
+      <h1 class="title">Create Account</h1>
+      <h2 class="fname-title">Full Name</h2>
+      <div class="first-container">
+        <div class="checkbox-container">
+          <label for="first-name">First Name</label>
+          <input id="first-name" type="text" placeholder="e.g. Juan" maxlength="255" />
+          <div class="error-message" id="error-first-name"></div>
+        </div>
+
+        <div class="checkbox-container">
+          <label for="middle-name">Middle Name</label>
+          <input id="middle-name" type="text" placeholder="e.g. Garcia" maxlength="255" />
+          <div class="error-message" id="error-middle-name"></div>
+        </div>
+
+        <div class="checkbox-container">
+          <label for="last-name">Last Name</label>
+          <input id="last-name" type="text" placeholder="e.g. Dela Cruz" maxlength="255" />
+          <div class="error-message" id="error-last-name"></div>
+        </div>
+
+        <div class="checkbox-container">
+          <label for="suffix-name">Suffix</label>
+          <input
+            id="suffix-name"
+            type="text"
+            placeholder="e.g. III (Press 0 if not applicable)"
+            maxlength="255"
+          />
+          <div class="error-message" id="error-suffix-name"></div>
+        </div>
+      </div>
+
+      <div class="second-container">
+        <h2 class="personal-info">Personal Information</h2>
+        <label class="date-of-birth">Date of Birth</label>
+        <div class="date-container">
+          <div class="date">
+            <label for="month">Month</label>
+            <select id="month">
+              <option value="" disabled selected>Select Month</option>
+            </select>
+            <div class="error-message" id="error-month"></div>
+          </div>
+
+          <div class="date">
+            <label for="day">Day</label>
+            <select id="day">
+              <option value="" disabled selected>Select Day</option>
+            </select>
+            <div class="error-message" id="error-day"></div>
+          </div>
+
+          <div class="date">
+            <label for="year">Year</label>
+            <select id="year">
+              <option value="" disabled selected>Select Year</option>
+            </select>
+            <div class="error-message" id="error-year"></div>
+          </div>
+        </div>
+
+        <div class="country-label">
+          <label for="country" disabled selected>Country of Birth</label>
+          <label for="citizenship">Citizenship</label>
+        </div>
+
+        <div class="country-container">
+          <div>
+            <select name="country" id="country">
+              <option value="" disabled selected>Select Country</option>
+            </select>
+            <div class="error-message" id="error-country"></div>
+          </div>
+
+          <div>
+            <select name="citizenship" id="citizenship">
+              <option value="" disabled selected>Select Citizenship</option>
+            </select>
+            <div class="error-message" id="error-citizenship"></div>
+          </div>
+        </div>
+
+        <div class="gender-label">
+          <label for="gender" disabled selected>Gender</label>
+          <label for="civil-status">Civil Status</label>
+        </div>
+
+        <div class="gender-container">
+          <div>
+            <select name="gender" id="gender">
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Non-binary">Non-binary</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+            <div class="error-message" id="error-gender"></div>
+          </div>
+
+          <div>
+            <select name="civil-status" id="civil-status">
+              <option class="default-select" value="" disabled selected>
+                Select Civil Status
+              </option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Legally Separated">Legally Separated</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Annulled">Annulled</option>
+              <option value="Widow/er">Widow/er</option>
+            </select>
+            <div class="error-message" id="error-civil-status"></div>
+          </div>
+        </div>
+        <div class="residency-status-container">
+          <label for="residency-status">Residency Status</label>
+          <select name="residency-status" id="residency-status">
+            <option value="" disabled selected>Select</option>
+            <option value="citizen">Citizen</option>
+            <option value="permanent-resident">Permanent Resident</option>
+            <option value="temporary-resident">Temporary Resident</option>
+            <option value="foreign-national">Foreign National</option>
+            <option value="dual-citizen">Dual Citizen</option>
+            <option value="refugee">Refugee</option>
+            <option value="student-visa">Student Visa Holder</option>
+            <option value="work-visa">Work Visa Holder</option>
+            <option value="undocumented">Undocumented</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="error-message" id="error-civil-status"></div>
+        </div>
+
+        <div class="button">
+          <div class="back">
+            <button
+              onclick="location.href='registration2.html'"
+              type="button"
+              id="back"
+            >
+              Back
+            </button>
+          </div>
+
+          <div class="proceed">
+            <button type="button" id="proceed">Proceed</button>
+          </div>
+        </div>
+      </div>
+      <script src="registration3.js"></script>
+    </div>
+  </body>
+</html>
+<script>
+  function addAsterisk(label) {
+    if (label) {
+      const asterisk = document.createElement('span');
+      asterisk.className = 'required-asterisk';
+      asterisk.textContent = '*';
+      label.appendChild(asterisk);
+    }
+  }
+
+  addAsterisk(document.querySelector('label[for="first-name"]'));
+  addAsterisk(document.querySelector('label[for="last-name"]'));
+
+  addAsterisk(document.querySelector('label[for="month"]'));
+  addAsterisk(document.querySelector('label[for="day"]'));
+  addAsterisk(document.querySelector('label[for="year"]'));
+
+  const countryLabels = document.querySelectorAll('.country-label label');
+  addAsterisk(countryLabels[0]);
+  addAsterisk(countryLabels[1]); 
+
+  const genderLabels = document.querySelectorAll('.gender-label label');
+  addAsterisk(genderLabels[0]); // Gender
+  addAsterisk(genderLabels[1]); // Civil Status
+
+  addAsterisk(document.querySelector('label[for="residency-status"]'));
+</script>

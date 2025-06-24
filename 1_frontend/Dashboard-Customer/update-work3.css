@@ -1,0 +1,147 @@
+:root {
+  --primary-color: #1f65b4;
+  --secondary-color: #004ea8;
+  --tertiary-color: #0072d8;
+  --font-family: "Manjari", sans-serif;
+}
+
+.blue-text {
+  color: #004ea8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("/assets/bg.png");
+  z-index: -1;
+  font-family: var(--font-family);
+}
+
+.data-privacy-consent-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 1450px;
+  width: 1500px;
+  padding: 50px 50px;
+  background-color: white;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.title {
+  font-size: 55px;
+  color: var(--primary-color);
+  text-align: left;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.first-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+.first-container p {
+  font-size: 32px;
+}
+
+.second-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.checkbox-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  margin-top: 6px;
+  accent-color: var(--tertiary-color);
+  cursor: pointer;
+}
+
+.description {
+  font-size: 32px;
+  text-align: justify;
+}
+
+.button {
+  display: flex;
+  gap: 20px;
+  margin-top: 60px;
+  align-self: center;
+  gap: 40px;
+}
+
+.button button {
+  height: 54px;
+  width: 239px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 25px;
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+#back {
+  background-color: white;
+  color: var(--tertiary-color);
+  border: 2px solid var(--tertiary-color);
+}
+
+#back:hover {
+  background-color: var(--tertiary-color);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#proceed {
+  background-color: var(--tertiary-color);
+  color: white;
+}
+
+#proceed:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.error-message {
+  color: #ff3860;
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}

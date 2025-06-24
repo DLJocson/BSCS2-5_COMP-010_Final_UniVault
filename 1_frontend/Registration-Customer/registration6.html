@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="registration6.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="alias-page">
+      <div class="title-container">
+        <h1 class="title">Create Account</h1>
+        <h2 class="alias">Aliases</h2>
+
+        <div class="checkbox">
+          <label>Do you have an alias?</label>
+          <div class="yes">
+            <input id="yes-alias" type="checkbox" />
+            <label for="yes-alias">Yes</label>
+            <input id="no-alias" type="checkbox" />
+            <label for="no-alias">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="containers" class="containers">
+        <div class="first-container">
+          <div class="full-name">
+            <div class="checkbox-container">
+              <label for="first-name">First Name</label>
+              <input id="first-name" type="text" placeholder="e.g. Juan" />
+              <div class="error-message" id="error-first-name"></div>
+            </div>
+
+            <div class="checkbox-container">
+              <label for="middle-name">Middle Name</label>
+              <input id="middle-name" type="text" placeholder="e.g. Garcia" />
+              <div class="error-message" id="error-middle-name"></div>
+            </div>
+
+            <div class="checkbox-container">
+              <label for="last-name">Last Name</label>
+              <input id="last-name" type="text" placeholder="e.g. Dela Cruz" />
+              <div class="error-message" id="error-last-name"></div>
+            </div>
+          </div>
+
+          <div class="note">
+            <p>
+              <span class="blue-text">
+                Note: Aliases should be entered as shown on official
+                government-issued identification or documentation.
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="second-container">
+          <h2 class="subtitle">ID 1</h2>
+          <div class="id1">
+            <div class="select-id">
+              <label for="select-id1">Select ID Type</label>
+              <select id="select-id1">
+                <option value="" disabled selected>Select</option>
+                <option value="passport">Passport</option>
+                <option value="driver">Driver's License</option>
+              </select>
+              <div class="error-message" id="error-select-id1"></div>
+            </div>
+
+            <div class="id-num">
+              <label for="">ID Number</label>
+              <input id="id1-num" type="text" placeholder="Enter ID Number" />
+              <div class="error-message" id="error-id1-num"></div>
+            </div>
+          </div>
+
+          <div class="id1-issue-date">
+            <h2 class="subtitle">ID 1 Issue Date</h2>
+            <div class="date-container">
+              <div class="date">
+                <label for="issue-month-id1">Month</label>
+                <select id="issue-month-id1">
+                  <option value="" disabled selected>Select Month</option>
+                </select>
+                <div class="error-message" id="error-issue-month-id1"></div>
+              </div>
+              <div class="date">
+                <label for="issue-day-id1">Day</label>
+                <select id="issue-day-id1">
+                  <option value="" disabled selected>Select Day</option>
+                </select>
+                <div class="error-message" id="error-issue-day-id1"></div>
+              </div>
+              <div class="date">
+                <label for="issue-year-id1">Year</label>
+                <select id="issue-year-id1">
+                  <option value="" disabled selected>Select Year</option>
+                </select>
+                <div class="error-message" id="error-issue-year-id1"></div>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="subtitle">ID 1 Expiration Date (Optional)</h2>
+          <div class="date-container">
+            <div class="date">
+              <label for="month">Month</label>
+              <select id="month">
+                <option value="" disabled selected>Select Month (Optional)</option>
+              </select>
+              <div class="error-message" id="error-month"></div>
+            </div>
+
+            <div class="date">
+              <label for="day">Day</label>
+              <select id="day">
+                <option value="" disabled selected>Select Day</option>
+              </select>
+              <div class="error-message" id="error-day"></div>
+            </div>
+
+            <div class="date">
+              <label for="year">Year</label>
+              <select id="year">
+                <option value="" disabled selected>Select Year</option>
+              </select>
+              <div class="error-message" id="error-year"></div>
+            </div>
+          </div>
+
+          <div class="upload-box">
+            <div class="icon">
+              <img src="/assets/upload-logo.png" alt="" />
+            </div>
+            <p class="direction">Upload Front of ID 1</p>
+            <label for="front-id-1">Browse</label>
+            <input type="file" id="front-id-1" accept=".png,.jpeg,.jpg" />
+            <br />
+            <p>drop a file here</p>
+            <div class="note">
+              <span class="red-text">* </span>File supported: .png & .jpeg
+            </div>
+            <br />
+            <div class="error-message" id="error-front-id-1"></div>
+          </div>
+
+          <div class="upload-box">
+            <div class="icon">
+              <img src="/assets/upload-logo.png" alt="" />
+            </div>
+            <p class="direction">Upload Back of ID 1</p>
+            <label for="back-id-1">Browse</label>
+            <input type="file" id="back-id-1" accept=".png,.jpeg,.jpg" />
+            <br />
+            <p>drop a file here</p>
+            <div class="note">
+              <span class="red-text">* </span>File supported: .png & .jpeg
+            </div>
+            <br />
+            <div class="error-message" id="error-back-id-1"></div>
+          </div>
+        </div>
+
+        <div class="third-container">
+          <h2>ID 2</h2>
+          <div class="id2">
+            <div class="select-id">
+              <label for="select-id2">Select ID Type</label>
+              <select id="select-id2">
+                <option value="" disabled selected>Select</option>
+                <option value="passport">Passport</option>
+                <option value="driver">Driver's License</option>
+              </select>
+              <div class="error-message" id="error-select-id2"></div>
+            </div>
+
+            <div class="id-num">
+              <label for="">ID Number</label>
+              <input id="id2-num" type="text" placeholder="Enter ID Number" />
+              <div class="error-message" id="error-id2-num"></div>
+            </div>
+          </div>
+
+          <div class="id2-issue-date">
+            <h2 class="subtitle">ID 2 Issue Date</h2>
+            <div class="date-container">
+              <div class="date">
+                <label for="issue-month-id2">Month</label>
+                <select id="issue-month-id2">
+                  <option value="" disabled selected>Select Month</option>
+                </select>
+                <div class="error-message" id="error-issue-month-id2"></div>
+              </div>
+              <div class="date">
+                <label for="issue-day-id2">Day</label>
+                <select id="issue-day-id2">
+                  <option value="" disabled selected>Select Day</option>
+                </select>
+                <div class="error-message" id="error-issue-day-id2"></div>
+              </div>
+              <div class="date">
+                <label for="issue-year-id2">Year</label>
+                <select id="issue-year-id2">
+                  <option value="" disabled selected>Select Year</option>
+                </select>
+                <div class="error-message" id="error-issue-year-id2"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="id2-expiration">
+            <h2 class="subtitle">ID 2 Expiration Date (Optional)</h2>
+            <div class="date-container">
+              <div class="date">
+                <label for="month-id2">Month</label>
+                <select id="month-id2">
+                  <option value="" disabled selected>Select Month</option>
+                </select>
+                <div class="error-message" id="error-month-id2"></div>
+              </div>
+
+              <div class="date">
+                <label for="day-id2">Day</label>
+                <select id="day-id2">
+                  <option value="" disabled selected>Select Day</option>
+                </select>
+                <div class="error-message" id="error-day-id2"></div>
+              </div>
+
+              <div class="date">
+                <label for="year-id2">Year</label>
+                <select id="year-id2">
+                  <option value="" disabled selected>Select Year</option>
+                </select>
+                <div class="error-message" id="error-year-id2"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="upload-box">
+            <div class="icon">
+              <img src="/assets/upload-logo.png" alt="" />
+            </div>
+            <p class="direction">Upload Front of ID 2</p>
+            <label for="front-id-2">Browse</label>
+            <input type="file" id="front-id-2" accept=".png,.jpeg,.jpg" />
+            <br />
+            <p>drop a file here</p>
+            <div class="note">
+              <span class="red-text">* </span> File supported: .png & .jpeg
+            </div>
+            <br />
+            <div class="error-message" id="error-front-id-2"></div>
+          </div>
+
+          <div class="upload-box">
+            <div class="icon">
+              <img src="/assets/upload-logo.png" alt="" />
+            </div>
+            <p class="direction">Upload Back of ID 2</p>
+            <label for="back-id-2">Browse</label>
+            <input type="file" id="back-id-2" accept=".png,.jpeg,.jpg" />
+            <br />
+            <p>drop a file here</p>
+            <div class="note">
+              <span class="red-text">* </span>File supported: .png & .jpeg
+            </div>
+            <br />
+            <div class="error-message" id="error-back-id-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='registration5.html'" id="back">
+            Back
+          </button>
+        </div>
+        <div class="proceed">
+          <button id="proceed" type="button">Proceed</button>
+        </div>
+      </div>
+
+      <script src="../shared/upload-utils.js"></script>
+      <script src="registration6.js"></script>
+    </div>
+  </body>
+</html>
+
+<script>
+  function getAliasDocTypeCode(displayName) {
+    // Normalize input
+    const key = displayName.trim().toLowerCase();
+    const map = {
+      "driver's license": "A01",
+      "passport": "A02",
+      "new philippine passport": "A02",
+      "old philippine passport": "A02", 
+      "sss id": "A03",
+      "philhealth id": "A04",
+      "tin id": "A05",
+      "voter's id": "A06",
+      "senior citizen id": "A07",
+      "pwd id": "A08",
+      "postal id": "A09",
+      "professional id": "A10",
+      "company id": "A11",
+      "school id": "A12",
+      "barangay id": "A13",
+      "umid": "A14",
+      "prc id": "A15",
+      "gsis id": "A16",
+      "philsys id": "A17",
+      "owwa id": "A18",
+      "ofw id": "A19",
+      "other government id": "A20",
+      "ibp id": "A10",
+      "marina id": "A20",
+      "gov't / gocc id": "A20",
+      "government office and gocc id": "A20",
+      "dswd certification": "A20",
+      "ncwdp certification": "A20",
+      "seaman's book": "A20"
+    };
+    return map[key] || "A20"; // Default to "Other Government ID"
+  }
+
+  function addIdOptions(selectId) {
+    const options = [
+      "PhilSys ID",
+      "New Philippine Passport",
+      "Old Philippine Passport",
+      "Driver's License",
+      "PRC ID",
+      "UMID",
+      "SSS ID",
+      "Postal ID",
+      "TIN ID",
+      "Barangay ID",
+      "GSIS ID",
+      "PhilHealth ID",
+      "OWWA ID",
+      "OFW ID",
+      "IBP ID",
+      "Company ID",
+      "MARINA ID",
+      "Voter's ID",
+      "Senior Citizen ID",
+      "Seaman's Book",
+      "Gov’t / GOCC ID",
+      "DSWD Certification",
+      "NCWDP Certification",
+      "PWD ID"
+    ];
+    const select = document.getElementById(selectId);
+    while (select.options.length > 1) {
+      select.remove(1);
+    }
+    options.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      option.textContent = opt;
+      select.appendChild(option);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    addIdOptions("select-id1");
+    addIdOptions("select-id2");
+  });
+</script>
+
+<script>
+  function populateMonths(selectId) {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const select = document.getElementById(selectId);
+    while (select.options.length > 1) {
+      select.remove(1);
+    }
+    months.forEach((month, idx) => {
+      const option = document.createElement("option");
+      option.value = idx + 1;
+      option.textContent = month;
+      select.appendChild(option);
+    });
+  }
+
+  function populateYears(selectId) {
+    const select = document.getElementById(selectId);
+    const currentYear = new Date().getFullYear();
+    while (select.options.length > 1) {
+      select.remove(1);
+    }
+    
+    // Check if this is an issue year (past) or expiry year (future)
+    if (selectId.includes('issue-year')) {
+      // Issue years: past years (current year down to 1900)
+      for (let year = currentYear; year >= 1900; year--) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        select.appendChild(option);
+      }
+    } else {
+      // Expiry years: future years (current year up to 2050)
+      for (let year = 2050; year >= currentYear; year--) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        select.appendChild(option);
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    populateMonths("issue-month-id1");
+    populateMonths("month");
+    populateMonths("issue-month-id2");
+    populateMonths("month-id2");
+    populateYears("issue-year-id1");
+    populateYears("year");
+    populateYears("issue-year-id2");
+    populateYears("year-id2");
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const firstNameLabel = document.querySelector('label[for="first-name"]');
+    const lastNameLabel = document.querySelector('label[for="last-name"]');
+    [firstNameLabel, lastNameLabel].forEach(label => {
+      if (label && !label.querySelector('.required-asterisk')) {
+        label.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+      }
+    });
+
+    const id1IssueDate = document.querySelector('.id1-issue-date .subtitle');
+    const id2IssueDate = document.querySelector('.id2-issue-date .subtitle');
+    [id1IssueDate, id2IssueDate].forEach(label => {
+      if (label && !label.querySelector('.required-asterisk')) {
+        label.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+      }
+    });
+
+    // Add red asterisk to "ID 1" and "ID 2" headings
+    const id1Heading = document.querySelector('.second-container > .subtitle');
+    if (id1Heading && !id1Heading.querySelector('.required-asterisk')) {
+      id1Heading.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+    }
+    const id2Heading = document.querySelector('.third-container > h2');
+    if (id2Heading && !id2Heading.querySelector('.required-asterisk')) {
+      id2Heading.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+    }
+
+    const uploadDirections = [
+      "Upload Front of ID 1",
+      "Upload Back of ID 1",
+      "Upload Front of ID 2",
+      "Upload Back of ID 2"
+    ];
+    uploadDirections.forEach(directionText => {
+      const p = Array.from(document.querySelectorAll('.upload-box .direction'))
+        .find(el => el.textContent.trim() === directionText);
+      if (p && !p.querySelector('.required-asterisk')) {
+        p.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+      }
+    });
+  });
+</script>

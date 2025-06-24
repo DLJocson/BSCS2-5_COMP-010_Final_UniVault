@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="update-fund-source1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="add-fund-source-page">
+      <h1 class="title">Employment & Financial Data</h1>
+      <div class="select-container">
+        <label>Source of Funds</label>
+        <select name="" id="source-of-funds">
+          <option value="" disabled selected>Select</option>
+          <option value="employed_fixed">Employed - Fixed Income</option>
+          <option value="employed_variable">Employed - Variable Income</option>
+          <option value="self_employed_fixed">
+            Self-Employed - Fixed Income
+          </option>
+          <option value="remittances">Remittances</option>
+          <option value="pension">Pension</option>
+          <option value="savings_retirement">
+            Personal Savings / Retirement Proceeds
+          </option>
+          <option value="allowance">Allowance</option>
+          <option value="inheritance">Inheritance</option>
+          <option value="investment_income">
+            Investment / Dividend Income
+          </option>
+          <option value="rental_income">Rental Income</option>
+          <option value="asset_sale">Sale of Asset / Property</option>
+          <option value="other">Other Sources</option>
+        </select>
+        <div class="error-message"></div>
+      </div>
+
+      <div class="button">
+        <div class="cancel">
+          <button onclick="location.href='profile.html'" id="cancel">
+            Cancel
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+      <script src="update-fund-source1.js"></script>
+    </div>
+  </body>
+</html>

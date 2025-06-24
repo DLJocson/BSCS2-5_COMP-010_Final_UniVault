@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="add-account1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="add-account-page">
+      <h1 class="title">Add Account</h1>
+      <div class="text-box">
+        <label>Enter Account</label>
+        <input type="text" id="account" placeholder="Enter Username" />
+        <div class="error-message"></div>
+
+        <label>Enter Username</label>
+        <input type="text" id="username" placeholder="Enter Username" />
+        <div class="error-message"></div>
+
+        <label>Enter Password</label>
+        <input type="password" id="password" placeholder="Enter Password" />
+        <div class="error-message"></div>
+      </div>
+
+      <div class="button">
+        <div class="cancel">
+          <button onclick="location.href='add-account-cancel.html'" id="cancel">
+            Cancel
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button onclick="location.href='add-account2.html'" id="proceed">
+            Proceed
+          </button>
+        </div>
+      </div>
+      <script src="add-account1.js"></script>
+    </div>
+  </body>
+</html>

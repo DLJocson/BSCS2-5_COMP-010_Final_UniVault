@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="admin-user-management2.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="deposit-page">
+      <div class="page-wrapper">
+        <div class="left-side-bar">
+          <div class="customer-options">
+            <div class="customer-options-container">
+              <a id="dashboard-option" href="admin-dashboard.html">Dashboard</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="user-management-option" href="admin-user-management.html"
+                >User Management</a
+              >
+            </div>
+            <div class="review-queue-container">
+              <a id="profile-option" href="admin-review-queue.html"
+                >Review Queue</a
+              >
+            </div>
+            <div class="customer-options-container">
+              <a id="closed-account-option" href="admin-closed-account.html"
+                >Closed Accounts</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <nav class="nav-bar">
+            <input type="text" id="search" placeholder="Search" />
+            <div class="icon-container">
+              <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
+            </div>
+          </nav>
+
+          <header class="header">
+            <div class="welcome-message">
+              <h1 class="welcome">
+                <span class="blue-text">Manage Users</span> Here
+              </h1>
+              <p class="blue-text">
+                View and search for all customer and employee accounts in one
+                place.
+              </p>
+            </div>
+          </header>
+
+          <div class="progress-container">
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='admin-user-management.html'"
+                class="circle"
+              ></div>
+              <div
+                onclick="window.location.href='admin-user-management.html'"
+                class="label"
+              >
+                Customers
+              </div>
+            </div>
+            <div class="progress-step active">
+              <div
+                onclick="window.location.href='admin-user-management2.html'"
+                class="circle"
+              ></div>
+              <div
+                onclick="window.location.href='admin-user-management2.html'"
+                class="label"
+              >
+                Employees
+              </div>
+            </div>
+          </div>
+
+          <div class="page-body">
+            <div class="account-info">
+              <div class="transaction-info">
+                <div class="top-label">
+                  <h2>Employee Management</h2>
+                  <div class="top-label-2">
+                    <label>Employee Number</label>
+                    <label>Last Name</label>
+                    <label>First Name</label>
+                    <label>Middle Name</label>
+                    <label>Suffix</label>
+                    <label>Status</label>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>E100001</label>
+                      <label>Dizon</label>
+                      <label>Jane</label>
+                      <label>Reyes</label>
+                      <label>N/A</label>
+                      <label class="blue-text">Employed</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

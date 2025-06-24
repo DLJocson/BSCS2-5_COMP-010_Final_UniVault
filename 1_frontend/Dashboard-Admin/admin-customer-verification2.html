@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="admin-customer-verification2.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="profile-page">
+      <div class="wrapper">
+        <div class="page-body">
+          <div class="account-information-container">
+            <div class="account-information">
+              <h1>Document Page</h1>
+              <h1 class="blue-text">Bautista, Chryshella Grace P.</h1>
+              <div class="button">
+                <button
+                  onclick="location.href='admin-customer-verification.html'"
+                  id="back"
+                >
+                  Back to Previous Page
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="personal-information-container">
+            <div class="title-verify">
+              <h1 class="title">ID 1 (Front & Back)</h1>
+              <button class="verify">Verify</button>
+            </div>
+
+            <div class="container-wrapper">
+              <div class="container">
+                <label for="select-id1">Select ID Type</label>
+                <select id="select-id1">
+                  <option value="" disabled selected>Select</option>
+                  <option value="passport">Passport</option>
+                  <option value="driver">Driver's License</option>
+                </select>
+                <div class="error-message" id="error-select-id1"></div>
+                <div class="error-message" id="error-select-id1"></div>
+              </div>
+
+              <div class="container">
+                <label for="">ID Number</label>
+                <input id="id1-num" type="text" placeholder="Enter ID Number" />
+                <div class="error-message" id="error-id1-num"></div>
+              </div>
+
+              <div class="container">
+                <label for="">Expiry Date</label>
+                <input type="date" />
+              </div>
+            </div>
+
+            <div class="id-picture-container">
+              <img src="/assets/front-id.png" alt="" />
+              <img src="/assets/back-d.png" alt="" />
+            </div>
+          </div>
+
+          <div class="contact-details-container">
+            <div class="title-verify">
+              <h1 class="title">ID 2 (Front & Back)</h1>
+              <button class="verify">Verify</button>
+            </div>
+
+            <div class="container-wrapper">
+              <div class="container">
+                <label for="select-id1">Select ID Type</label>
+                <select id="select-id1">
+                  <option value="" disabled selected>Select</option>
+                  <option value="passport">Passport</option>
+                  <option value="driver">Driver's License</option>
+                </select>
+                <div class="error-message" id="error-select-id1"></div>
+                <div class="error-message" id="error-select-id1"></div>
+              </div>
+
+              <div class="container">
+                <label for="">ID Number</label>
+                <input id="id1-num" type="text" placeholder="Enter ID Number" />
+                <div class="error-message" id="error-id1-num"></div>
+              </div>
+
+              <div class="container">
+                <label for="">Expiry Date</label>
+                <input type="date" />
+              </div>
+            </div>
+
+            <div class="id-picture-container">
+              <img src="/assets/front-id.png" alt="" />
+              <img src="/assets/back-d.png" alt="" />
+            </div>
+          </div>
+
+          <div class="employment-data-container">
+            <div class="title-verify">
+              <h1 class="title">Supporting Documents</h1>
+              <button class="verify">Verify</button>
+            </div>
+
+            <div class="account-info">
+              <div class="transaction-info">
+                <div class="top-label-2">
+                  <label>File Name</label>
+                  <label>Type</label>
+                  <label>Size</label>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="admin-customer-verification2.js"></script>
+    </div>
+  </body>
+</html>

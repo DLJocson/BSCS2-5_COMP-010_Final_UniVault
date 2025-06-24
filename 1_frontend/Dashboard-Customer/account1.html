@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="account1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Customer Info Section -->
+    <div
+      id="customer-info"
+      style="
+        padding: 24px;
+        background: #e5f5ff;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <h2>Customer Profile</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li><b>Name:</b> <span id="customer-name"></span></li>
+        <!-- Removed Account Type and any static info not belonging to the current cif_number -->
+      </ul>
+    </div>
+
+    <div class="deposit-page">
+      <div class="page-wrapper">
+        <div class="left-side-bar">
+          <div class="customer-options">
+            <div class="customer-options-container">
+              <a id="account-option" href="account1.html">Accounts</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="transaction-option" href="transaction1.html"
+                >Transactions</a
+              >
+            </div>
+            <div class="customer-options-container">
+              <a id="profile-option" href="profile.html">Profile</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="close-account-option" href="close-account.html"
+                >Close Accounts</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <nav class="nav-bar">
+            <input type="text" id="search" placeholder="Search" />
+            <div class="icon-container">
+              <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
+            </div>
+          </nav>
+
+          <header class="header">
+            <div class="welcome-message">
+              <h1 class="welcome">
+                Welcome Back, <span class="blue-text"></span>
+              </h1>
+              <p>Your last login was at <span></span></p>
+            </div>
+            <div class="picture-logo">
+              <img src="/assets/header-logo.png" alt="Header Logo" />
+            </div>
+          </header>
+
+          <div class="progress-container">
+            <div class="progress-line"></div>
+
+            <div class="progress-step active">
+              <div class="circle"></div>
+              <div class="label">Deposits</div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account2.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account2.html'" class="label">
+                Cards
+              </div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account3.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account3.html'" class="label">
+                Loans
+              </div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account4.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account4.html'" class="label">
+                Wealth <br />
+                Management
+              </div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account5.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account5.html'" class="label">
+                Insurance
+              </div>
+            </div>
+          </div>
+
+          <div class="page-body">
+            <div class="account-info">
+              <div class="transaction-info">
+                <div class="top-label">
+                  <h2>Accounts</h2>
+                  <div class="top-label-2">
+                    <label>Account Number</label>
+                    <label>Currency</label>
+                    <label>Balance</label>
+                  </div>
+                  <div class="top-label-3">
+                    <label>Status</label>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div id="savings" class="account">
+                    <img src="/assets/savings.png" alt="" />
+                    <div class="account-name">
+                      <h2 class="account-title">BDO Savings Account</h2>
+                      <h4>Emergency Fund</h4>
+                    </div>
+                    <div class="top-label-2">
+                      <label>*******9713</label>
+                      <label class="blue-text">USD</label>
+                      <label>120, 000</label>
+                    </div>
+                    <div class="top-label-3">
+                      <label>Active</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right-container">
+              <div class="account-details">
+                <div class="title">
+                  <h2>Account Details</h2>
+                  <img src="/assets/edit-logo.png" alt="Edit" />
+                </div>
+
+                <div class="account-nickname">
+                  <label>Account Nickname</label>
+                  <textarea></textarea>
+                </div>
+
+                <div class="account-number">
+                  <label>Account Number</label>
+                  <textarea></textarea>
+                </div>
+
+                <div class="open-close-date">
+                  <div class="open-date">
+                    <label>Open Date</label>
+                    <textarea></textarea>
+                  </div>
+                  <div class="close-date">
+                    <label>Close Date</label>
+                    <textarea></textarea>
+                  </div>
+                </div>
+
+                <div class="current-balance">
+                  <label>Current Balance</label>
+                  <textarea></textarea>
+                </div>
+
+                <div class="biometrics-type">
+                  <label>Biometrics Type</label>
+                  <textarea></textarea>
+                </div>
+              </div>
+
+              <div class="button">
+                <button
+                  onclick="location.href='add-account1.html'"
+                  id="add-existing-button"
+                >
+                  + Add Existing Account
+                </button>
+                <button
+                  onclick="location.href='apply-account1.html'"
+                  id="apply-existing-button"
+                >
+                  + Apply Existing Account
+                </button>
+              </div>
+
+              <img src="/assets/account-page-logo.png" alt="Account Logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Get cif_number from URL path (e.g., /Dashboard-Customer/account1.html/123456)
+      function getCifNumberFromUrl() {
+        const pathParts = window.location.pathname.split('/');
+        // Find the part after 'account1.html', if present
+        const idx = pathParts.findIndex(p => p.startsWith('account1.html'));
+        if (idx !== -1 && pathParts.length > idx + 1) {
+          return pathParts[idx + 1];
+        }
+        return null;
+      }
+      const cif_number = getCifNumberFromUrl() || localStorage.getItem('cif_number');
+      // Try to get cached customer data
+      let customerData = null;
+      if (localStorage.getItem('customerData')) {
+        try {
+          const cached = JSON.parse(localStorage.getItem('customerData'));
+          if (cached && cached.cif_number == cif_number) {
+            customerData = cached;
+          }
+        } catch (e) {}
+      }
+      function displayCustomer(data) {
+        // Welcome message with real first name
+        const welcome = document.querySelector('.welcome .blue-text');
+        if (welcome) welcome.textContent = data.customer_first_name || '';
+        // Show last login time if available
+        const lastLoginSpan = document.querySelector('.welcome-message p span');
+        if (lastLoginSpan) {
+          let lastLogin = localStorage.getItem('last_login');
+          if (!lastLogin) {
+            // If not set, use now and save for next login
+            lastLogin = new Date().toLocaleString();
+            localStorage.setItem('last_login', lastLogin);
+          }
+          lastLoginSpan.textContent = lastLogin;
+        }
+        // Name in profile
+        document.getElementById('customer-name').textContent =
+          [data.customer_first_name, data.customer_middle_name, data.customer_last_name, data.customer_suffix_name]
+            .filter(Boolean).join(' ');
+        // Accounts section (replace with real data)
+        // Example: data.accounts = [{account_name, account_number, currency, balance, status, ...}]
+        const accounts = data.accounts || [];
+        const accountInfoCard = document.querySelector('.account-info-card');
+        accountInfoCard.innerHTML = '';
+        accounts.forEach(acc => {
+          const div = document.createElement('div');
+          div.className = 'account';
+          div.innerHTML = `
+            <img src="/assets/savings.png" alt="" />
+            <div class="account-name">
+              <h2 class="account-title">${acc.account_name || ''}</h2>
+              <h4>${acc.nickname || ''}</h4>
+            </div>
+            <div class="top-label-2">
+              <label>${acc.account_number ? '*******' + acc.account_number.slice(-4) : ''}</label>
+              <label class="blue-text">${acc.currency || ''}</label>
+              <label>${acc.balance ? acc.balance.toLocaleString() : ''}</label>
+            </div>
+            <div class="top-label-3">
+              <label>${acc.status || ''}</label>
+            </div>
+          `;
+          accountInfoCard.appendChild(div);
+        });
+        // Account details (show first account by default)
+        const details = accounts[0] || {};
+        document.querySelector('.account-nickname textarea').value = details.nickname || '';
+        document.querySelector('.account-number textarea').value = details.account_number || '';
+        document.querySelector('.open-date textarea').value = details.open_date || '';
+        document.querySelector('.close-date textarea').value = details.close_date || '';
+        document.querySelector('.current-balance textarea').value = details.balance ? details.balance.toLocaleString() : '';
+        document.querySelector('.biometrics-type textarea').value = details.biometrics_type || '';
+      }
+      function fetchAndDisplay() {
+        fetch(`/api/customer/${cif_number}`)
+          .then(res => res.json())
+          .then((data) => {
+            // Optionally fetch accounts for this customer
+            // fetch(`/api/accounts/${cif_number}`) ...
+            // For now, assume accounts are included in data.accounts
+            localStorage.setItem('customerData', JSON.stringify(data));
+            displayCustomer(data);
+          })
+          .catch(() => {
+            document.getElementById('customer-info').textContent = 'Failed to load customer data.';
+          });
+      }
+      if (customerData) {
+        displayCustomer(customerData);
+      } else {
+        fetchAndDisplay();
+      }
+    </script>
+    <script src="account1.js"></script>
+  </body>
+</html>

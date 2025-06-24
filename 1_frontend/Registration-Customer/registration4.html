@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="registration4.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="contact-info-page">
+      <h1 class="title">Create Account</h1>
+      <div class="first-container">
+        <h2 class="contact-info">Contact Information</h2>
+        <div class="phone-number">
+          <label for="">Country Code</label>
+          <label for="">Phone Number</label>
+        </div>
+        <div class="phone-number-text">
+          <div class="error-container">
+            <input id="phone-country-code" type="text" placeholder="e.g. 63" />
+            <div class="error-message"></div>
+          </div>
+          <div class="error-container">
+            <input id="phone-num" type="text" placeholder="e.g. 9123456789" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="home-landline">
+          <label for="">Home</label>
+          <label for="">Landline Number</label>
+        </div>
+        <div class="home-landline-text">
+          <div class="error-container">
+            <input id="home" type="text" placeholder="e.g. 02" />
+            <div class="error-message"></div>
+          </div>
+          <div class="error-container">
+            <input id="landline" placeholder="e.g. 1234-1234" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="personal-email">
+          <div>
+            <label for="">Personal Email Address</label>
+            <input
+              id="email"
+              type="text"
+              placeholder="e.g. juandelacruz@gmail.com"
+            />
+            <div class="error-message"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="second-container">
+        <h2 class="home-address">Home Address</h2>
+        <div class="unit-building">
+          <label for="">Unit</label>
+          <label for="">Building</label>
+        </div>
+        <div class="unit-building-text">
+          <div>
+            <input id="unit" type="text" placeholder="e.g. 1234" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input id="building" type="text" placeholder="e.g. Building 1" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="street-subdivision">
+          <label for="">Street</label>
+          <label for="">Subdivision</label>
+        </div>
+        <div class="street-subdivision-text">
+          <div>
+            <input id="street" type="text" placeholder="e.g. 123 Street" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input
+              id="subdivision"
+              type="text"
+              placeholder="e.g. Subdivision 1"
+            />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="barangay-city">
+          <label for="">Barangay</label>
+          <label for="">City</label>
+        </div>
+        <div class="barangay-city-text">
+          <div>
+            <input id="barangay" type="text" placeholder="e.g. Barangay 123" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input id="city" type="text" placeholder="e.g. Makati" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="province-country">
+          <label for="">Province</label>
+          <label for="">Country</label>
+        </div>
+        <div class="province-country-text">
+          <div>
+            <input id="province" type="text" placeholder="e.g. Metro Manila" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input id="country" type="text" placeholder="e.g. Philippines" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+        <div class="zip-code">
+          <label for="">Zip Code</label>
+          <input id="zip-code" type="text" placeholder="e.g. 1234" />
+          <div class="error-message"></div>
+        </div>
+
+        <h2 class="alternate-address">Alternate Address</h2>
+
+        <div class="checkbox-wrapper-40">
+          <label for="">Alternate address same as home</label>
+          <input id="is-alternative" type="checkbox" />
+          <label for="">Yes</label>
+          <div class="error-message"></div>
+        </div>
+      </div>
+
+      <div id="third-container" class="third-container">
+        <div class="unit-building">
+          <label for="">Unit</label>
+          <label for="">Building</label>
+        </div>
+        <div class="unit-building-text">
+          <div>
+            <input id="unit" type="text" placeholder="e.g. 1234" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input id="building" type="text" placeholder="e.g. Building 1" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="street-subdivision">
+          <label for="">Street</label>
+          <label for="">Subdivision</label>
+        </div>
+        <div class="street-subdivision-text">
+          <div>
+            <input id="street" type="text" placeholder="e.g. 123 Street" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input
+              id="subdivision"
+              type="text"
+              placeholder="e.g. Subdivision 1"
+            />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="barangay-city">
+          <label for="">Barangay</label>
+          <label for="">City</label>
+        </div>
+        <div class="barangay-city-text">
+          <div>
+            <input id="barangay" type="text" placeholder="e.g. Barangay 123" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input id="city" type="text" placeholder="e.g. Makati" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+
+        <div class="province-country">
+          <label for="">Province</label>
+          <label for="">Country</label>
+        </div>
+        <div class="province-country-text">
+          <div>
+            <input id="province" type="text" placeholder="e.g. Metro Manila" />
+            <div class="error-message"></div>
+          </div>
+
+          <div>
+            <input id="country" type="text" placeholder="e.g. Philippines" />
+            <div class="error-message"></div>
+          </div>
+        </div>
+        <div class="zip-code">
+          <label for="">Zip Code</label>
+          <input id="zip-code" type="text" placeholder="e.g. 1234" />
+          <div class="error-message"></div>
+        </div>
+      </div>
+
+      <div class="button">
+        <div class="back">
+          <button onclick="location.href='registration3.html'" id="back">
+            Back
+          </button>
+        </div>
+
+        <div class="proceed">
+          <button id="proceed">Proceed</button>
+        </div>
+      </div>
+      <script src="registration4.js"></script>
+    </div>
+  </body>
+</html>
+
+<script>
+  function addAsterisk(label) {
+    if (label && !label.querySelector('.required-asterisk')) {
+      const span = document.createElement('span');
+      span.className = 'required-asterisk';
+      span.textContent = '*';
+      label.appendChild(span);
+    }
+  }
+
+  // Phone Number
+  document.querySelectorAll('.phone-number label')[1] && addAsterisk(document.querySelectorAll('.phone-number label')[1]);
+  // Landline Number
+  document.querySelectorAll('.home-landline label')[1] && addAsterisk(document.querySelectorAll('.home-landline label')[1]);
+  // Personal Email Address
+  document.querySelector('.personal-email label') && addAsterisk(document.querySelector('.personal-email label'));
+  // City
+  document.querySelectorAll('.barangay-city label')[1] && addAsterisk(document.querySelectorAll('.barangay-city label')[1]);
+  // Province
+  document.querySelectorAll('.province-country label')[0] && addAsterisk(document.querySelectorAll('.province-country label')[0]);
+  // Country
+  document.querySelectorAll('.province-country label')[1] && addAsterisk(document.querySelectorAll('.province-country label')[1]);
+  // Zip Code
+  document.querySelector('.zip-code label') && addAsterisk(document.querySelector('.zip-code label'));
+
+  // Alternate address section
+  // City
+  document.querySelectorAll('#third-container .barangay-city label')[1] && addAsterisk(document.querySelectorAll('#third-container .barangay-city label')[1]);
+  // Province
+  document.querySelectorAll('#third-container .province-country label')[0] && addAsterisk(document.querySelectorAll('#third-container .province-country label')[0]);
+  // Country
+  document.querySelectorAll('#third-container .province-country label')[1] && addAsterisk(document.querySelectorAll('#third-container .province-country label')[1]);
+  // Zip Code
+  document.querySelector('#third-container .zip-code label') && addAsterisk(document.querySelector('#third-container .zip-code label'));
+</script>

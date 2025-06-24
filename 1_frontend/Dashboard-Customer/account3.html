@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="account3.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="loan-page">
+      <div class="page-wrapper">
+        <div class="left-side-bar">
+          <div class="customer-options">
+            <div class="customer-options-container">
+              <a id="account-option" href="account1.html">Accounts</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="transaction-option" href="transaction1.html"
+                >Transactions</a
+              >
+            </div>
+            <div class="customer-options-container">
+              <a id="profile-option" href="profile.html">Profile</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="close-account-option" href="close-account.html"
+                >Close Accounts</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <nav class="nav-bar">
+            <input type="text" id="search" placeholder="Search" />
+            <div class="icon-container">
+              <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
+            </div>
+          </nav>
+
+          <header class="header">
+            <div class="welcome-message">
+              <h1 class="welcome">
+                Welcome Back, <span class="blue-text">FirstName!</span>
+              </h1>
+              <p>Your last login was at <span>04/06/2024 at 5:60 PM.</span></p>
+            </div>
+            <div class="picture-logo">
+              <img src="/assets/header-logo.png" alt="Header Logo" />
+            </div>
+          </header>
+
+          <div class="progress-container">
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account1.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account1.html'" class="label">
+                Deposits
+              </div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account2.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account2.html'" class="label">
+                Cards
+              </div>
+            </div>
+            <div class="progress-step active">
+              <div
+                onclick="window.location.href='account3.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account3.html'" class="label">
+                Loans
+              </div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account4.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account4.html'" class="label">
+                Wealth <br />
+                Management
+              </div>
+            </div>
+            <div class="progress-step">
+              <div
+                onclick="window.location.href='account5.html'"
+                class="circle"
+              ></div>
+              <div onclick="window.location.href='account5.html'" class="label">
+                Insurance
+              </div>
+            </div>
+          </div>
+
+          <div class="page-body">
+            <div class="account-info">
+              <div class="transaction-info">
+                <div class="top-label">
+                  <h2>Accounts</h2>
+                  <div class="top-label-2">
+                    <label>Account Number</label>
+                    <label>Currency</label>
+                    <label>Balance</label>
+                  </div>
+                  <div class="top-label-3">
+                    <label>Status</label>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div id="savings" class="account">
+                    <img src="/assets/loan.png" alt="" />
+                    <div class="account-name">
+                      <h2 class="account-title">BDO Loan Account</h2>
+                      <h4>Mortgage</h4>
+                    </div>
+                    <div class="top-label-2">
+                      <label>*******8731</label>
+                      <label class="blue-text">USD</label>
+                      <label>800, 000</label>
+                    </div>
+                    <div class="top-label-3">
+                      <label>Active</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right-container">
+              <div class="account-details">
+                <div class="title">
+                  <h2>Account Details</h2>
+                  <img src="/assets/edit-logo.png" alt="Edit" />
+                </div>
+
+                <div class="account-nickname">
+                  <label>Account Nickname</label>
+                  <textarea></textarea>
+                </div>
+
+                <div class="account-number">
+                  <label>Account Number</label>
+                  <textarea></textarea>
+                </div>
+
+                <div class="open-close-date">
+                  <div class="open-date">
+                    <label>Open Date</label>
+                    <textarea></textarea>
+                  </div>
+                  <div class="close-date">
+                    <label>Close Date</label>
+                    <textarea></textarea>
+                  </div>
+                </div>
+
+                <div class="current-balance">
+                  <label>Current Balance</label>
+                  <textarea></textarea>
+                </div>
+
+                <div class="biometrics-type">
+                  <label>Biometrics Type</label>
+                  <textarea></textarea>
+                </div>
+              </div>
+
+              <div class="button">
+                <button
+                  onclick="location.href='add-account1.html'"
+                  id="add-existing-button"
+                >
+                  + Add Existing Account
+                </button>
+                <button
+                  onclick="location.href='apply-account1.html'"
+                  id="apply-existing-button"
+                >
+                  + Apply Existing Account
+                </button>
+              </div>
+
+              <img src="/assets/account-page-logo.png" alt="Account Logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
