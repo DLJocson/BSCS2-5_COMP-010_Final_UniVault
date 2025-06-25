@@ -205,9 +205,16 @@ router.patch('/api/customer/:cif_number', async (req, res, next) => {
         const employmentValues = [];
         if (employment) {
             employmentFields.forEach(field => {
-                if (req.body[field] !== undefined && req.body[field] != employment[field]) {
-                    employmentUpdates.push(`${field} = ?`);
-                    employmentValues.push(req.body[field]);
+                if (req.body[field] !== undefined) {
+                    let value = req.body[field];
+                    // Sanitize income_monthly_gross: remove currency symbols and commas
+                    if (field === 'income_monthly_gross' && typeof value === 'string') {
+                        value = value.replace(/[^0-9.\-]/g, '');
+                    }
+                    if (value != employment[field]) {
+                        employmentUpdates.push(`${field} = ?`);
+                        employmentValues.push(value);
+                    }
                 }
             });
         }
