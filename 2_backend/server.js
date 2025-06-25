@@ -14,12 +14,18 @@ const authRoutes = require('./routes/auth');
 const customerRoutes = require('./routes/customer');
 const registrationRoutes = require('./routes/registration');
 const uploadRoutes = require('./routes/upload');
+const accountsRoutes = require('./routes/accounts');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Test database connection
-testConnection();
+// Test database connection (but don't fail if it doesn't work)
+try {
+    testConnection();
+} catch (error) {
+    console.log('⚠️  Database connection failed, but server will continue running for testing');
+    console.log('   You can still test the frontend structure and API endpoints');
+}
 
 // CORS middleware
 app.use((req, res, next) => {
@@ -75,6 +81,7 @@ app.use('/', authRoutes);
 app.use('/', customerRoutes);
 app.use('/', registrationRoutes);
 app.use('/', uploadRoutes);
+app.use('/', accountsRoutes);
 
 // API info endpoint
 app.get('/api', (req, res) => {

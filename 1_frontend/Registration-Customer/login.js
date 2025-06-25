@@ -25,10 +25,16 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(data.message || "Login failed.");
         return;
       }
-      // Save session info if needed
+      
+      // Save session info
       localStorage.setItem("cif_number", data.cif_number || "");
-      // Redirect to dashboard with CIF in URL
-      window.location.href = `../Dashboard-Customer/account1.html/${data.cif_number}`;
+      sessionStorage.setItem("cif_number", data.cif_number || "");
+      
+      // After successful login, set last_login in localStorage
+      localStorage.setItem('last_login', new Date().toLocaleString());
+      
+      // Redirect to profile page with CIF parameter
+      window.location.href = `../Dashboard-Customer/profile.html?cif=${data.cif_number}`;
     } catch (err) {
       alert("Login failed: " + err.message);
     }

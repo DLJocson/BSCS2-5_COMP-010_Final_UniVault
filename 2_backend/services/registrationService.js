@@ -54,7 +54,6 @@ class RegistrationService {
         
         // Required fields
         customer.customer_type = customerTypeMap[(data.customer_type || '').toLowerCase()] || data.customer_type;
-        customer.account_type = data.account_type;
         customer.customer_last_name = data.customer_last_name;
         customer.customer_first_name = data.customer_first_name;
         customer.customer_middle_name = data.customer_middle_name || null;
@@ -96,15 +95,15 @@ class RegistrationService {
         
         const [result] = await conn.execute(
             `INSERT INTO CUSTOMER (
-                customer_type, account_type, customer_last_name, customer_first_name, 
+                customer_type, customer_last_name, customer_first_name, 
                 customer_middle_name, customer_suffix_name, customer_username, customer_password, 
                 birth_date, gender, civil_status_code, birth_country, residency_status, 
                 citizenship, tax_identification_number, customer_status, remittance_country, 
                 remittance_purpose, reg_political_affiliation, reg_fatca, reg_dnfbp, 
                 reg_online_gaming, reg_beneficial_owner
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
-                customerData.customer_type, customerData.account_type,
+                customerData.customer_type,
                 customerData.customer_last_name, customerData.customer_first_name,
                 customerData.customer_middle_name, customerData.customer_suffix_name,
                 customerData.customer_username, password_hash,

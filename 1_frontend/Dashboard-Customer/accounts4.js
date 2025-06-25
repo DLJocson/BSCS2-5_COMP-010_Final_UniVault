@@ -1,33 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
   const cif = localStorage.getItem('cif_number');
-  if (!cif) return;
-
-  // Fetch and display customer name and last login
-  fetch(`/api/customer/${cif}`)
-    .then(res => res.json())
-    .then(customer => {
-      // Set welcome message
-      document.querySelector('.welcome .blue-text').textContent = customer.customer_first_name || 'Customer';
-      // Set last login
-      const lastLogin = localStorage.getItem('last_login');
-      if (lastLogin) {
-        document.querySelector('.welcome-message p span').textContent = lastLogin;
-      } else {
-        document.querySelector('.welcome-message p span').textContent = '';
-      }
-      // Set customer name in profile section
-      document.getElementById('customer-name').textContent = 
-        [customer.customer_first_name, customer.customer_middle_name, customer.customer_last_name, customer.customer_suffix_name]
-          .filter(Boolean).join(' ');
-    });
+  if (cif) {
+    fetch(`/api/customer/${cif}`)
+      .then(res => res.json())
+      .then(customer => {
+        document.querySelector('.welcome .blue-text').textContent = customer.customer_first_name || 'Customer';
+        const lastLogin = localStorage.getItem('last_login');
+        document.querySelector('.welcome-message p span').textContent = lastLogin || '';
+      });
+  }
 
   function renderAccountsByType(accountType, iconPath) {
     fetch(`/api/accounts/${cif}`)
       .then(res => res.json())
       .then(accounts => {
-        // Flexible filter: allow both 'Deposit Account' and 'Deposits'
+        // Flexible filter: allow both 'Wealth Management Account' and 'Wealth Management'
         const filtered = accounts.filter(acc =>
-          acc.account_type === 'Deposit Account' || acc.account_type === 'Deposits'
+          acc.account_type === 'Wealth Management Account' || acc.account_type === 'Wealth Management'
         );
         const cardContainer = document.querySelector('.account-info-card');
         cardContainer.innerHTML = '';
@@ -63,20 +52,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Update the details panel with the first account
           if (idx === 0) {
-            document.querySelector('.account-nickname textarea').value = acc.account_nickname || '';
+            document.querySelector('.account-title').textContent = acc.account_type || '';
             document.querySelector('.account-number textarea').value = acc.account_number || '';
             document.querySelector('.current-balance textarea').value = typeof acc.current_balance === 'number' ? acc.current_balance.toLocaleString() : (acc.current_balance ? Number(acc.current_balance).toLocaleString() : '');
             document.querySelector('.open-date textarea').value = acc.account_open_date ? acc.account_open_date.slice(0, 10) : '';
             document.querySelector('.close-date textarea').value = acc.account_close_date ? acc.account_close_date.slice(0, 10) : '';
+            const topLabels = document.querySelectorAll('.top-label-2 label');
+            if (topLabels.length >= 3) {
+              topLabels[0].textContent = acc.account_number ? '*******' + acc.account_number.toString().slice(-4) : 'N/A';
+              topLabels[1].textContent = acc.currency || 'PHP';
+              topLabels[2].textContent = typeof acc.current_balance === 'number' ? acc.current_balance.toLocaleString() : (acc.current_balance ? Number(acc.current_balance).toLocaleString() : 'N/A');
+            }
+            const statusLabel = document.querySelector('.top-label-3 label');
+            if (statusLabel) statusLabel.textContent = acc.account_status || 'N/A';
           }
         });
       });
   }
 
-  // Render deposit accounts
-  renderAccountsByType('Deposit Account', '/assets/savings.png');
+  renderAccountsByType('Wealth Management Account', '/assets/investment.png');
 
-  // Logout functionality
   const logoutBtn = document.getElementById('log-out');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', function() {
