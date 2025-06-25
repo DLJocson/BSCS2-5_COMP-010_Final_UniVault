@@ -50,8 +50,8 @@ router.post('/register', async (req, res, next) => {
         if (error.code === 'ER_CHECK_CONSTRAINT_VIOLATED') {
             let friendlyMessage = 'Invalid value provided for one of the fields';
             
-            if (error.message.includes('check_product_type')) {
-                friendlyMessage = 'Invalid product type. Please select a valid product type.';
+            if (error.message.includes('check_account_type')) {
+                friendlyMessage = 'Invalid account type. Please select a valid account type.';
             } else if (error.message.includes('check_customer_type')) {
                 friendlyMessage = 'Invalid customer type. Please select a valid customer type.';
             } else if (error.message.includes('check_gender')) {

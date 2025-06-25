@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Customer Profile - UniVault Admin</title>
+    <title>Document</title>
     <link rel="stylesheet" href="admin-customer-profile.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,25 +36,19 @@
                 </div>
 
                 <div class="container">
-                  <label for="account-type">Account Type</label>
+                  <label for="account-tyoe">Account Type</label>
                   <input type="text" id="account-type" />
                 </div>
 
                 <div class="container">
                   <label for="status">Status</label>
-                  <div class="status-control-container">
-                    <select id="status-dropdown" class="status-dropdown">
-                      <option value="">Loading...</option>
-                    </select>
-                    <button id="update-status-btn" class="update-status-btn" disabled>Update Status</button>
-                  </div>
-                  <div id="status-update-message" class="status-message" style="display: none;"></div>
+                  <input type="text" id="status" />
                 </div>
               </div>
             </div>
             <div class="profile-name-page">
-              <h1>Customer Profile</h1>
-              <h1 class="blue-text" id="customer-name">Loading...</h1>
+              <h1>Profile Page</h1>
+              <h1 class="blue-text">Bautista, Chryshella Grace P.</h1>
               <div class="button">
                 <button
                   onclick="location.href='admin-user-management.html'"
@@ -65,32 +59,6 @@
               </div>
             </div>
           </div>
-          
-          <!-- Customer Accounts Section -->
-          <div class="customer-accounts-container">
-            <h1 class="title">Customer Accounts</h1>
-            <div id="accounts-loading" class="accounts-loading">
-              <p>Loading accounts...</p>
-            </div>
-            <div id="accounts-list" class="accounts-list" style="display: none;">
-              <!-- Account cards will be populated by JavaScript -->
-            </div>
-            <div id="no-accounts-message" class="no-accounts-message" style="display: none;">
-              <p>No accounts found for this customer.</p>
-            </div>
-          </div>
-          
-          <!-- Profile Validation Section -->
-          <div class="profile-validation-container">
-            <h1 class="title">Profile Completeness Validation</h1>
-            <div id="validation-loading" class="validation-loading" style="display: none;">
-              <p>Loading validation information...</p>
-            </div>
-            <div id="validation-content" class="validation-content" style="display: none;">
-              <!-- Validation content will be populated by JavaScript -->
-            </div>
-          </div>
-          
           <div class="personal-information-container">
             <h1 class="title">Personal Information</h1>
             <h2 class="subtitle">Full Name</h2>
@@ -359,7 +327,21 @@
 
             <div class="work-business-nature-container">
               <div class="container">
-                <label for="work-business-nature">Work/Business Nature</label>
+                <label for="work-email-address">Work/Business Nature</label>
+                <input type="text" id="work-business-nature" />
+              </div>
+            </div>
+
+            <div class="work-business-nature-container">
+              <div class="container">
+                <label for="work-email-address">Work/Business Nature</label>
+                <input type="text" id="work-business-nature" />
+              </div>
+            </div>
+
+            <div class="work-business-nature-container">
+              <div class="container">
+                <label for="work-email-address">Work/Business Nature</label>
                 <input type="text" id="work-business-nature" />
               </div>
             </div>
@@ -402,9 +384,6 @@
           </div>
         </div>
       </div>
-      
-      <script src="utils/logout-fix.js"></script>
-      <script src="admin-customer-profile.js"></script>
     </div>
   </body>
 </html>

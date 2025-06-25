@@ -50,9 +50,9 @@ async function verifyDatabase() {
         const tableNames = tables.map(row => Object.values(row)[0]);
         
         const requiredTables = [
-            'customer', 'bank_employee', 'account_details', 
-            'customer_address', 'customer_contact_details',
-            'customer_id', 'customer_employment_information'
+            'CUSTOMER', 'BANK_EMPLOYEE', 'ACCOUNT_DETAILS', 
+            'CUSTOMER_ADDRESS', 'CUSTOMER_CONTACT_DETAILS',
+            'CUSTOMER_ID', 'CUSTOMER_EMPLOYMENT_INFORMATION'
         ];
         
         const missingTables = requiredTables.filter(table => !tableNames.includes(table));
@@ -65,9 +65,9 @@ async function verifyDatabase() {
         console.log(`✅ Found ${tableNames.length} tables`);
         
         // Check sample data
-        const [customers] = await connection.execute('SELECT COUNT(*) as count FROM customer');
-        const [employees] = await connection.execute('SELECT COUNT(*) as count FROM bank_employee');
-        const [accounts] = await connection.execute('SELECT COUNT(*) as count FROM account_details');
+        const [customers] = await connection.execute('SELECT COUNT(*) as count FROM CUSTOMER');
+        const [employees] = await connection.execute('SELECT COUNT(*) as count FROM BANK_EMPLOYEE');
+        const [accounts] = await connection.execute('SELECT COUNT(*) as count FROM ACCOUNT_DETAILS');
         
         console.log(`✅ Sample data loaded:`);
         console.log(`   - Customers: ${customers[0].count}`);

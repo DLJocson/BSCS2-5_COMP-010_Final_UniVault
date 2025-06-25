@@ -1,399 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Document Verification - UniVault Admin</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
     <link rel="stylesheet" href="admin-customer-verification2.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap" rel="stylesheet" />
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="profile-page">
-        <!-- Left Sidebar Navigation -->
-        <div class="left-side-bar">
-            <div class="logo-section">
-                <img src="../../4_assets/logo-footer.png" class="logo-image" alt="UniVault Logo" />
-                <div class="logo-text">
-                    <div class="logo-title">UniVault</div>
-                    <div class="logo-subtitle">Admin Panel</div>
-                </div>
+      <div class="wrapper">
+        <div class="page-body">
+          <div class="account-information-container">
+            <div class="account-information">
+              <h1>Document Page</h1>
+              <h1 class="blue-text">Bautista, Chryshella Grace P.</h1>
+              <div class="button">
+                <button
+                  onclick="location.href='admin-customer-verification.html'"
+                  id="back"
+                >
+                  Back to Previous Page
+                </button>
+              </div>
             </div>
-            
-            <nav class="nav-menu">
-                <a href="admin-dashboard.html" class="nav-item">
-                    <div class="nav-icon">📊</div>
-                    <span>Dashboard</span>
-                </a>
-                <a href="admin-review-queue.html" class="nav-item active">
-                    <div class="nav-icon">📋</div>
-                    <span>Review Queue</span>
-                </a>
-                <a href="admin-user-management.html" class="nav-item">
-                    <div class="nav-icon">👥</div>
-                    <span>User Management</span>
-                </a>
-                <a href="admin-customer-close-request.html" class="nav-item">
-                    <div class="nav-icon">🔐</div>
-                    <span>Close Requests</span>
-                </a>
-            </nav>
-        </div>
-
-        <!-- Top Navigation Bar -->
-        <div class="nav-bar">
-            <div class="nav-content">
-                <h1 class="page-title">Document Verification</h1>
-                <div class="logout-container" onclick="logout()">
-                    <span class="logout-text">Logout</span>
-                    <img src="../../4_assets/logout-icon.png" alt="Logout" />
-                </div>
+          </div>
+          <div class="personal-information-container">
+            <div class="title-verify">
+              <h1 class="title">ID 1 (Front & Back)</h1>
+              <button class="verify">Verify</button>
             </div>
-        </div>
 
-        <div class="wrapper">
-            <div class="page-body">
-                <!-- Header Section -->
-                <div class="document-header">
-                    <div class="customer-info">
-                        <h2 class="page-subtitle">Document Verification Page</h2>
-                        <h1 class="customer-name blue-text" id="customer-name">Loading...</h1>
-                    </div>
-                    
-                    <div class="verification-progress">
-                        <div class="progress-item" id="id1-progress">
-                            <span class="progress-label">ID 1</span>
-                            <span class="progress-status pending">Pending</span>
-                        </div>
-                        <div class="progress-item" id="id2-progress">
-                            <span class="progress-label">ID 2</span>
-                            <span class="progress-status pending">Pending</span>
-                        </div>
-                        <div class="progress-item" id="docs-progress">
-                            <span class="progress-label">Supporting Docs</span>
-                            <span class="progress-status pending">Pending</span>
-                        </div>
-                    </div>
-                    
-                    <button id="back-btn" class="back-btn">
-                        ← Back to Verification
-                    </button>
-                </div>
+            <div class="container-wrapper">
+              <div class="container">
+                <label for="select-id1">Select ID Type</label>
+                <select id="select-id1">
+                  <option value="" disabled selected>Select</option>
+                  <option value="passport">Passport</option>
+                  <option value="driver">Driver's License</option>
+                </select>
+                <div class="error-message" id="error-select-id1"></div>
+                <div class="error-message" id="error-select-id1"></div>
+              </div>
 
-                <!-- ID Verification Section 1 -->
-                <div class="verification-section" id="id1-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <span class="id-icon">🆔</span>
-                            Primary ID Verification (Front & Back)
-                        </h2>
-                        <div class="verification-controls">
-                            <button class="verify-btn" id="id1-verify-btn" data-section="id1">
-                                <span class="btn-icon">✓</span>
-                                <span class="btn-text">Verify</span>
-                            </button>
-                        </div>
-                    </div>
+              <div class="container">
+                <label for="">ID Number</label>
+                <input id="id1-num" type="text" placeholder="Enter ID Number" />
+                <div class="error-message" id="error-id1-num"></div>
+              </div>
 
-                    <div class="id-details-container">
-                        <div class="id-form-section">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="id1-type">ID Type</label>
-                                    <select id="id1-type" disabled>
-                                        <option value="">Loading...</option>
-                                        <option value="passport">Passport</option>
-                                        <option value="drivers_license">Driver's License</option>
-                                        <option value="national_id">National ID</option>
-                                        <option value="voters_id">Voter's ID</option>
-                                        <option value="sss_id">SSS ID</option>
-                                        <option value="philhealth_id">PhilHealth ID</option>
-                                        <option value="umid">UMID</option>
-                                        <option value="postal_id">Postal ID</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="id1-number">ID Number</label>
-                                    <input type="text" id="id1-number" placeholder="Loading..." readonly />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="id1-expiry">Expiry Date</label>
-                                    <input type="text" id="id1-expiry" placeholder="Loading..." readonly />
-                                </div>
-                            </div>
-                            
-                            <div class="validation-checklist" id="id1-checklist">
-                                <h4>Verification Checklist:</h4>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id1-check-readable" />
-                                    <label for="id1-check-readable">Text is clear and readable</label>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id1-check-photo" />
-                                    <label for="id1-check-photo">Photo matches customer</label>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id1-check-valid" />
-                                    <label for="id1-check-valid">ID is not expired</label>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id1-check-authentic" />
-                                    <label for="id1-check-authentic">ID appears authentic</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="id-images-section">
-                            <div class="image-container">
-                                <div class="image-wrapper">
-                                    <img id="id1-front" src="../../4_assets/front-id.png" alt="ID 1 Front" onclick="openImageModal(this)" />
-                                    <div class="image-label">Front</div>
-                                    <div class="image-actions">
-                                        <button class="zoom-btn" onclick="openImageModal(document.getElementById('id1-front'))">🔍 Zoom</button>
-                                        <button class="download-btn" onclick="downloadImage('id1-front')">⬇ Download</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="image-wrapper">
-                                    <img id="id1-back" src="../../4_assets/back-d.png" alt="ID 1 Back" onclick="openImageModal(this)" />
-                                    <div class="image-label">Back</div>
-                                    <div class="image-actions">
-                                        <button class="zoom-btn" onclick="openImageModal(document.getElementById('id1-back'))">🔍 Zoom</button>
-                                        <button class="download-btn" onclick="downloadImage('id1-back')">⬇ Download</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ID Verification Section 2 -->
-                <div class="verification-section" id="id2-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <span class="id-icon">🆔</span>
-                            Secondary ID Verification (Front & Back)
-                        </h2>
-                        <div class="verification-controls">
-                            <button class="verify-btn" id="id2-verify-btn" data-section="id2">
-                                <span class="btn-icon">✓</span>
-                                <span class="btn-text">Verify</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="id-details-container">
-                        <div class="id-form-section">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="id2-type">ID Type</label>
-                                    <select id="id2-type" disabled>
-                                        <option value="">Loading...</option>
-                                        <option value="passport">Passport</option>
-                                        <option value="drivers_license">Driver's License</option>
-                                        <option value="national_id">National ID</option>
-                                        <option value="voters_id">Voter's ID</option>
-                                        <option value="sss_id">SSS ID</option>
-                                        <option value="philhealth_id">PhilHealth ID</option>
-                                        <option value="umid">UMID</option>
-                                        <option value="postal_id">Postal ID</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="id2-number">ID Number</label>
-                                    <input type="text" id="id2-number" placeholder="Loading..." readonly />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="id2-expiry">Expiry Date</label>
-                                    <input type="text" id="id2-expiry" placeholder="Loading..." readonly />
-                                </div>
-                            </div>
-                            
-                            <div class="validation-checklist" id="id2-checklist">
-                                <h4>Verification Checklist:</h4>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id2-check-readable" />
-                                    <label for="id2-check-readable">Text is clear and readable</label>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id2-check-photo" />
-                                    <label for="id2-check-photo">Photo matches customer</label>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id2-check-valid" />
-                                    <label for="id2-check-valid">ID is not expired</label>
-                                </div>
-                                <div class="checklist-item">
-                                    <input type="checkbox" id="id2-check-authentic" />
-                                    <label for="id2-check-authentic">ID appears authentic</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="id-images-section">
-                            <div class="image-container">
-                                <div class="image-wrapper">
-                                    <img id="id2-front" src="../../4_assets/front-id.png" alt="ID 2 Front" onclick="openImageModal(this)" />
-                                    <div class="image-label">Front</div>
-                                    <div class="image-actions">
-                                        <button class="zoom-btn" onclick="openImageModal(document.getElementById('id2-front'))">🔍 Zoom</button>
-                                        <button class="download-btn" onclick="downloadImage('id2-front')">⬇ Download</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="image-wrapper">
-                                    <img id="id2-back" src="../../4_assets/back-d.png" alt="ID 2 Back" onclick="openImageModal(this)" />
-                                    <div class="image-label">Back</div>
-                                    <div class="image-actions">
-                                        <button class="zoom-btn" onclick="openImageModal(document.getElementById('id2-back'))">🔍 Zoom</button>
-                                        <button class="download-btn" onclick="downloadImage('id2-back')">⬇ Download</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Supporting Documents Section -->
-                <div class="verification-section" id="documents-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <span class="doc-icon">📄</span>
-                            Supporting Documents
-                        </h2>
-                        <div class="verification-controls">
-                            <button class="verify-btn" id="docs-verify-btn" data-section="documents">
-                                <span class="btn-icon">✓</span>
-                                <span class="btn-text">Verify All</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="documents-container">
-                        <div class="documents-loading" id="documents-loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading supporting documents...</p>
-                        </div>
-                        
-                        <div class="documents-table" id="documents-table" style="display: none;">
-                            <div class="table-header">
-                                <div class="table-cell">Document Name</div>
-                                <div class="table-cell">Type</div>
-                                <div class="table-cell">Size</div>
-                                <div class="table-cell">Upload Date</div>
-                                <div class="table-cell">Actions</div>
-                                <div class="table-cell">Status</div>
-                            </div>
-                            
-                            <div id="documents-list">
-                                <!-- Document rows will be populated by JavaScript -->
-                            </div>
-                        </div>
-                        
-                        <div class="no-documents" id="no-documents" style="display: none;">
-                            <div class="no-docs-icon">📄</div>
-                            <h3>No Supporting Documents</h3>
-                            <p>No supporting documents have been uploaded for this customer.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Verification Summary -->
-                <div class="verification-summary">
-                    <h2 class="section-title">Verification Summary</h2>
-                    <div class="summary-grid">
-                        <div class="summary-card" id="overall-summary">
-                            <h3>Overall Status</h3>
-                            <div class="summary-status pending" id="overall-status">
-                                <span class="status-icon">⏳</span>
-                                <span class="status-text">In Progress</span>
-                            </div>
-                            <div class="summary-details">
-                                <div class="detail-item">
-                                    <span>IDs Verified:</span>
-                                    <span id="ids-verified-count">0/2</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span>Documents Verified:</span>
-                                    <span id="docs-verified-count">0/0</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="summary-card" id="action-summary">
-                            <h3>Required Actions</h3>
-                            <div class="action-list" id="action-list">
-                                <div class="action-item pending">Review Primary ID</div>
-                                <div class="action-item pending">Review Secondary ID</div>
-                                <div class="action-item pending">Review Supporting Documents</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="completion-actions">
-                        <button id="complete-verification-btn" class="complete-btn" disabled>
-                            ✓ Complete Document Verification
-                        </button>
-                        <div class="completion-note">
-                            <p>All documents must be verified before completing the verification process.</p>
-                        </div>
-                    </div>
-                </div>
+              <div class="container">
+                <label for="">Expiry Date</label>
+                <input type="date" />
+              </div>
             </div>
+
+            <div class="id-picture-container">
+              <img src="/assets/front-id.png" alt="" />
+              <img src="/assets/back-d.png" alt="" />
+            </div>
+          </div>
+
+          <div class="contact-details-container">
+            <div class="title-verify">
+              <h1 class="title">ID 2 (Front & Back)</h1>
+              <button class="verify">Verify</button>
+            </div>
+
+            <div class="container-wrapper">
+              <div class="container">
+                <label for="select-id1">Select ID Type</label>
+                <select id="select-id1">
+                  <option value="" disabled selected>Select</option>
+                  <option value="passport">Passport</option>
+                  <option value="driver">Driver's License</option>
+                </select>
+                <div class="error-message" id="error-select-id1"></div>
+                <div class="error-message" id="error-select-id1"></div>
+              </div>
+
+              <div class="container">
+                <label for="">ID Number</label>
+                <input id="id1-num" type="text" placeholder="Enter ID Number" />
+                <div class="error-message" id="error-id1-num"></div>
+              </div>
+
+              <div class="container">
+                <label for="">Expiry Date</label>
+                <input type="date" />
+              </div>
+            </div>
+
+            <div class="id-picture-container">
+              <img src="/assets/front-id.png" alt="" />
+              <img src="/assets/back-d.png" alt="" />
+            </div>
+          </div>
+
+          <div class="employment-data-container">
+            <div class="title-verify">
+              <h1 class="title">Supporting Documents</h1>
+              <button class="verify">Verify</button>
+            </div>
+
+            <div class="account-info">
+              <div class="transaction-info">
+                <div class="top-label-2">
+                  <label>File Name</label>
+                  <label>Type</label>
+                  <label>Size</label>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="account-info-card">
+                  <div class="account">
+                    <div class="top-label-2">
+                      <label>FILE_NAME</label>
+                      <label>PDF</label>
+                      <label>120 KB</label>
+                      <button id="view">View</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <script src="admin-customer-verification2.js"></script>
     </div>
-
-    <!-- Image Modal for Document Preview -->
-    <div id="imageModal" class="modal" style="display: none;">
-        <div class="modal-content image-modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Document Preview</h3>
-                <div class="modal-controls">
-                    <button class="control-btn" onclick="zoomIn()">🔍+</button>
-                    <button class="control-btn" onclick="zoomOut()">🔍-</button>
-                    <button class="control-btn" onclick="resetZoom()">⟲</button>
-                    <button class="close-btn" onclick="closeImageModal()">&times;</button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="image-container">
-                    <img id="modalImage" src="" alt="Document Preview" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Document Viewer Modal for PDFs and other documents -->
-    <div id="documentModal" class="modal" style="display: none;">
-        <div class="modal-content document-modal-content">
-            <div class="modal-header">
-                <h3 id="doc-modal-title">Document Viewer</h3>
-                <button class="close-btn" onclick="closeDocumentModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <iframe id="documentFrame" src="" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Container -->
-    <div id="notification-container" class="notification-container"></div>
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay" style="display: none;">
-        <div class="loading-content">
-            <div class="loading-spinner large"></div>
-            <p class="loading-text">Processing documents...</p>
-        </div>
-    </div>
-
-    <script src="utils/logout-fix.js"></script>
-    <script src="admin-customer-verification2.js"></script>
-</body>
+  </body>
 </html>

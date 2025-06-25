@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginBtn = document.querySelector(".button button");
   const accountInput = document.querySelector('.text-box input[type="text"]');
   const passwordInput = document.querySelector('.text-box input[type="password"]');
-  const adminLoginBtn = document.getElementById("admin-login-btn");
 
   loginBtn.addEventListener("click", async function (e) {
     e.preventDefault();
@@ -26,18 +25,18 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(data.message || "Login failed.");
         return;
       }
-      // Save session info if needed
+      
+      // Save session info
       localStorage.setItem("cif_number", data.cif_number || "");
-      // Redirect to dashboard with CIF in URL
-      window.location.href = `../Dashboard-Customer/account1.html/${data.cif_number}`;
+      sessionStorage.setItem("cif_number", data.cif_number || "");
+      
+      // After successful login, set last_login in localStorage
+      localStorage.setItem('last_login', new Date().toLocaleString());
+      
+      // Redirect to profile page with CIF parameter
+      window.location.href = `../Dashboard-Customer/profile.html?cif=${data.cif_number}`;
     } catch (err) {
       alert("Login failed: " + err.message);
     }
-  });
-
-  // Admin Login button functionality
-  adminLoginBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.location.href = "../Dashboard-Admin/admin-login.html";
   });
 });
