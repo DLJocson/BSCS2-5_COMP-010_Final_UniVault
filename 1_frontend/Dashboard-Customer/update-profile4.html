@@ -51,10 +51,10 @@
           sensitive personal information about new or related products and
           services of the BDO Group, or to access, update, or correct certain
           data in this form, I may communicate directly with the relevant member
-          of the BDO Group’s Data Protection Officer through the email address
+          of the BDO Group's Data Protection Officer through the email address
           found at <a href="https://www.bdo.com.ph/privacy-statement">https://www.bdo.com.ph/privacy-statement</a>. I
           further acknowledge and understand that I may access and read the BDO
-          Group’s Data Privacy Statement at the above address or obtain a copy
+          Group's Data Privacy Statement at the above address or obtain a copy
           thereof from the office or branch of the relevant member of the BDO
           Group.
         </p>
@@ -85,18 +85,19 @@
       </div>
       <div id="error-message" class="error-message"></div>
 
-      <div class="button">
+      <div class="button" style="display: flex; justify-content: center; gap: 32px; margin-top: 32px;">
         <div class="back">
-          <button onclick="location.href='update-profile2.html'" id="back">
-            Back
-          </button>
+          <button onclick="location.href='update-profile2.html'" id="back" style="padding: 12px 32px; font-size: 1.2em; background: #fff; color: #1f65b4; border: 2px solid #1f65b4; border-radius: 20px; cursor: pointer;">Back</button>
         </div>
-
         <div class="proceed">
-          <button id="proceed">Proceed</button>
+          <button id="proceed-btn" style="padding: 12px 32px; font-size: 1.2em; background: #1f65b4; color: #fff; border: none; border-radius: 20px; cursor: pointer;">Proceed</button>
         </div>
       </div>
-      <script src="update-profile4.js"></script>
+      <script>
+        document.getElementById('proceed-btn').onclick = function() {
+          window.location.href = 'update-profile7.html';
+        };
+      </script>
     </div>
   </body>
 </html>

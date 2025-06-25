@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniVault - Accounts 1-5 Display</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .summary-table th {
+            background: #f8f9fa;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .summary-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .summary-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .status.active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .account-type {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .balance {
+            font-weight: 600;
+            color: #28a745;
+            text-align: right;
+        }
+        
+        .balance.high {
+            color: #007bff;
+        }
+        
+        .buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 0 10px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: #5a67d8;
+        }
+        
+        .btn.secondary {
+            background: #6c757d;
+        }
+        
+        .btn.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .summary-table {
+                font-size: 0.9em;
+            }
+            
+            .summary-table th,
+            .summary-table td {
+                padding: 8px 6px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 UniVault Banking System</h1>
+            <p>Account Information Display - Accounts 1 through 5</p>
+        </div>
+        
+        <div class="content">
+            <div class="buttons">
+                <button class="btn" onclick="loadAccountData()">🔄 Load Account Data</button>
+                <button class="btn secondary" onclick="loadDetailedData()">📋 Load Detailed Data</button>
+                <button class="btn secondary" onclick="exportData()">💾 Export Data</button>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <p>Loading account data...</p>
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="accountData" style="display: none;">
+                <h2>📈 Account Summary</h2>
+                <table class="summary-table" id="summaryTable">
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Customer Name</th>
+                            <th>Username</th>
+                            <th>Account Type</th>
+                            <th>Status</th>
+                            <th>Balance</th>
+                            <th>Contact</th>
+                            <th>Employer</th>
+                            <th>Monthly Income</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accountTableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="detailedData" style="display: none;">
+                <h2>📊 Detailed Account Information</h2>
+                <div id="detailedContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3000';
+        
+        async function loadAccountData() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const accountData = document.getElementById('accountData');
+            const detailedData = document.getElementById('detailedData');
+            
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            accountData.style.display = 'none';
+            detailedData.style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/accounts/summary/1-5`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayAccountSummary(data.account_summary);
+                
+                loading.style.display = 'none';
+                accountData.style.display = 'block';
+                
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.innerHTML = `<strong>Error loading data:</strong> ${err.message}<br><br>
+                    <strong>Troubleshooting:</strong><br>
+                    • Make sure the backend server is running on port 3000<br>
+                    • Check if the database is properly connected<br>
+                    • Ensure the database has been seeded with sample data`;
+            }
+        }
+        
+        async function loadDetailedData() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const accountData = document.getElementById('accountData');
+            const detailedData = document.getElementById('detailedData');
+            
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            accountData.style.display = 'none';
+            detailedData.style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/accounts/display/1-5`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayDetailedData(data.accounts);
+                
+                loading.style.display = 'none';
+                detailedData.style.display = 'block';
+                
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.innerHTML = `<strong>Error loading detailed data:</strong> ${err.message}`;
+            }
+        }
+        
+        function displayAccountSummary(accounts) {
+            const tbody = document.getElementById('accountTableBody');
+            tbody.innerHTML = '';
+            
+            accounts.forEach(account => {
+                const row = document.createElement('tr');
+                
+                const statusClass = account.status === 'Active' ? 'active' : 'pending';
+                const balanceClass = parseFloat(account.current_balance.replace(/[₱,]/g, '')) > 100000 ? 'high' : '';
+                
+                row.innerHTML = `
+                    <td><strong>${account.account_id}</strong><br><small>#${account.account_number}</small></td>
+                    <td><strong>${account.customer_name}</strong></td>
+                    <td><code>${account.username}</code></td>
+                    <td><span class="account-type">${account.account_type}</span></td>
+                    <td><span class="status ${statusClass}">${account.status}</span></td>
+                    <td class="balance ${balanceClass}">${account.current_balance}</td>
+                    <td>${account.mobile_number}<br><small>${account.email}</small></td>
+                    <td>${account.employer}</td>
+                    <td class="balance">${account.monthly_income}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        function displayDetailedData(accounts) {
+            const container = document.getElementById('detailedContent');
+            container.innerHTML = '';
+            
+            accounts.forEach((account, index) => {
+                const accountCard = document.createElement('div');
+                accountCard.style.cssText = `
+                    background: #f8f9fa;
+                    padding: 20px;
+                    margin: 20px 0;
+                    border-radius: 8px;
+                    border-left: 4px solid #667eea;
+                `;
+                
+                accountCard.innerHTML = `
+                    <h3>🏦 Account ${index + 1}: ${account.customer_details.full_name}</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div>
+                            <h4>Account Details</h4>
+                            <p><strong>Account Number:</strong> ${account.account_details.account_number}</p>
+                            <p><strong>Type:</strong> ${account.account_details.account_type}</p>
+                            <p><strong>Status:</strong> <span class="status ${account.account_details.account_status.toLowerCase()}">${account.account_details.account_status}</span></p>
+                            <p><strong>Balance:</strong> ₱${account.account_details.current_balance.toLocaleString('en-PH', {minimumFractionDigits: 2})}</p>
+                            <p><strong>Initial Deposit:</strong> ₱${account.account_details.initial_deposit.toLocaleString('en-PH', {minimumFractionDigits: 2})}</p>
+                        </div>
+                        
+                        <div>
+                            <h4>Customer Information</h4>
+                            <p><strong>CIF Number:</strong> ${account.customer_details.cif_number}</p>
+                            <p><strong>Username:</strong> ${account.customer_details.username}</p>
+                            <p><strong>Birth Date:</strong> ${new Date(account.customer_details.birth_date).toLocaleDateString()}</p>
+                            <p><strong>Gender:</strong> ${account.customer_details.gender}</p>
+                            <p><strong>Civil Status:</strong> ${account.customer_details.civil_status}</p>
+                        </div>
+                        
+                        <div>
+                            <h4>Contact Information</h4>
+                            <p><strong>Mobile:</strong> ${account.contact_details.primary_contact}</p>
+                            <p><strong>Email:</strong> ${account.contact_details.email_address}</p>
+                            <p><strong>Address:</strong> ${account.contact_details.address.full_address}</p>
+                        </div>
+                        
+                        <div>
+                            <h4>Financial Profile</h4>
+                            <p><strong>Employer:</strong> ${account.financial_profile.employer}</p>
+                            <p><strong>Job Title:</strong> ${account.financial_profile.job_title}</p>
+                            <p><strong>Monthly Income:</strong> ₱${account.financial_profile.monthly_income.toLocaleString('en-PH', {minimumFractionDigits: 2})}</p>
+                            <p><strong>Fund Source:</strong> ${account.financial_profile.fund_source}</p>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(accountCard);
+            });
+        }
+        
+        function exportData() {
+            const accountData = document.getElementById('accountData');
+            const detailedData = document.getElementById('detailedData');
+            
+            if (accountData.style.display !== 'none' || detailedData.style.display !== 'none') {
+                alert('Export functionality would be implemented here.\n\nCurrent data can be copied from the display or accessed via the API endpoints:\n\n• Summary: /api/accounts/summary/1-5\n• Detailed: /api/accounts/display/1-5');
+            } else {
+                alert('Please load data first before exporting.');
+            }
+        }
+        
+        // Auto-load data when page loads
+        window.addEventListener('load', loadAccountData);
+    </script>
+</body>
+</html>

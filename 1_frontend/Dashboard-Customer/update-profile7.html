@@ -15,43 +15,31 @@
   </head>
   <body>
     <div class="username-password-page">
-      <h1 class="title">Username & Password</h1>
+      <h1 class="title">Profile Update Complete</h1>
       <div class="text-box">
-        <label>Enter Username</label>
-        <input type="text" id="username" placeholder="Enter Account Number" />
-        <div class="error-message"></div>
-
-        <label>Enter Password</label>
-        <input type="password" id="password" placeholder="Enter Password" />
-        <div class="error-message"></div>
+        <p style="text-align: center; font-size: 1.2em; color: #333; margin: 20px 0;">
+          Your profile has been updated successfully!
+        </p>
+        <p style="text-align: center; color: #666; margin: 10px 0;">
+          You will be redirected back to your profile page.
+        </p>
       </div>
 
-      <div class="password-note">
-        <h4>Password must:</h4>
-        <br />
-        <ul class="description">
-          <li>Have 8 to 30 characters</li>
-          <li>Have 1 number</li>
-          <li>Contain special characters ‘-!@#$%^&*_+’</li>
-          <li>Contain both lowercase and uppercase letters</li>
-          <li>
-            Not contain number or letter sequences like ‘abc’, ‘123’, and ‘9999
-          </li>
-        </ul>
-      </div>
-
-      <div class="button">
-        <div class="back">
-          <button onclick="location.href='update-profile6.html'" id="back">
-            Back
-          </button>
-        </div>
-
+      <div class="button" style="display: flex; justify-content: center; gap: 32px; margin-top: 32px;">
         <div class="proceed">
-          <button id="proceed">Proceed</button>
+          <button id="finish-btn" style="padding: 12px 32px; font-size: 1.2em; background: #1f65b4; color: #fff; border: none; border-radius: 20px; cursor: pointer;">Finish</button>
         </div>
       </div>
-      <script src="update-profile7.js"></script>
+      <script>
+        document.getElementById('finish-btn').onclick = function() {
+          window.location.href = 'profile.html';
+        };
+        
+        // Auto-redirect after 3 seconds
+        setTimeout(function() {
+          window.location.href = 'profile.html';
+        }, 3000);
+      </script>
     </div>
   </body>
 </html>

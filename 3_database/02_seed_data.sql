@@ -191,8 +191,8 @@ INSERT INTO BANK_EMPLOYEE (employee_position, employee_last_name, employee_first
 
 -- Sample Customers
 -- Customer 1: Juan Dela Cruz (Standard Profile)
-INSERT INTO CUSTOMER (customer_type, customer_last_name, customer_first_name, customer_middle_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
-VALUES ('Account Owner', 'Dela Cruz', 'Juan', 'Protacio', 'juandelacruz', '$2a$12$O2C.E9f6.bT3xR2Y1B0i6yWJ6e1/V/G.f0J7jK9i6yWJ6e1/A', '1990-05-15', 'Male', 'CS02', 'Philippines', 'Resident', 'Filipino', '123-456-789-000', 'Active');
+INSERT INTO CUSTOMER (customer_type, account_type, customer_last_name, customer_first_name, customer_middle_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
+VALUES ('Account Owner', 'Deposit Account', 'Dela Cruz', 'Juan', 'Protacio', 'juandelacruz', '$2a$12$O2C.E9f6.bT3xR2Y1B0i6yWJ6e1/V/G.f0J7jK9i6yWJ6e1/A', '1990-05-15', 'Male', 'CS02', 'Philippines', 'Resident', 'Filipino', '123-456-789-000', 'Active');
 SET @cif1 = LAST_INSERT_ID();
 
 INSERT INTO CUSTOMER_ADDRESS (cif_number, address_type_code, address_unit, address_street, address_barangay, address_city, address_province, address_country, address_zip_code) VALUES
@@ -223,8 +223,8 @@ SET @acc1 = LAST_INSERT_ID();
 INSERT INTO CUSTOMER_ACCOUNT (cif_number, account_number) VALUES (@cif1, @acc1);
 
 -- Customer 2: Maria Clara Santos (Remittance Profile)
-INSERT INTO CUSTOMER (customer_type, customer_last_name, customer_first_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status, remittance_country, remittance_purpose)
-VALUES ('Account Owner', 'Santos', 'Maria Clara', 'maria.santos', '$2a$12$P3D.F0g7.cT4yS3Z2C1j7zXK7f2/W/H.g1K8kL0j7zXK7f2/A', '1985-11-22', 'Female', 'CS06', 'Philippines', 'Resident', 'Filipino', '234-567-890-001', 'Active', 'United States', 'Family Support');
+INSERT INTO CUSTOMER (customer_type, account_type, customer_last_name, customer_first_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status, remittance_country, remittance_purpose)
+VALUES ('Account Owner', 'Card Account', 'Santos', 'Maria Clara', 'maria.santos', '$2a$12$P3D.F0g7.cT4yS3Z2C1j7zXK7f2/W/H.g1K8kL0j7zXK7f2/A', '1985-11-22', 'Female', 'CS06', 'Philippines', 'Resident', 'Filipino', '234-567-890-001', 'Active', 'United States', 'Family Support');
 SET @cif2 = LAST_INSERT_ID();
 
 INSERT INTO CUSTOMER_ADDRESS (cif_number, address_type_code, address_street, address_barangay, address_city, address_province, address_country, address_zip_code) VALUES
@@ -249,8 +249,8 @@ SET @acc2 = LAST_INSERT_ID();
 INSERT INTO CUSTOMER_ACCOUNT (cif_number, account_number) VALUES (@cif2, @acc2);
 
 -- Customer 3: Pedro Penduko (Alias and Self-Employed)
-INSERT INTO CUSTOMER (customer_type, customer_last_name, customer_first_name, customer_middle_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
-VALUES ('Business Owner', 'Penduko', 'Pedro', 'Reyes', 'pedro.penduko', '$2a$12$Q4E.G1h8.dT5zT4A3D2k8aYL8g3/X/I.h2L9lM1k8aYL8g3/A', '1982-02-20', 'Male', 'CS01', 'Philippines', 'Resident', 'Filipino', '345-678-901-002', 'Active');
+INSERT INTO CUSTOMER (customer_type, account_type, customer_last_name, customer_first_name, customer_middle_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
+VALUES ('Business Owner', 'Loan Account', 'Penduko', 'Pedro', 'Reyes', 'pedro.penduko', '$2a$12$Q4E.G1h8.dT5zT4A3D2k8aYL8g3/X/I.h2L9lM1k8aYL8g3/A', '1982-02-20', 'Male', 'CS01', 'Philippines', 'Resident', 'Filipino', '345-678-901-002', 'Active');
 SET @cif3 = LAST_INSERT_ID();
 
 INSERT INTO CUSTOMER_ALIAS (cif_number, alias_first_name, alias_last_name) VALUES (@cif3, 'Peter', 'Punzalan');
@@ -284,8 +284,8 @@ SET @acc3 = LAST_INSERT_ID();
 INSERT INTO CUSTOMER_ACCOUNT (cif_number, account_number) VALUES (@cif3, @acc3);
 
 -- Customer 4: Basilio Dimaguiba (Dormant Account) - Fixed status
-INSERT INTO CUSTOMER (customer_type, customer_last_name, customer_first_name, customer_middle_name, customer_suffix_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
-VALUES ('Account Owner', 'Dimaguiba', 'Basilio', 'Salazar', NULL, 'basilio.d', '$2a$12$R5F.H2i9.eU6A5E4F3L9m9Z0h4/Y/J.i3M0nN2l9m9Z0h4/A', '1950-09-01', 'Male', 'CS02', 'Philippines', 'Resident', 'Filipino', '901-234-567-008', 'Dormant');
+INSERT INTO CUSTOMER (customer_type, account_type, customer_last_name, customer_first_name, customer_middle_name, customer_suffix_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
+VALUES ('Account Owner', 'Wealth Management Account', 'Dimaguiba', 'Basilio', 'Salazar', NULL, 'basilio.d', '$2a$12$R5F.H2i9.eU6A5E4F3L9m9Z0h4/Y/J.i3M0nN2l9m9Z0h4/A', '1950-09-01', 'Male', 'CS02', 'Philippines', 'Resident', 'Filipino', '901-234-567-008', 'Dormant');
 SET @cif4 = LAST_INSERT_ID();
 
 INSERT INTO CUSTOMER_ADDRESS (cif_number, address_type_code, address_street, address_barangay, address_city, address_province, address_country, address_zip_code) VALUES
@@ -309,8 +309,8 @@ SET @acc4 = LAST_INSERT_ID();
 INSERT INTO CUSTOMER_ACCOUNT (cif_number, account_number) VALUES (@cif4, @acc4);
 
 -- Customer 5: Sisa Madrigal (Pending Verification)
-INSERT INTO CUSTOMER (customer_type, customer_last_name, customer_first_name, customer_middle_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
-VALUES ('Account Owner', 'Madrigal', 'Sisa', NULL, 'sisa.m', '$2a$12$S6G.I3j0.fV7B6F5G4N0o0A1i5/Z/K.j4O1pP3m0o0A1i5/A', '1978-03-25', 'Female', 'CS01', 'Philippines', 'Resident', 'Filipino', '987-654-321-009', 'Pending Verification');
+INSERT INTO CUSTOMER (customer_type, account_type, customer_last_name, customer_first_name, customer_middle_name, customer_username, customer_password, birth_date, gender, civil_status_code, birth_country, residency_status, citizenship, tax_identification_number, customer_status)
+VALUES ('Account Owner', 'Insurance Account', 'Madrigal', 'Sisa', NULL, 'sisa.m', '$2a$12$S6G.I3j0.fV7B6F5G4N0o0A1i5/Z/K.j4O1pP3m0o0A1i5/A', '1978-03-25', 'Female', 'CS01', 'Philippines', 'Resident', 'Filipino', '987-654-321-009', 'Pending Verification');
 SET @cif5 = LAST_INSERT_ID();
 
 INSERT INTO CUSTOMER_ADDRESS (cif_number, address_type_code, address_street, address_barangay, address_city, address_province, address_country, address_zip_code) VALUES

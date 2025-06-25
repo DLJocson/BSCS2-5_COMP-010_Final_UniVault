@@ -11,7 +11,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Step 2: Creating schema...  
-mysql -u root -p < 3_database/01_schema.sql
+mysql -u root -p < 3_database/01_schema_improved.sql
 if %errorlevel% neq 0 (
     echo ERROR: Failed to create schema
     pause
@@ -19,7 +19,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Step 3: Loading seed data...
-mysql -u root -p < 3_database/02_seed_data.sql
+mysql -u root -p < 3_database/02_seed_data_improved.sql
 if %errorlevel% neq 0 (
     echo ERROR: Failed to load seed data
     pause

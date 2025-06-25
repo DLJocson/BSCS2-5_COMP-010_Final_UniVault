@@ -296,15 +296,73 @@ input[type="text"] {
 }
 
 .account-details {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+  padding: 20px;
+  margin-bottom: 1.5em;
+  color: #000;
   display: flex;
   flex-direction: column;
-  height: 59vh;
-  width: 65vh;
-  border-radius: 20px;
-  background-color: white;
-  box-shadow: 0 5px 15px rgba(0.2, 0.2, 0.2, 0.2);
-  padding: 5vh 5vh;
-  padding-bottom: 3vh;
+  transition: none;
+  gap: 0;
+}
+
+.account-details .title {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-bottom: 1em;
+}
+
+.account-details .title h2 {
+  color: #1f65b4;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.account-details .title img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(31,101,180,0.12));
+  transition: transform 0.15s;
+}
+
+.account-details .title img:hover {
+  transform: scale(1.13) rotate(-8deg);
+}
+
+.account-details label {
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 0.2em;
+}
+
+.account-details textarea {
+  border: 1.5px solid #cbcbcb;
+  border-radius: 10px;
+  padding: 0.7em 1em;
+  font-size: 1em;
+  background: #fff;
+  width: 100%;
+  resize: none;
+  margin-top: 0.2em;
+  min-height: 2.2em;
+}
+
+.account-details .open-close-date {
+  display: flex;
+  gap: 1.2em;
+}
+
+.account-details .open-date, .account-details .close-date {
+  flex: 1;
+}
+
+.account-details .current-balance {
+  margin-top: 0.7em;
 }
 
 .title {
@@ -564,28 +622,75 @@ input[type="checkbox"] {
 }
 
 .account-info-card {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 4em;
-  margin-bottom: 1.5em;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #ffffff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: #fff;
   border-radius: 20px;
-  color: #000000;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+  padding: 20px;
+  margin-bottom: 1.5em;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  transition: none;
+  gap: 0;
+}
+
+.account-info-card label {
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 0.2em;
+}
+
+.account-info-card textarea {
+  border: 1.5px solid #cbcbcb;
+  border-radius: 10px;
+  padding: 0.7em 1em;
+  font-size: 1em;
+  background: #fff;
+  width: 100%;
+  resize: none;
+  margin-top: 0.2em;
+  min-height: 2.2em;
 }
 
 .account-info-card:hover {
-  transform: translateY(-5px) scale(1.01);
-  background: linear-gradient(135deg, #f9f9f9, #ececec);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  color: #333333;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+  transform: none;
+}
+
+.account-info-card .account-name {
+  font-size: 1.35em;
+  font-weight: 700;
+  color: #1f65b4;
+  margin-bottom: 0.2em;
+}
+.account-info-card .account-number {
+  font-size: 1.08em;
+  color: #444;
+  margin-bottom: 0.2em;
+}
+.account-info-card .account-details-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+.account-info-card .account-details-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5em;
+}
+.account-info-card .account-balance {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #0072d8;
+}
+.account-info-card .account-status {
+  font-size: 1em;
+  color: #888;
+  font-weight: 500;
+  margin-top: 0.2em;
 }
 
 .account {
