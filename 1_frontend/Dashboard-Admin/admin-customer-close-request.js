@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupEventListeners();
     } else {
         console.error('No CIF number provided');
-        window.location.href = 'admin-review-queue2.html';
+        window.location.href = 'admin-dashboard.html';
     }
 });
 
@@ -89,7 +89,7 @@ async function loadCustomerBasicInfo(cifNumber) {
     } catch (error) {
         console.error('Error loading customer info:', error);
         alert('Customer not found');
-        window.location.href = 'admin-review-queue2.html';
+        window.location.href = 'admin-dashboard.html';
     }
 }
 
@@ -380,7 +380,7 @@ async function processProfileUpdate(action) {
         if (!response.ok) throw new Error(`Failed to ${action} profile update`);
         
         alert(`Profile update request ${action}d successfully`);
-        window.location.href = 'admin-review-queue2.html';
+        window.location.href = 'admin-dashboard.html';
         
     } catch (error) {
         console.error(`Error ${action}ing profile update:`, error);
@@ -415,7 +415,7 @@ async function processAccountClosure(action) {
         if (!response.ok) throw new Error(`Failed to ${action} account closure`);
         
         alert(`Account closure request(s) ${action}d successfully`);
-        window.location.href = 'admin-review-queue2.html';
+        window.location.href = 'admin-dashboard.html';
         
     } catch (error) {
         console.error(`Error ${action}ing account closure:`, error);

@@ -309,20 +309,8 @@
     minmax(100px, 130px); /* Status */
 }
 
-/* Review Queue Page - 10 columns */
-.review-queue-page .top-label-2 {
-  grid-template-columns:
-    minmax(110px, 140px) /* CIF Number */
-    minmax(140px, 180px) /* Date & Time */
-    minmax(110px, 150px) /* Customer Type */
-    minmax(100px, 130px) /* Last Name */
-    minmax(100px, 130px) /* First Name */
-    minmax(100px, 130px) /* Middle Name */
-    minmax(70px, 90px) /* Suffix */
-    minmax(150px, 190px) /* Email Address */
-    minmax(120px, 160px) /* Phone Number */
-    minmax(90px, 120px); /* Status */
-}
+
+
 
 /* Closed Accounts Page - 8 columns */
 .closed-accounts-page .top-label-2 {
@@ -369,19 +357,7 @@
       minmax(70px, 90px);
   }
 
-  .review-queue-page .top-label-2 {
-    grid-template-columns:
-      minmax(80px, 95px)
-      minmax(100px, 130px)
-      minmax(80px, 100px)
-      minmax(70px, 85px)
-      minmax(70px, 85px)
-      minmax(70px, 85px)
-      minmax(45px, 60px)
-      minmax(110px, 140px)
-      minmax(85px, 110px)
-      minmax(60px, 80px);
-  }
+
 
   .closed-accounts-page .top-label-2 {
     grid-template-columns:
@@ -418,9 +394,7 @@
     grid-template-columns: 75px 85px 75px 75px 75px 45px 110px 85px 65px;
   }
 
-  .review-queue-page .top-label-2 {
-    grid-template-columns: 70px 110px 75px 65px 65px 65px 40px 100px 75px 55px;
-  }
+
 
   .closed-accounts-page .top-label-2 {
     grid-template-columns: 75px 130px 85px 75px 75px 75px 45px 65px;
@@ -432,7 +406,6 @@
 }
 
 /* Page-specific search container centering fixes */
-.review-queue-page .search-container,
 .closed-accounts-page .search-container {
   grid-column: 1 / -1;
   justify-self: center;

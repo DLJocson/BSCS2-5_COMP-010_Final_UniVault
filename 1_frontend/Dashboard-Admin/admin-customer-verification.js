@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!cifNumber) {
         showNotification('No customer CIF number provided', 'error');
         setTimeout(() => {
-            window.location.href = 'admin-review-queue.html';
+            window.location.href = 'admin-dashboard.html';
         }, 2000);
         return;
     }
@@ -755,7 +755,7 @@ function setupEventHandlers(cifNumber) {
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
         backBtn.onclick = () => {
-            window.location.href = 'admin-review-queue.html';
+            window.location.href = 'admin-dashboard.html';
         };
     }
     
@@ -866,7 +866,7 @@ async function confirmVerificationDecision(action, cifNumber) {
             closeVerificationModal();
             
             setTimeout(() => {
-                window.location.href = 'admin-review-queue.html';
+                window.location.href = 'admin-dashboard.html';
             }, 2000);
         } else {
             const errorData = await response.json();

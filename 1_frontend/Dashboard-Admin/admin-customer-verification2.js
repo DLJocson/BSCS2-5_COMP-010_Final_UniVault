@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!cifNumber) {
         showNotification('No customer CIF number provided', 'error');
         setTimeout(() => {
-            window.location.href = 'admin-review-queue.html';
+            window.location.href = 'admin-dashboard.html';
         }, 2000);
         return;
     }
