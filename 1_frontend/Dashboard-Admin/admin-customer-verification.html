@@ -1,395 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Customer Verification - UniVault Admin</title>
     <link rel="stylesheet" href="admin-customer-verification.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
+    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
     <div class="profile-page">
-      <div class="wrapper">
-        <div class="page-body">
-          <div class="account-information-container">
-            <div class="account-information">
-              <h2 class="title">Account Information</h2>
-
-              <div class="container-wrapper">
-                <div class="container">
-                  <label for="cif-number">CIF Number</label>
-                  <input type="text" id="cif-number" />
+        <!-- Left Sidebar Navigation -->
+        <div class="left-side-bar">
+            <div class="logo-section">
+                <img src="../../4_assets/logo-footer.png" class="logo-image" alt="UniVault Logo" />
+                <div class="logo-text">
+                    <div class="logo-title">UniVault</div>
+                    <div class="logo-subtitle">Admin Panel</div>
                 </div>
-
-                <div class="container">
-                  <label for="customer-type">Customer Type</label>
-                  <input type="text" id="customer-type" />
-                </div>
-
-                <div class="container">
-                  <label for="account-tyoe">Account Type</label>
-                  <input type="text" id="account-type" />
-                </div>
-
-                <div class="container">
-                  <label for="status">Status</label>
-                  <input type="text" id="status" />
-                </div>
-              </div>
             </div>
-            <div class="profile-name-page">
-              <h1>Verification Page</h1>
-              <h1 class="blue-text">Bautista, Chryshella Grace P.</h1>
-              <div class="button">
-                <button
-                  onclick="location.href='admin-review-queue.html'"
-                  id="back"
-                >
-                  Back to Review Queue
-                </button>
-                <button
-                  onclick="location.href='admin-customer-verification2.html'"
-                  id="view"
-                >
-                  View Attached Documents
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="personal-information-container">
-            <h1 class="title">Personal Information</h1>
-            <h2 class="subtitle">Full Name</h2>
-            <div class="full-name-container">
-              <div class="container">
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" />
-              </div>
-
-              <div class="container">
-                <label for="middle-name">Middle Name</label>
-                <input type="text" id="middle-name" />
-              </div>
-
-              <div class="container">
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" />
-              </div>
-
-              <div class="container">
-                <label for="suffix-name">Suffix </label>
-                <input type="text" id="suffix-name" />
-              </div>
-            </div>
-
-            <h2 class="subtitle">Biographical Information</h2>
-            <div class="biographical-info-container">
-              <div class="container">
-                <label for="date">Date of Birth</label>
-                <input type="text" id="date" />
-              </div>
-
-              <div class="container">
-                <label for="country-of-birth">Country of Birth</label>
-                <input type="text" id="country-of-birth" />
-              </div>
-
-              <div class="container">
-                <label for="citizenship">Citizenship</label>
-                <input type="text" id="citizenship" />
-              </div>
-
-              <div class="container">
-                <label for="gender">Gender</label>
-                <input type="text" id="gender" />
-              </div>
-
-              <div class="container">
-                <label for="civil-status">Civil Status</label>
-                <input type="text" id="civil-status" />
-              </div>
-
-              <div class="container">
-                <label for="residency">Residency Status</label>
-                <input type="text" id="residency" />
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-details-container">
-            <h1 class="title">Contact Details</h1>
-            <h2 class="subtitle">Personal Numbers and Email Address</h2>
-            <div class="full-name-container">
-              <div class="container">
-                <label for="mobile-number">Personal Mobile Number</label>
-                <input type="text" id="mobile-number" />
-              </div>
-
-              <div class="container">
-                <label for="landline-number">Home Landline Number</label>
-                <input type="text" id="landline-number" />
-              </div>
-
-              <div class="container">
-                <label for="email-address">Personal Email Address</label>
-                <input type="text" id="email-address" />
-              </div>
-            </div>
-
-            <h2 class="subtitle">Home Address</h2>
-            <div class="home-address-container">
-              <div class="container">
-                <label for="unit">Unit</label>
-                <input type="text" id="unit" />
-              </div>
-
-              <div class="container">
-                <label for="building">Building</label>
-                <input type="text" id="building" />
-              </div>
-
-              <div class="container">
-                <label for="street">Street</label>
-                <input type="text" id="street" />
-              </div>
-
-              <div class="container">
-                <label for="subdivision">Subdivision</label>
-                <input type="text" id="subdivision" />
-              </div>
-
-              <div class="container">
-                <label for="barangay">Barangay</label>
-                <input type="text" id="barangay" />
-              </div>
-
-              <div class="container">
-                <label for="city">City</label>
-                <input type="text" id="city" />
-              </div>
-
-              <div class="container">
-                <label for="province">Province</label>
-                <input type="text" id="province" />
-              </div>
-
-              <div class="container">
-                <label for="country">Country</label>
-                <input type="text" id="country" />
-              </div>
-
-              <div class="container">
-                <label for="zip-code">Zip Code</label>
-                <input type="text" id="zip-code" />
-              </div>
-            </div>
-
-            <h2 class="subtitle">Alternate Address</h2>
-            <div class="alternate-address-container">
-              <div class="container">
-                <label for="alt-unit">Unit</label>
-                <input type="text" id="alt-unit" />
-              </div>
-
-              <div class="container">
-                <label for="alt-building">Building</label>
-                <input type="text" id="alt-building" />
-              </div>
-
-              <div class="container">
-                <label for="alt-street">Street</label>
-                <input type="text" id="alt-street" />
-              </div>
-
-              <div class="container">
-                <label for="alt-subdivision">Subdivision</label>
-                <input type="text" id="alt-subdivision" />
-              </div>
-
-              <div class="container">
-                <label for="alt-barangay">Barangay</label>
-                <input type="text" id="alt-barangay" />
-              </div>
-
-              <div class="container">
-                <label for="alt-city">City</label>
-                <input type="text" id="alt-city" />
-              </div>
-
-              <div class="container">
-                <label for="alt-province">Province</label>
-                <input type="text" id="alt-province" />
-              </div>
-
-              <div class="container">
-                <label for="alt-country">Country</label>
-                <input type="text" id="alt-country" />
-              </div>
-
-              <div class="container">
-                <label for="alt-zip-code">Zip Code</label>
-                <input type="text" id="alt-zip-code" />
-              </div>
-            </div>
-          </div>
-
-          <div class="employment-data-container">
-            <h1 class="title">Employment & Financial Data</h1>
-            <div class="work-details-container">
-              <div class="container">
-                <label for="work-email-address"
-                  >Work/Business Email Address</label
-                >
-                <input type="text" id="work-email-address" />
-              </div>
-
-              <div class="container">
-                <label for="work-landline-number">Work Landline Number</label>
-                <input type="text" id="work-landline-number" />
-              </div>
-
-              <div class="container">
-                <label for="tin-number">TIN Number</label>
-                <input type="text" id="tin-number" />
-              </div>
-
-              <div class="container">
-                <label for="primary-employer">Name of Primary Employer</label>
-                <input type="text" id="primary-employer" />
-              </div>
-
-              <div class="container">
-                <label for="position">Position/Job Title</label>
-                <input type="text" id="position" />
-              </div>
-
-              <div class="container">
-                <label for="monthly-income">Monthly Income</label>
-                <input type="text" id="monthly-income" />
-              </div>
-            </div>
-
-            <h2 class="subtitle">Work/Business Address</h2>
-            <div class="work-address-container">
-              <div class="container">
-                <label for="work-unit">Unit</label>
-                <input type="text" id="work-unit" />
-              </div>
-
-              <div class="container">
-                <label for="work-building">Building</label>
-                <input type="text" id="work-building" />
-              </div>
-
-              <div class="container">
-                <label for="work-street">Street</label>
-                <input type="text" id="work-street" />
-              </div>
-
-              <div class="container">
-                <label for="work-subdivision">Subdivision</label>
-                <input type="text" id="work-subdivision" />
-              </div>
-
-              <div class="container">
-                <label for="work-barangay">Barangay</label>
-                <input type="text" id="work-barangay" />
-              </div>
-
-              <div class="container">
-                <label for="work-city">City</label>
-                <input type="text" id="work-city" />
-              </div>
-
-              <div class="container">
-                <label for="work-province">Province</label>
-                <input type="text" id="work-province" />
-              </div>
-
-              <div class="container">
-                <label for="work-country">Country</label>
-                <input type="text" id="work-country" />
-              </div>
-
-              <div class="container">
-                <label for="work-zip-code">Zip Code</label>
-                <input type="text" id="work-zip-code" />
-              </div>
-            </div>
-          </div>
-
-          <div class="work-nature-container">
-            <div class="title-container">
-              <h1 class="title">Work/Business Nature</h1>
-            </div>
-
-            <div class="work-business-nature-container">
-              <div class="container">
-                <label for="work-email-address">Work/Business Nature</label>
-                <input type="text" id="work-business-nature" />
-              </div>
-            </div>
-
-            <div class="work-business-nature-container">
-              <div class="container">
-                <label for="work-email-address">Work/Business Nature</label>
-                <input type="text" id="work-business-nature" />
-              </div>
-            </div>
-
-            <div class="work-business-nature-container">
-              <div class="container">
-                <label for="work-email-address">Work/Business Nature</label>
-                <input type="text" id="work-business-nature" />
-              </div>
-            </div>
-          </div>
-
-          <div class="fund-source-alias-container">
-            <div class="fund-source-container">
-              <div class="title-container">
-                <h1 class="title">Fund Source</h1>
-              </div>
-              <div class="source-of-fund-container">
-                <div class="container">
-                  <label for="source-of-fund">Source of Funds</label>
-                  <input type="text" id="source-of-fund" />
-                </div>
-              </div>
-            </div>
-
-            <div class="alias-container">
-              <div class="alias-full-name-container">
-                <div class="title-container">
-                  <h1 class="title">Aliases</h1>
-                </div>
-                <div class="container">
-                  <label for="alias-first-name">First Name</label>
-                  <input type="text" id="alias-first-name" />
-                </div>
-
-                <div class="container">
-                  <label for="alias-middle-name">Middle Name</label>
-                  <input type="text" id="alias-middle-name" />
-                </div>
-
-                <div class="container">
-                  <label for="alias-last-name">Last Name</label>
-                  <input type="text" id="alias-last-name" />
-                </div>
-              </div>
-            </div>
-          </div>
+            
+            <nav class="nav-menu">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <div class="nav-icon">📊</div>
+                    <span>Dashboard</span>
+                </a>
+                <a href="admin-review-queue.html" class="nav-item active">
+                    <div class="nav-icon">📋</div>
+                    <span>Review Queue</span>
+                </a>
+                <a href="admin-user-management.html" class="nav-item">
+                    <div class="nav-icon">👥</div>
+                    <span>User Management</span>
+                </a>
+                <a href="admin-customer-close-request.html" class="nav-item">
+                    <div class="nav-icon">🔐</div>
+                    <span>Close Requests</span>
+                </a>
+            </nav>
         </div>
-      </div>
+
+        <!-- Top Navigation Bar -->
+        <div class="nav-bar">
+            <div class="nav-content">
+                <h1 class="page-title">Customer Verification</h1>
+                <div class="logout-container" onclick="logout()">
+                    <span class="logout-text">Logout</span>
+                    <img src="../../4_assets/logout-icon.png" alt="Logout" />
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <div class="page-body">
+                <!-- Header Section with Customer Info -->
+                <div class="verification-header">
+                    <div class="customer-info-section">
+                        <div class="profile-completeness">
+                            <div class="completeness-bar">
+                                <div class="completeness-fill" id="completeness-fill"></div>
+                            </div>
+                            <span class="completeness-text" id="completeness-text">Loading profile completeness...</span>
+                        </div>
+                        
+                        <div class="customer-name-section">
+                            <h2 class="verification-title">Verification Page</h2>
+                            <h1 class="customer-name blue-text" id="customer-name">Loading...</h1>
+                        </div>
+                        
+                        <div class="verification-actions">
+                            <button id="back-btn" class="action-btn secondary">
+                                ← Back to Review Queue
+                            </button>
+                            <button id="view-documents-btn" class="action-btn primary">
+                                📄 View Attached Documents
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Verification Decision Buttons -->
+                    <div class="verification-decision-section">
+                        <div class="decision-buttons">
+                            <button id="approve-btn" class="decision-btn approve" disabled>
+                                ✓ Approve Verification
+                            </button>
+                            <button id="reject-btn" class="decision-btn reject">
+                                ✗ Reject Verification
+                            </button>
+                        </div>
+                        <div class="verification-status" id="verification-status">
+                            <span class="status-indicator pending">Pending Verification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Information Context -->
+                <div class="verification-context-section">
+                    <h2 class="section-title">Account Information Context</h2>
+                    <div class="account-context-loading" id="account-context-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading existing account information...</p>
+                    </div>
+                    <div class="account-context-grid" id="account-context-grid" style="display: none;">
+                        <!-- Account cards will be populated by JavaScript -->
+                    </div>
+                    <div class="no-accounts-message" id="no-accounts-message" style="display: none;">
+                        <p>No existing accounts found. This is a new customer verification.</p>
+                    </div>
+                </div>
+
+                <!-- Profile Validation Summary -->
+                <div class="profile-validation-section">
+                    <h2 class="section-title">Profile Validation Summary</h2>
+                    <div class="validation-grid">
+                        <div class="validation-card" id="personal-info-validation">
+                            <div class="validation-header">
+                                <h3>Personal Information</h3>
+                                <div class="validation-status pending">
+                                    <span class="status-icon">⏳</span>
+                                    <span class="status-text">Validating...</span>
+                                </div>
+                            </div>
+                            <div class="validation-details">
+                                <div class="validation-item">
+                                    <span class="item-label">Full Name:</span>
+                                    <span class="item-status" id="name-status">Checking...</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">Date of Birth:</span>
+                                    <span class="item-status" id="dob-status">Checking...</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">Gender & Civil Status:</span>
+                                    <span class="item-status" id="personal-details-status">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="validation-card" id="contact-info-validation">
+                            <div class="validation-header">
+                                <h3>Contact Information</h3>
+                                <div class="validation-status pending">
+                                    <span class="status-icon">⏳</span>
+                                    <span class="status-text">Validating...</span>
+                                </div>
+                            </div>
+                            <div class="validation-details">
+                                <div class="validation-item">
+                                    <span class="item-label">Mobile Number:</span>
+                                    <span class="item-status" id="mobile-status">Checking...</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">Email Address:</span>
+                                    <span class="item-status" id="email-status">Checking...</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">Address Information:</span>
+                                    <span class="item-status" id="address-status">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="validation-card" id="employment-validation">
+                            <div class="validation-header">
+                                <h3>Employment & Financial</h3>
+                                <div class="validation-status pending">
+                                    <span class="status-icon">⏳</span>
+                                    <span class="status-text">Validating...</span>
+                                </div>
+                            </div>
+                            <div class="validation-details">
+                                <div class="validation-item">
+                                    <span class="item-label">Employment Details:</span>
+                                    <span class="item-status" id="employment-status">Checking...</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">Income Information:</span>
+                                    <span class="item-status" id="income-status">Checking...</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">TIN Number:</span>
+                                    <span class="item-status" id="tin-status">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="validation-card" id="document-validation">
+                            <div class="validation-header">
+                                <h3>Document Verification</h3>
+                                <div class="validation-status pending">
+                                    <span class="status-icon">⏳</span>
+                                    <span class="status-text">Pending Review</span>
+                                </div>
+                            </div>
+                            <div class="validation-details">
+                                <div class="validation-item">
+                                    <span class="item-label">ID Documents:</span>
+                                    <span class="item-status" id="id-documents-status">Not Reviewed</span>
+                                </div>
+                                <div class="validation-item">
+                                    <span class="item-label">Supporting Documents:</span>
+                                    <span class="item-status" id="supporting-docs-status">Not Reviewed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Customer Profile -->
+                <div class="customer-profile-section">
+                    <h2 class="section-title">Customer Profile Details</h2>
+                    
+                    <!-- Personal Information -->
+                    <div class="profile-section">
+                        <h3 class="subsection-title">Personal Information</h3>
+                        <div class="info-grid">
+                            <div class="info-group">
+                                <h4>Full Name</h4>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>First Name</label>
+                                        <div class="field-value" id="first-name">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Middle Name</label>
+                                        <div class="field-value" id="middle-name">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Last Name</label>
+                                        <div class="field-value" id="last-name">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Suffix</label>
+                                        <div class="field-value" id="suffix-name">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-group">
+                                <h4>Biographical Information</h4>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>Date of Birth</label>
+                                        <div class="field-value" id="date-of-birth">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Country of Birth</label>
+                                        <div class="field-value" id="country-of-birth">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Citizenship</label>
+                                        <div class="field-value" id="citizenship">Loading...</div>
+                                    </div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>Gender</label>
+                                        <div class="field-value" id="gender">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Civil Status</label>
+                                        <div class="field-value" id="civil-status">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Residency Status</label>
+                                        <div class="field-value" id="residency">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="profile-section">
+                        <h3 class="subsection-title">Contact Information</h3>
+                        <div class="info-grid">
+                            <div class="info-group">
+                                <h4>Contact Details</h4>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>Mobile Number</label>
+                                        <div class="field-value" id="mobile-number">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Landline Number</label>
+                                        <div class="field-value" id="landline-number">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Email Address</label>
+                                        <div class="field-value" id="email-address">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-group">
+                                <h4>Home Address</h4>
+                                <div class="address-display" id="home-address">
+                                    Loading address information...
+                                </div>
+                            </div>
+
+                            <div class="info-group" id="alt-address-group" style="display: none;">
+                                <h4>Alternate Address</h4>
+                                <div class="address-display" id="alternate-address">
+                                    Loading alternate address...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employment & Financial Information -->
+                    <div class="profile-section">
+                        <h3 class="subsection-title">Employment & Financial Information</h3>
+                        <div class="info-grid">
+                            <div class="info-group">
+                                <h4>Employment Details</h4>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>Primary Employer</label>
+                                        <div class="field-value" id="primary-employer">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Position/Job Title</label>
+                                        <div class="field-value" id="position">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Monthly Income</label>
+                                        <div class="field-value" id="monthly-income">Loading...</div>
+                                    </div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>TIN Number</label>
+                                        <div class="field-value" id="tin-number">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Work Email</label>
+                                        <div class="field-value" id="work-email">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Work Phone</label>
+                                        <div class="field-value" id="work-phone">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-group" id="work-address-group" style="display: none;">
+                                <h4>Work Address</h4>
+                                <div class="address-display" id="work-address">
+                                    Loading work address...
+                                </div>
+                            </div>
+
+                            <div class="info-group">
+                                <h4>Financial Information</h4>
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>Source of Funds</label>
+                                        <div class="field-value" id="source-of-funds">Loading...</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Business Nature</label>
+                                        <div class="field-value" id="business-nature">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="profile-section" id="alias-section" style="display: none;">
+                        <h3 class="subsection-title">Known Aliases</h3>
+                        <div class="info-grid">
+                            <div class="info-group">
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <label>Alias First Name</label>
+                                        <div class="field-value" id="alias-first-name">N/A</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Alias Middle Name</label>
+                                        <div class="field-value" id="alias-middle-name">N/A</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <label>Alias Last Name</label>
+                                        <div class="field-value" id="alias-last-name">N/A</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verification History -->
+                <div class="verification-history-section">
+                    <h2 class="section-title">Verification History</h2>
+                    <div class="history-container" id="verification-history">
+                        <div class="history-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading verification history...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+
+    <!-- Verification Comment Modal -->
+    <div id="verification-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Verification Decision</h3>
+                <button class="modal-close" onclick="closeVerificationModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="comment-section">
+                    <label for="verification-comment">Comments (Optional):</label>
+                    <textarea id="verification-comment" placeholder="Add any relevant comments about this verification decision..."></textarea>
+                </div>
+                <div class="decision-summary" id="decision-summary">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" onclick="closeVerificationModal()">Cancel</button>
+                <button class="modal-btn primary" id="confirm-verification-btn">Confirm Decision</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner large"></div>
+            <p class="loading-text">Processing request...</p>
+        </div>
+    </div>
+
+    <script src="utils/logout-fix.js"></script>
+    <script src="admin-customer-verification.js"></script>
+</body>
 </html>

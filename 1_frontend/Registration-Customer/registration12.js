@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function collectRegistrationData() {
     const keyMap = {
       'customer_type': 'customer_type',
-      'account_type': 'account_type',
+      'product_type': 'product_type',
       'customer_first_name': 'customer_first_name',
       'customer_middle_name': 'customer_middle_name',
       'customer_last_name': 'customer_last_name',

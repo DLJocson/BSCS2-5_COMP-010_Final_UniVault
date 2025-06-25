@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginBtn = document.querySelector(".button button");
   const accountInput = document.querySelector('.text-box input[type="text"]');
   const passwordInput = document.querySelector('.text-box input[type="password"]');
+  const adminLoginBtn = document.getElementById("admin-login-btn");
 
   loginBtn.addEventListener("click", async function (e) {
     e.preventDefault();
@@ -32,5 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (err) {
       alert("Login failed: " + err.message);
     }
+  });
+
+  // Admin Login button functionality
+  adminLoginBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "../Dashboard-Admin/admin-login.html";
   });
 });

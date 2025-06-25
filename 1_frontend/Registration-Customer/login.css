@@ -34,7 +34,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 755px;
+  height: 820px;
   width: 620px;
   background-color: white;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
@@ -145,8 +145,8 @@ button:hover {
 
 .forgot-password {
   padding-top: 20px;
-  padding-bottom: 30px;
-  margin-bottom: 130px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
   animation: fadeInForgot 0.8s 0.5s both;
 }
 
@@ -200,3 +200,43 @@ input[type="password"]:focus::placeholder {
   color: #5c95ec;
   transition: color 0.3s, opacity 0.3s;
 }
+
+/* Admin Login Button Styles */
+.admin-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  animation: fadeInAdmin 0.8s 0.7s both;
+}
+
+@keyframes fadeInAdmin {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-login button {
+  height: 45px;
+  width: 200px;
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: var(--font-family);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 78, 168, 0.1);
+}
+
+.admin-login button:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  scale: 1.03;
+  box-shadow: 0 4px 12px rgba(0, 78, 168, 0.2);
+}
+
+/* Update animation delays for new element */
+.log-in-page > *:nth-child(6) { animation-delay: 0.9s; }

@@ -6,8 +6,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Document</title>
+    <title>Admin User Management - UniVault</title>
     <link rel="stylesheet" href="admin-user-management.css" />
+    <link rel="stylesheet" href="styles/notification-styles.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,9 +17,10 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="user-management-page">
     <div class="deposit-page">
       <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
         <div class="left-side-bar">
           <div class="customer-options">
             <div class="customer-options-container">
@@ -42,26 +44,38 @@
           </div>
         </div>
 
+        <!-- Main Content -->
         <div class="wrapper">
+          <!-- Navigation Bar -->
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
-            <div class="icon-container">
-              <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
+            <div class="nav-content">
+              <h3 class="page-title">User Management</h3>
+              <div class="logout-container">
+                <span class="logout-text">Logout</span>
+                <img
+                  id="log-out"
+                  src="../assets/log-out-logo.png"
+                  alt="Log Out"
+                />
+              </div>
             </div>
           </nav>
 
+          <!-- Page Header -->
           <header class="header">
             <div class="welcome-message">
               <h1 class="welcome">
                 <span class="blue-text">Manage Users</span> Here
               </h1>
               <p class="blue-text">
-                View and search for all customer and employee accounts in one
-                place.
+                View and search for all verified customer and employee accounts
+                in one place. Pending verification customers are handled in the
+                Review Queue.
               </p>
             </div>
           </header>
 
+          <!-- Progress Steps -->
           <div class="progress-container">
             <div class="progress-line"></div>
 
@@ -91,40 +105,116 @@
             </div>
           </div>
 
+          <!-- Page Body -->
           <div class="page-body">
+            <!-- Search and Filter Controls -->
+            <div class="search-container">
+              <div class="search-bar-wrapper">
+                <input
+                  type="text"
+                  id="customerSearchBar"
+                  placeholder="Search by name, CIF number, username..."
+                  class="search-input"
+                />
+                <div class="search-icon">🔍</div>
+                <div class="search-loading-spinner"></div>
+              </div>
+              <div class="filter-container">
+                <label for="statusFilter" class="filter-label"
+                  >Filter by Status:</label
+                >
+                <select id="statusFilter" class="status-filter">
+                  <option value="all">All Verified Customers</option>
+                  <option value="Active">Active</option>
+                  <option value="Pending Verification">
+                    Pending Verification (Review Queue)
+                  </option>
+                  <option value="Inactive">Inactive</option>
+                  <option value="Suspended">Suspended</option>
+                  <option value="Dormant">Dormant</option>
+                </select>
+              </div>
+              <div
+                id="searchResults"
+                class="search-results"
+                style="display: none"
+              ></div>
+            </div>
+
+            <!-- Customer Management Section -->
             <div class="account-info">
               <div class="transaction-info">
+                <!-- Table Header -->
                 <div class="top-label">
-                  <h2>Customer Management</h2>
+                  <div class="section-header">
+                    <h2>Customer Management</h2>
+                    <div class="bulk-actions">
+                      <button id="selectAllBtn" class="bulk-btn">
+                        Select All
+                      </button>
+                      <button id="bulkStatusBtn" class="bulk-btn" disabled>
+                        Update Status
+                      </button>
+                    </div>
+                  </div>
                   <div class="top-label-2">
-                    <label>CIF Number</label>
-                    <label>Customer Type</label>
-                    <label>Last Name</label>
-                    <label>First Name</label>
-                    <label>Middle Name</label>
-                    <label>Suffix</label>
-                    <label>Email Address</label>
-                    <label>Phone Number</label>
-                    <label>Status</label>
+                  <label>
+                  <input
+                  type="checkbox"
+                  id="selectAllCheckbox"
+                  class="select-all-checkbox"
+                  />
+                  </label>
+                  <label>CIF Number</label>
+                  <label>Username</label>
+                  <label>Last Name</label>
+                  <label>First Name</label>
+                  <label>Gender</label>
+                  <label>Citizenship</label>
+                  <label>Status</label>
+                  <label>Created Date</label>
+                  <label>Actions</label>
                   </div>
                 </div>
 
+                <!-- Customer cards will be dynamically populated by JavaScript -->
+                <div id="customerList" class="customer-list">
+                  <!-- Loading state -->
+                  <div id="loadingState" class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading customers...</p>
+                  </div>
+                </div>
+
+                <!-- Pagination Controls -->
                 <div
-                  onclick="location.href='admin-customer-profile.html'"
-                  class="account-info-card"
+                  class="pagination-container"
+                  id="paginationContainer"
+                  style="display: none"
                 >
-                  <div class="account">
-                    <div class="top-label-2">
-                      <label>5821947360</label>
-                      <label>Business Owner</label>
-                      <label>Bautista</label>
-                      <label>Chryshella Grace</label>
-                      <label>Perez</label>
-                      <label>Perez</label>
-                      <label>bautista@gmail.com</label>
-                      <label>+63 9171112222</label>
-                      <label class="blue-text">Verified</label>
-                    </div>
+                  <div class="pagination-info">
+                    <span id="paginationInfo"
+                      >Showing 0 - 0 of 0 customers</span
+                    >
+                  </div>
+                  <div class="pagination-controls">
+                    <button id="prevPageBtn" class="pagination-btn" disabled>
+                      ← Previous
+                    </button>
+                    <div id="pageNumbers" class="page-numbers"></div>
+                    <button id="nextPageBtn" class="pagination-btn" disabled>
+                      Next →
+                    </button>
+                  </div>
+                  <div class="pagination-size">
+                    <label for="pageSize">Show:</label>
+                    <select id="pageSize">
+                      <option value="10">10</option>
+                      <option value="25" selected>25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                    <span>per page</span>
                   </div>
                 </div>
               </div>
@@ -133,5 +223,70 @@
         </div>
       </div>
     </div>
+
+    <!-- Status Update Modal -->
+    <div id="statusModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Update Customer Status</h3>
+          <span class="close" id="closeModal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p id="statusModalText">
+            Are you sure you want to update the status for the selected
+            customer(s)?
+          </p>
+          <div class="status-select-container">
+            <label for="newStatus">New Status:</label>
+            <select id="newStatus" class="status-select">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Suspended">Suspended</option>
+              <option value="Dormant">Dormant</option>
+            </select>
+          </div>
+          <div class="reason-container">
+            <label for="statusReason">Reason (optional):</label>
+            <textarea
+              id="statusReason"
+              placeholder="Enter reason for status change..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="cancelStatusUpdate" class="btn-secondary">Cancel</button>
+          <button id="confirmStatusUpdate" class="btn-primary">
+            Update Status
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Profile Quick View Modal -->
+    <div id="profileModal" class="modal" style="display: none">
+      <div class="modal-content large">
+        <div class="modal-header">
+          <h3>Customer Profile</h3>
+          <span class="close" id="closeProfileModal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div id="profileContent" class="profile-content">
+            <!-- Profile content will be loaded here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="viewFullProfile" class="btn-primary">
+            View Full Profile
+          </button>
+          <button id="closeProfileBtn" class="btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="utils/logout-fix.js"></script>
+    <script src="utils/connectivity-test.js"></script>
+    <script src="utils/search-functionality.js"></script>
+    <script src="admin-user-management.js"></script>
   </body>
 </html>

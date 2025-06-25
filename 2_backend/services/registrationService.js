@@ -26,7 +26,7 @@ class RegistrationService {
             await this.createContactDetails(conn, cif_number, data);
             await this.createEmploymentInfo(conn, cif_number, data);
             await this.createFundSources(conn, cif_number, data);
-            await this.createCustomerAccount(conn, cif_number, data.account_type);
+            await this.createCustomerAccount(conn, cif_number, data.product_type);
             
             // Optional data
             if (this.hasIDData(data)) {
@@ -54,7 +54,7 @@ class RegistrationService {
         
         // Required fields
         customer.customer_type = customerTypeMap[(data.customer_type || '').toLowerCase()] || data.customer_type;
-        customer.account_type = data.account_type;
+        // Product type is handled separately in ACCOUNT_DETAILS table
         customer.customer_last_name = data.customer_last_name;
         customer.customer_first_name = data.customer_first_name;
         customer.customer_middle_name = data.customer_middle_name || null;
@@ -96,15 +96,15 @@ class RegistrationService {
         
         const [result] = await conn.execute(
             `INSERT INTO CUSTOMER (
-                customer_type, account_type, customer_last_name, customer_first_name, 
+                customer_type, customer_last_name, customer_first_name, 
                 customer_middle_name, customer_suffix_name, customer_username, customer_password, 
                 birth_date, gender, civil_status_code, birth_country, residency_status, 
                 citizenship, tax_identification_number, customer_status, remittance_country, 
                 remittance_purpose, reg_political_affiliation, reg_fatca, reg_dnfbp, 
                 reg_online_gaming, reg_beneficial_owner
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
-                customerData.customer_type, customerData.account_type,
+                customerData.customer_type,
                 customerData.customer_last_name, customerData.customer_first_name,
                 customerData.customer_middle_name, customerData.customer_suffix_name,
                 customerData.customer_username, password_hash,
@@ -336,16 +336,16 @@ class RegistrationService {
     }
 
     // Create customer account
-    static async createCustomerAccount(conn, cif_number, account_type) {
-        const accountTypeToProductCodeMap = {
-            'Deposit Account': 'PR01',
-            'Card Account': 'PR02',
-            'Loan Account': 'PR03',
-            'Wealth Management Account': 'PR04',
-            'Insurance Account': 'PR05'
+    static async createCustomerAccount(conn, cif_number, product_type) {
+        const productTypeToCodeMap = {
+            'Deposits': 'PR01',
+            'Cards': 'PR02', 
+            'Loans': 'PR03',
+            'Wealth Management': 'PR04',
+            'Insurance': 'PR05'
         };
         
-        const product_type_code = accountTypeToProductCodeMap[account_type] || 'PR01';
+        const product_type_code = productTypeToCodeMap[product_type] || 'PR01';
         
         const [accountResult] = await conn.execute(
             `INSERT INTO ACCOUNT_DETAILS (product_type_code, verified_by_employee, account_open_date, account_status)

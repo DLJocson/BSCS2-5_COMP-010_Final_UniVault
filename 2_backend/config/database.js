@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-// MySQL Connection Pool
+// MySQL Connection Pool with optimized settings
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -8,8 +8,10 @@ const pool = mysql.createPool({
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 20,
+    queueLimit: 0,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0
 });
 
 // Test database connection

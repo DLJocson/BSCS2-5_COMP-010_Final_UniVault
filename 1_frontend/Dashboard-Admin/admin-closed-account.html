@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Document</title>
+    <title>UniVault - Closed Accounts Admin</title>
     <link rel="stylesheet" href="admin-closed-account.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="closed-accounts-page">
     <div class="deposit-page">
       <div class="page-wrapper">
         <div class="left-side-bar">
@@ -44,9 +44,12 @@
 
         <div class="wrapper">
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
-            <div class="icon-container">
-              <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
+            <div class="nav-content">
+              <h3 class="page-title">Closed Accounts</h3>
+              <div class="logout-container">
+                <span class="logout-text">Logout</span>
+                <img id="log-out" src="../assets/log-out-logo.png" alt="Log Out" />
+              </div>
             </div>
           </nav>
 
@@ -62,6 +65,15 @@
           </header>
 
           <div class="page-body">
+            <div class="search-container">
+              <div class="search-bar-wrapper">
+                <input type="text" id="closedSearchBar" placeholder="Search by name, CIF number, email, or phone..." class="search-input" />
+                <div class="search-icon">🔍</div>
+                <div class="search-loading-spinner"></div>
+              </div>
+              <div id="searchResults" class="search-results" style="display: none;"></div>
+            </div>
+            
             <div class="account-info">
               <div class="transaction-info">
                 <div class="top-label">
@@ -78,19 +90,14 @@
                   </div>
                 </div>
 
-                <div class="account-info-card">
-                  <div class="account">
-                    <div class="top-label-2">
-                      <label>5821947360</label>
-                      <label>06/16/2025 at 1:46 PM</label>
-                      <label>Business Owner</label>
-                      <label>Bautista</label>
-                      <label>Chryshella Grace</label>
-                      <label>Perez</label>
-                      <label>N/A</label>
-                      <label class="blue-text">Closed</label>
-                    </div>
+                <div class="account-info-card" id="accountInfoContainer">
+                  <div class="loading-state" id="loadingState" style="display: none;">
+                    <p>Loading closed accounts...</p>
                   </div>
+                  <div class="error-state" id="errorState" style="display: none;">
+                    <p>Error loading closed accounts. Please try again.</p>
+                  </div>
+                  <!-- Account data will be populated by JavaScript -->
                 </div>
               </div>
             </div>
@@ -98,5 +105,8 @@
         </div>
       </div>
     </div>
+    <script src="utils/logout-fix.js"></script>
+    <script src="utils/search-functionality.js"></script>
+    <script src="admin-closed-account.js"></script>
   </body>
 </html>

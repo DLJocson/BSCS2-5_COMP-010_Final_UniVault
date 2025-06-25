@@ -9,6 +9,8 @@
     "dev-linux": "NODE_ENV=development node server.js",
     "test": "node test-endpoints.js",
     "test-dry": "echo \"Starting dry run test...\" && node test-endpoints.js",
+    "test-login": "node scripts/test-login-performance.js",
+    "optimize": "node scripts/optimize-login.js",
     "cleanup": "node scripts/cleanup-uploads.js",
     "cleanup-dry": "node scripts/cleanup-uploads.js --dry-run",
     "verify": "node ../verify_setup.js"
@@ -19,6 +21,7 @@
     "express": "^5.1.0",
     "multer": "^2.0.1",
     "mysql2": "^3.14.1",
+    "node-fetch": "^3.3.2",
     "validator": "^13.12.0"
   },
   "engines": {

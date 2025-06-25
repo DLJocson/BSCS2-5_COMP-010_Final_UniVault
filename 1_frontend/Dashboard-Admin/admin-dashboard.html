@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Document</title>
+    <title>UniVault - Admin Dashboard</title>
     <link rel="stylesheet" href="admin-dashboard.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="dashboard-page">
     <div class="deposit-page">
       <div class="page-wrapper">
         <div class="left-side-bar">
@@ -29,8 +29,8 @@
                 >User Management</a
               >
             </div>
-            <div class="review-queue-container">
-              <a id="profile-option" href="admin-review-queue.html"
+            <div class="customer-options-container">
+              <a id="review-queue-option" href="admin-review-queue.html"
                 >Review Queue</a
               >
             </div>
@@ -44,9 +44,16 @@
 
         <div class="wrapper">
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
-            <div class="icon-container">
-              <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
+            <div class="nav-content">
+              <h3 class="page-title">Dashboard</h3>
+              <div class="logout-container">
+                <span class="logout-text">Logout</span>
+                <img
+                  id="log-out"
+                  src="../assets/log-out-logo.png"
+                  alt="Log Out"
+                />
+              </div>
             </div>
           </nav>
 
@@ -55,118 +62,149 @@
               <h1 class="welcome">
                 Welcome to your <span class="blue-text">Dashboard!</span>
               </h1>
-              <p>Your last login was at <span>04/06/2024 at 5:60 PM.</span></p>
+              <p class="blue-text">
+                Real-time administrative dashboard with key metrics and
+                statistics.
+              </p>
             </div>
           </header>
 
           <div class="page-body">
-            <div class="first-div">
-              <div class="rejected">
-                <div class="title-logo-container">
-                  <div class="logo-container">
-                    <img src="/assets/rejected.png" alt="" />
-                  </div>
-
-                  <div class="title">
-                    <h2 class="title-name">Rejected Applications</h2>
-
-                    <label class="date">as of 06/14/2025</label>
-                  </div>
-                </div>
-                <h1 class="number">1</h1>
-              </div>
-              <div class="pending-applications">
-                <div class="title-logo-container">
-                  <div class="logo-container">
-                    <img src="/assets/pending.png" alt="" />
-                  </div>
-
-                  <div class="title">
-                    <h2 class="title-name">Pending Applications</h2>
-
-                    <label class="date">as of 06/14/2025</label>
-                  </div>
-                </div>
-                <h1 class="number">1</h1>
-              </div>
-              <div class="pending-approvals">
-                <div class="title-logo-container">
-                  <div class="logo-container">
-                    <img src="/assets/pending-approvals.png" alt="" />
-                  </div>
-
-                  <div class="title">
-                    <h2 class="title-name">Pending Approvals</h2>
-
-                    <label class="date">as of 06/14/2025</label>
-                  </div>
-                </div>
-                <h1 class="number">1</h1>
-              </div>
+            <!-- Loading/Error States -->
+            <div class="loading-state" id="loadingState" style="display: none">
+              <div class="loading-spinner"></div>
+              <p>Loading dashboard statistics...</p>
             </div>
-            <div class="second-div">
-              <div class="graph">
-                <div class="title-logo-container">
-                  <div class="logo-container">
-                    <img src="/assets/graph.png" alt="" />
+            <div class="error-state" id="errorState" style="display: none">
+              <p>Error loading dashboard data. Please refresh the page.</p>
+              <button onclick="loadDashboardStats()" class="retry-button">
+                Retry
+              </button>
+            </div>
+
+            <div class="dashboard-content" id="dashboardContent">
+              <div class="first-div">
+                <div class="rejected">
+                  <div class="title-logo-container">
+                    <div class="logo-container">
+                      <img src="../assets/rejected.png" alt="" />
+                    </div>
+
+                    <div class="title">
+                      <h2 class="title-name">Rejected Applications</h2>
+
+                      <label class="date" id="rejected-date">as of -</label>
+                    </div>
                   </div>
+                  <h1 class="number" id="rejected-count">-</h1>
+                </div>
+                <div class="pending-applications">
+                  <div class="title-logo-container">
+                    <div class="logo-container">
+                      <img src="../assets/pending.png" alt="" />
+                    </div>
 
-                  <div class="title">
-                    <h2 class="title-name">Last Month's Statistics</h2>
+                    <div class="title">
+                      <h2 class="title-name">Pending Applications</h2>
 
-                    <label class="date">as of 06/14/2025</label>
+                      <label class="date" id="pending-applications-date"
+                        >as of -</label
+                      >
+                    </div>
                   </div>
+                  <h1 class="number" id="pending-applications-count">-</h1>
                 </div>
+                <div class="pending-approvals">
+                  <div class="title-logo-container">
+                    <div class="logo-container">
+                      <img src="../assets/pending-approvals.png" alt="" />
+                    </div>
 
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <div class="title">
+                      <h2 class="title-name">Pending Approvals</h2>
 
-                <div class="container">
-                  <canvas id="myChart" width="600" height="400"></canvas>
+                      <label class="date" id="pending-approvals-date"
+                        >as of -</label
+                      >
+                    </div>
+                  </div>
+                  <h1 class="number" id="pending-approvals-count">-</h1>
                 </div>
-            
               </div>
-              <div class="vertical-div">
-                <div class="new-accounts">
+              <div class="second-div">
+                <div class="graph">
                   <div class="title-logo-container">
                     <div class="logo-container">
-                      <img src="/assets/new-account.png" alt="" />
+                      <img src="../assets/graph.png" alt="" />
                     </div>
 
                     <div class="title">
-                      <h2 class="title-name">New Accounts</h2>
-
-                      <label class="date">as of 06/14/2025</label>
+                      <h2 class="title-name">Monthly Statistics</h2>
+                      <label class="date" id="monthly-stats-date"
+                        >as of -</label
+                      >
                     </div>
                   </div>
-                  <h1 class="number">1</h1>
+
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                  <div
+                    class="container"
+                    style="width: 100%; max-width: 900px; margin: auto"
+                  >
+                    <canvas
+                      id="myChart"
+                      style="width: 100%; height: 400px; max-height: 60vw"
+                    ></canvas>
+                  </div>
                 </div>
-                <div class="verified">
-                  <div class="title-logo-container">
-                    <div class="logo-container">
-                      <img src="/assets/verified.png" alt="" />
-                    </div>
+                <div class="vertical-div">
+                  <div class="new-accounts">
+                    <div class="title-logo-container">
+                      <div class="logo-container">
+                        <img src="../assets/new-account.png" alt="" />
+                      </div>
 
-                    <div class="title">
-                      <h2 class="title-name">Verified</h2>
+                      <div class="title">
+                        <h2 class="title-name">New Accounts</h2>
 
-                      <label class="date">as of 06/14/2025</label>
+                        <label class="date" id="new-accounts-date"
+                          >as of -</label
+                        >
+                      </div>
                     </div>
+                    <h1 class="number" id="new-accounts-count">-</h1>
                   </div>
-                  <h1 class="number">1</h1>
-                </div>
-                <div class="total-customers">
-                  <div class="title-logo-container">
-                    <div class="logo-container">
-                      <img src="/assets/total.png" alt="" />
-                    </div>
+                  <div class="verified">
+                    <div class="title-logo-container">
+                      <div class="logo-container">
+                        <img src="../assets/verified.png" alt="" />
+                      </div>
 
-                    <div class="title">
-                      <h2 class="title-name">Total Customers</h2>
+                      <div class="title">
+                        <h2 class="title-name">Verified</h2>
 
-                      <label class="date">as of 06/14/2025</label>
+                        <label class="date" id="verified-date">as of -</label>
+                      </div>
                     </div>
+                    <h1 class="number" id="verified-count">-</h1>
                   </div>
-                  <h1 class="number">1</h1>
+                  <div class="total-customers">
+                    <div class="title-logo-container">
+                      <div class="logo-container">
+                        <img src="../assets/total.png" alt="" />
+                      </div>
+
+                      <div class="title">
+                        <h2 class="title-name">Total Customers</h2>
+
+                        <label class="date" id="total-customers-date"
+                          >as of -</label
+                        >
+                      </div>
+                    </div>
+                    <h1 class="number" id="total-customers-count">-</h1>
+                  </div>
                 </div>
               </div>
             </div>
@@ -174,5 +212,8 @@
         </div>
       </div>
     </div>
+    <script src="utils/logout-fix.js"></script>
+    <script src="utils/connectivity-test.js"></script>
+    <script src="admin-dashboard.js"></script>
   </body>
 </html>

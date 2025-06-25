@@ -161,7 +161,6 @@ CREATE TABLE ID_TYPE (
 CREATE TABLE CUSTOMER (
     cif_number                   BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     customer_type                VARCHAR(50) NOT NULL,
-    account_type                 VARCHAR(50) NOT NULL,
     customer_last_name           VARCHAR(255) NOT NULL,
     customer_first_name          VARCHAR(255) NOT NULL,
     customer_middle_name         VARCHAR(255),
@@ -198,7 +197,6 @@ CREATE TABLE CUSTOMER (
     
     -- CHECK CONSTRAINTS
     CONSTRAINT check_customer_type                	CHECK (customer_type IN ('Account Owner', 'Business Owner', 'Business Owner / Officer / Signatory', 'Individual', 'Corporate')),
-    CONSTRAINT check_account_type                 	CHECK (account_type IN ('Deposit Account', 'Card Account', 'Loan Account', 'Wealth Management Account', 'Insurance Account')),
     CONSTRAINT check_customer_last_name           	CHECK (customer_last_name REGEXP '^[A-Za-z \\-]+$'),
     CONSTRAINT check_customer_first_name           	CHECK (customer_first_name REGEXP '^[A-Za-z ]+$'),
     CONSTRAINT check_customer_middle_name          	CHECK (customer_middle_name IS NULL OR customer_middle_name REGEXP '^[A-Za-z ]+$'),

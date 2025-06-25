@@ -1,10 +1,13 @@
+@import url('./styles/shared-table-styles.css');
+@import url('./styles/shared-nav-styles.css');
+
 :root {
   --primary-color: #1f65b4;
   --secondary-color: #004ea8;
   --tertiary-color: #0072d8;
   --fields-color: #cbcbcb;
   --nav-bar-color: #e5f5ff;
-  --font-family: "Manjari", sans-serif;
+  --font-family: 'Manjari', sans-serif;
 }
 
 * {
