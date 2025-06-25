@@ -1,11 +1,7 @@
-Admin routes module loaded!
-🔧 Forcing Express router initialization...
-📦 Express router forced, status: STILL NO ROUTER
-🔧 Defining routes...
-✅ Test route defined
-✅ Admin debug route defined
-All routes registered successfully!
-📍 Routes defined: NO ROUTER
+
+> univault-backend@1.0.0 dev
+> set NODE_ENV=development && node server.js
+
 Server running on http://localhost:3000
-Environment: development
+Environment: development 
 Connected to MySQL database!

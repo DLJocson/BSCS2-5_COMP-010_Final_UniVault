@@ -89,16 +89,10 @@ class ValidationUtils {
         return validTypes.includes(type);
     }
 
-    // Validate product type against allowed values from CUSTOMER_PRODUCT_TYPE table
-    static validateProductType(type) {
-        const validTypes = ['Deposits', 'Cards', 'Loans', 'Wealth Management', 'Insurance'];
+    // Validate account type against allowed values
+    static validateAccountType(type) {
+        const validTypes = ['Deposit Account', 'Card Account', 'Loan Account', 'Wealth Management Account', 'Insurance Account'];
         return validTypes.includes(type);
-    }
-    
-    // Validate product type code against allowed values from CUSTOMER_PRODUCT_TYPE table
-    static validateProductTypeCode(code) {
-        const validCodes = ['PR01', 'PR02', 'PR03', 'PR04', 'PR05'];
-        return validCodes.includes(code);
     }
 
     // Validate gender
@@ -128,7 +122,7 @@ class ValidationUtils {
         
         // Required fields validation
         const requiredFields = [
-            'customer_type', 'product_type', 'customer_last_name', 
+            'customer_type', 'account_type', 'customer_last_name', 
             'customer_first_name', 'customer_username', 'customer_password',
             'birth_date', 'gender', 'birth_country', 'citizenship'
         ];
@@ -153,14 +147,9 @@ class ValidationUtils {
             errors.push('Invalid customer type');
         }
 
-        // Product type validation
-        if (data.product_type && !this.validateProductType(data.product_type)) {
-            errors.push('Invalid product type');
-        }
-        
-        // Product type code validation
-        if (data.product_type_code && !this.validateProductTypeCode(data.product_type_code)) {
-            errors.push('Invalid product type code');
+        // Account type validation
+        if (data.account_type && !this.validateAccountType(data.account_type)) {
+            errors.push('Invalid account type');
         }
 
         // Gender validation

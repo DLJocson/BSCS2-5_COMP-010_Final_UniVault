@@ -17,14 +17,14 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Step 2: Creating schema..."
-mysql -u root -p < 3_database/01_schema.sql
+mysql -u root -p < 3_database/01_schema_improved.sql
 if [ $? -ne 0 ]; then
     echo "ERROR: Failed to create schema"
     exit 1
 fi
 
 echo "Step 3: Loading seed data..."
-mysql -u root -p < 3_database/02_seed_data.sql
+mysql -u root -p < 3_database/02_seed_data_improved.sql
 if [ $? -ne 0 ]; then
     echo "ERROR: Failed to load seed data"
     exit 1

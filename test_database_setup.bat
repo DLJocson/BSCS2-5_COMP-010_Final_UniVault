@@ -5,13 +5,13 @@ echo Step 1: Dropping and recreating database...
 mysql -u root -p -e "DROP DATABASE IF EXISTS univault_schema_test; CREATE DATABASE univault_schema_test;"
 
 echo Step 2: Testing schema creation...
-mysql -u root -p univault_schema_test < 3_database/01_schema.sql
+mysql -u root -p univault_schema_test < 3_database/01_schema_improved.sql
 
 if %ERRORLEVEL% equ 0 (
     echo ✅ Schema created successfully!
     
     echo Step 3: Testing seed data...
-    mysql -u root -p univault_schema_test < 3_database/02_seed_data.sql
+    mysql -u root -p univault_schema_test < 3_database/02_seed_data_improved.sql
     
     if %ERRORLEVEL% equ 0 (
         echo ✅ Seed data loaded successfully!

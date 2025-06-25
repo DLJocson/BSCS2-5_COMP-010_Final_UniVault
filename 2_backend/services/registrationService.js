@@ -26,7 +26,7 @@ class RegistrationService {
             await this.createContactDetails(conn, cif_number, data);
             await this.createEmploymentInfo(conn, cif_number, data);
             await this.createFundSources(conn, cif_number, data);
-            await this.createCustomerAccount(conn, cif_number, data.product_type);
+            await this.createCustomerAccount(conn, cif_number, data.account_type);
             
             // Optional data
             if (this.hasIDData(data)) {
@@ -54,7 +54,6 @@ class RegistrationService {
         
         // Required fields
         customer.customer_type = customerTypeMap[(data.customer_type || '').toLowerCase()] || data.customer_type;
-        // Product type is handled separately in ACCOUNT_DETAILS table
         customer.customer_last_name = data.customer_last_name;
         customer.customer_first_name = data.customer_first_name;
         customer.customer_middle_name = data.customer_middle_name || null;
@@ -336,16 +335,16 @@ class RegistrationService {
     }
 
     // Create customer account
-    static async createCustomerAccount(conn, cif_number, product_type) {
-        const productTypeToCodeMap = {
-            'Deposits': 'PR01',
-            'Cards': 'PR02', 
-            'Loans': 'PR03',
-            'Wealth Management': 'PR04',
-            'Insurance': 'PR05'
+    static async createCustomerAccount(conn, cif_number, account_type) {
+        const accountTypeToProductCodeMap = {
+            'Deposit Account': 'PR01',
+            'Card Account': 'PR02',
+            'Loan Account': 'PR03',
+            'Wealth Management Account': 'PR04',
+            'Insurance Account': 'PR05'
         };
         
-        const product_type_code = productTypeToCodeMap[product_type] || 'PR01';
+        const product_type_code = accountTypeToProductCodeMap[account_type] || 'PR01';
         
         const [accountResult] = await conn.execute(
             `INSERT INTO ACCOUNT_DETAILS (product_type_code, verified_by_employee, account_open_date, account_status)

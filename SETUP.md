@@ -34,12 +34,12 @@ mysql -u root -p < 3_database/00_create_database.sql
 
 #### Step 2: Run Database Schema
 ```bash
-mysql -u root -p < 3_database/01_schema.sql
+mysql -u root -p < 3_database/01_schema_improved.sql
 ```
 
 #### Step 3: Load Seed Data
 ```bash
-mysql -u root -p < 3_database/02_seed_data.sql
+mysql -u root -p < 3_database/02_seed_data_improved.sql
 ```
 
 **Note:** You'll be prompted for your MySQL root password for each command.
@@ -240,8 +240,8 @@ npm test
 ```bash
 # Recreate the database
 mysql -u root -p -e "CREATE DATABASE univault_schema;"
-mysql -u root -p < 3_database/01_schema.sql
-mysql -u root -p < 3_database/02_seed_data.sql
+mysql -u root -p < 3_database/01_schema_improved.sql
+mysql -u root -p < 3_database/02_seed_data_improved.sql
 ```
 
 **Error: "Access denied for user"**
@@ -263,7 +263,7 @@ FLUSH PRIVILEGES;
 mysql -u root -p -e "USE univault_schema; SHOW TABLES;"
 
 # If empty, reapply schema
-mysql -u root -p < 3_database/01_schema.sql
+mysql -u root -p < 3_database/01_schema_improved.sql
 ```
 
 ### Backend Issues
@@ -334,8 +334,8 @@ mysql -u root -p univault_schema < backup_file.sql
 
 # Reset database to fresh state
 mysql -u root -p -e "DROP DATABASE IF EXISTS univault_schema;"
-mysql -u root -p < 3_database/01_schema.sql
-mysql -u root -p < 3_database/02_seed_data.sql
+mysql -u root -p < 3_database/01_schema_improved.sql
+mysql -u root -p < 3_database/02_seed_data_improved.sql
 ```
 
 ## Production Deployment Notes

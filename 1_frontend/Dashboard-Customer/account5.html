@@ -42,7 +42,6 @@
 
         <div class="wrapper">
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
             <div class="icon-container">
               <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
             </div>
@@ -127,25 +126,7 @@
                 </div>
 
                 <div class="account-info-card">
-                  <div
-                    onclick="location.href='close-account2.html'"
-                    id="savings"
-                    class="account"
-                  >
-                    <img src="/assets/insurance.png" alt="" />
-                    <div class="account-name">
-                      <h2 class="account-title">BDO Insurance</h2>
-                      <h4>Health-Related</h4>
-                    </div>
-                    <div class="top-label-2">
-                      <label>*******7752</label>
-                      <label class="blue-text">USD</label>
-                      <label>60, 000</label>
-                    </div>
-                    <div class="top-label-3">
-                      <label>Active</label>
-                    </div>
-                  </div>
+                  <!-- Account cards will be rendered here by JS if any exist -->
                 </div>
               </div>
             </div>
@@ -182,26 +163,10 @@
                   <label>Current Balance</label>
                   <textarea></textarea>
                 </div>
-
-                <div class="biometrics-type">
-                  <label>Biometrics Type</label>
-                  <textarea></textarea>
-                </div>
               </div>
 
               <div class="button">
-                <button
-                  onclick="location.href='add-account1.html'"
-                  id="add-existing-button"
-                >
-                  + Add Existing Account
-                </button>
-                <button
-                  onclick="location.href='apply-account1.html'"
-                  id="apply-existing-button"
-                >
-                  + Apply Existing Account
-                </button>
+                <!-- Removed Add Existing Account and Apply Existing Account buttons as requested -->
               </div>
 
               <img src="/assets/account-page-logo.png" alt="Account Logo" />
@@ -210,5 +175,6 @@
         </div>
       </div>
     </div>
+    <script src="accounts5.js"></script>
   </body>
 </html>

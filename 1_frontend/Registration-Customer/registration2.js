@@ -17,15 +17,15 @@ document.getElementById("proceed").addEventListener("click", () => {
 
   if (!anyChecked) {
     errorMessage.textContent =
-      "Please select a product type before proceeding.";
+      "Please select an account type before proceeding.";
     return;
   }
 
   errorMessage.textContent = "";
 
-  // Save product_type to localStorage
-  const productTypeInput = document.querySelector('input[name="product_type"]:checked');
-  localStorage.setItem('product_type', productTypeInput.value.trim());
+  // Save account_type to localStorage (do not overwrite customer_type)
+  const accountTypeInput = document.querySelector('input[name="account_type"]:checked');
+  localStorage.setItem('account_type', accountTypeInput.value.trim());
 
   // Proceed directly to next registration step
   window.location.href = "registration3.html";

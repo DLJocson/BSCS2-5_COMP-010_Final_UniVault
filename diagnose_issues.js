@@ -38,8 +38,8 @@ function checkDatabaseFiles() {
     const dbDir = path.join(__dirname, '3_database');
     const files = [
         '00_create_database.sql',
-        '01_schema.sql',
-        '02_seed_data.sql'
+        '01_schema_improved.sql',
+        '02_seed_data_improved.sql'
     ];
     
     let allExist = true;

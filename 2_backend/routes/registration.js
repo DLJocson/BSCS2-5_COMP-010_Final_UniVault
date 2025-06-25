@@ -109,35 +109,28 @@ router.post('/register', async (req, res, next) => {
         
         // Robust mapping for all required fields
         const customer_type = getField(data, ['customer_type', 'customerType']);
-        const product_type_raw = getField(data, ['product_type', 'productType']);
+        const account_type_raw = getField(data, ['account_type', 'accountType']);
         
-        // Map old account type values to new product type values for backward compatibility
-        const productTypeMap = {
-            // Old account type values -> new product type values
-            'Deposit Account': 'Deposits',
-            'Card Account': 'Cards',
-            'Loan Account': 'Loans',
-            'Wealth Management Account': 'Wealth Management',
-            'Insurance Account': 'Insurance',
-            // Old short values
-            'deposit': 'Deposits',
-            'card': 'Cards', 
-            'loan': 'Loans',
-            'wealth-management': 'Wealth Management',
-            'insurance': 'Insurance',
+        // Map old short account type values to proper database values for backward compatibility
+        const accountTypeMap = {
+            'deposit': 'Deposit Account',
+            'card': 'Card Account', 
+            'loan': 'Loan Account',
+            'wealth-management': 'Wealth Management Account',
+            'insurance': 'Insurance Account',
             // Pass through new correct values
-            'Deposits': 'Deposits',
-            'Cards': 'Cards',
-            'Loans': 'Loans', 
-            'Wealth Management': 'Wealth Management',
-            'Insurance': 'Insurance'
+            'Deposit Account': 'Deposit Account',
+            'Card Account': 'Card Account',
+            'Loan Account': 'Loan Account', 
+            'Wealth Management Account': 'Wealth Management Account',
+            'Insurance Account': 'Insurance Account'
         };
-        const product_type = productTypeMap[product_type_raw] || product_type_raw;
+        const account_type = accountTypeMap[account_type_raw] || account_type_raw;
         
         if (process.env.NODE_ENV === 'development') {
-            console.log('Product type processing:', { 
-                raw: product_type_raw, 
-                mapped: product_type
+            console.log('Account type processing:', { 
+                raw: account_type_raw, 
+                mapped: account_type
             });
         }
         const customer_last_name = getField(data, ['customer_last_name', 'customerLastName', 'last_name', 'lastName']);
@@ -187,7 +180,7 @@ router.post('/register', async (req, res, next) => {
         // Validate required fields with detailed error messages
         const missingFields = [];
         if (!customer_type) missingFields.push('customer_type');
-        if (!product_type) missingFields.push('product_type');
+        if (!account_type) missingFields.push('account_type');
         if (!customer_last_name) missingFields.push('customer_last_name');
         if (!customer_first_name) missingFields.push('customer_first_name');
         if (!customer_username) missingFields.push('customer_username');
@@ -197,14 +190,14 @@ router.post('/register', async (req, res, next) => {
         if (!birth_country) missingFields.push('birth_country');
         if (!citizenship) missingFields.push('citizenship');
         
-        // Validate product type against database constraint
-        const validProductTypes = ['Deposits', 'Cards', 'Loans', 'Wealth Management', 'Insurance'];
-        if (product_type && !validProductTypes.includes(product_type)) {
+        // Validate account type against database constraint
+        const validAccountTypes = ['Deposit Account', 'Card Account', 'Loan Account', 'Wealth Management Account', 'Insurance Account'];
+        if (account_type && !validAccountTypes.includes(account_type)) {
             return res.status(400).json({ 
-                message: `Invalid product type: ${product_type}. Must be one of: ${validProductTypes.join(', ')}`,
-                invalidField: 'product_type',
-                receivedValue: product_type,
-                allowedValues: validProductTypes
+                message: `Invalid account type: ${account_type}. Must be one of: ${validAccountTypes.join(', ')}`,
+                invalidField: 'account_type',
+                receivedValue: account_type,
+                allowedValues: validAccountTypes
             });
         }
         
@@ -854,26 +847,26 @@ router.post('/register', async (req, res, next) => {
             // Create customer account and account details
             console.log('Creating customer account and account details...');
             
-            // Use product_type directly for account creation
-            // Map product_type to product_type_code for ACCOUNT_DETAILS table
-            const productTypeToCodeMap = {
-                'Deposits': 'PR01',
-                'Cards': 'PR02', 
-                'Loans': 'PR03',
-                'Wealth Management': 'PR04',
-                'Insurance': 'PR05'
+            // Use account_type directly for account creation
+            // Map account_type to product_type_code for ACCOUNT_DETAILS table
+            const accountTypeToProductCodeMap = {
+                'Deposit Account': 'PR01',
+                'Card Account': 'PR02', 
+                'Loan Account': 'PR03',
+                'Wealth Management Account': 'PR04',
+                'Insurance Account': 'PR05'
             };
             
-            // Map the user-selected product_type to the database product_type_code
-            const product_type_code = productTypeToCodeMap[product_type] || 'PR01';
+            // Map the user-selected account_type to the database product_type_code
+            const product_type_code = accountTypeToProductCodeMap[account_type] || 'PR01';
             
             console.log('Account creation data:', { 
-                user_selected_product_type: product_type,
+                user_selected_account_type: account_type,
                 database_product_type_code: product_type_code
             });
             
             console.log('Account creation mapping:', { 
-                product_type, 
+                account_type, 
                 mapped_product_type: product_type_code
             });
             
@@ -934,8 +927,8 @@ router.post('/register', async (req, res, next) => {
                 let friendlyMessage = 'Invalid value provided for one of the fields';
                 
                 // Provide more specific error messages based on constraint name
-                if (error.message.includes('check_product_type')) {
-                    friendlyMessage = 'Invalid product type. Please select a valid product type.';
+                if (error.message.includes('check_account_type')) {
+                    friendlyMessage = 'Invalid account type. Please select a valid account type.';
                 } else if (error.message.includes('check_customer_type')) {
                     friendlyMessage = 'Invalid customer type. Please select a valid customer type.';
                 } else if (error.message.includes('check_gender')) {
