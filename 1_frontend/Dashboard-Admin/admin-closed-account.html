@@ -25,19 +25,10 @@
               <a id="dashboard-option" href="admin-dashboard.html">Dashboard</a>
             </div>
             <div class="customer-options-container">
-              <a id="user-management-option" href="admin-user-management.html"
-                >User Management</a
-              >
-            </div>
-            <div class="review-queue-container">
-              <a id="review-queue-option" href="admin-review-queue.html"
-                >Review Queue</a
-              >
+              <a id="user-management-option" href="admin-user-management.html">User Management</a>
             </div>
             <div class="customer-options-container">
-              <a id="closed-account-option" href="admin-closed-account.html"
-                >Closed Accounts</a
-              >
+              <a id="closed-account-option" href="admin-closed-account.html">Closed Accounts</a>
             </div>
           </div>
         </div>
@@ -55,41 +46,14 @@
 
           <header class="header">
             <div class="welcome-message">
-              <h1 class="welcome">
-                <span class="blue-text">Closed Accounts</span>
-              </h1>
-              <p class="blue-text">
-                Track records of users whose accounts have been closed.
-              </p>
+              <h1 class="welcome" style="font-size: 1.75rem; font-weight: bold; margin-bottom: 1.5rem; text-align: left;">Closed Accounts</h1>
+              <p class="blue-text" style="margin-bottom: 0.5rem;">Track records of users whose accounts have been closed.</p>
             </div>
           </header>
 
           <div class="page-body">
-            <div class="search-container">
-              <div class="search-bar-wrapper">
-                <input type="text" id="closedSearchBar" placeholder="Search by name, CIF number, email, or phone..." class="search-input" />
-                <div class="search-icon">🔍</div>
-                <div class="search-loading-spinner"></div>
-              </div>
-              <div id="searchResults" class="search-results" style="display: none;"></div>
-            </div>
-            
-            <div class="account-info">
-              <div class="transaction-info">
-                <div class="top-label">
-                  <h2>Closed Accounts</h2>
-                  <div class="top-label-2">
-                    <label>CIF Number</label>
-                    <label>Date & Time</label>
-                    <label>Customer Type</label>
-                    <label>Last Name</label>
-                    <label>First Name</label>
-                    <label>Middle Name</label>
-                    <label>Suffix</label>
-                    <label>Status</label>
-                  </div>
-                </div>
-
+            <div class="white-container">
+              <div class="table-container">
                 <div class="account-info-card" id="accountInfoContainer">
                   <div class="loading-state" id="loadingState" style="display: none;">
                     <p>Loading closed accounts...</p>
@@ -97,7 +61,7 @@
                   <div class="error-state" id="errorState" style="display: none;">
                     <p>Error loading closed accounts. Please try again.</p>
                   </div>
-                  <!-- Account data will be populated by JavaScript -->
+                  <!-- Table will be rendered here by JS -->
                 </div>
               </div>
             </div>
@@ -106,7 +70,6 @@
       </div>
     </div>
     <script src="utils/logout-fix.js"></script>
-    <script src="utils/search-functionality.js"></script>
     <script src="admin-closed-account.js"></script>
   </body>
 </html>

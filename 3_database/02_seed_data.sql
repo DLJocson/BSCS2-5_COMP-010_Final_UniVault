@@ -183,11 +183,11 @@ INSERT INTO ID_TYPE (id_type_code, id_description) VALUES
 -- ////////////////
 
 -- Bank Employees
-INSERT INTO BANK_EMPLOYEE (employee_position, employee_last_name, employee_first_name, employee_username, employee_password) VALUES
-('Account Officer', 'Rizal', 'Jose', 'jrizal', '$2a$12$L8Y.A5b2.xP9tN8U7X6e2uSHJ2a7/R/C.b6E3fD4gH5e2uSHJ2a7A.LongerExampleHashValue'),
-('Branch Manager', 'Bonifacio', 'Andres', 'abonifacio', '$2a$12$K9Z.B6c3.yQ0uO9V8Y7f3vTGI3b8/S/D.c7F4gH6f3vTGI3b8A.AnotherLongerExampleHash'),
-('Compliance Officer', 'Del Pilar', 'Gregorio', 'gdelpilar', '$2a$12$M0A.C7d4.zR1vP0W9Z8g4wUHI4c9/T/E.d8G5hI7g4wUHI4c9A.YetAnotherLongerHashVal'),
-('New Accounts Specialist', 'Silang', 'Gabriela', 'gsilang', '$2a$12$N1B.D8e5.aS2wQ1X0A9h5xVI5d0/U/F.e9H6iJ8h5xVI5d0/A.AndFinalLongerHashVal');
+INSERT INTO BANK_EMPLOYEE (employee_position, employee_last_name, employee_first_name, employee_username, employee_password, created_at) VALUES
+('Account Officer', 'Rizal', 'Jose', 'jrizal', '$2a$12$L8Y.A5b2.xP9tN8U7X6e2uSHJ2a7/R/C.b6E3fD4gH5e2uSHJ2a7A.LongerExampleHashValue', NOW()),
+('Branch Manager', 'Bonifacio', 'Andres', 'abonifacio', '$2a$12$K9Z.B6c3.yQ0uO9V8Y7f3vTGI3b8/S/D.c7F4gH6f3vTGI3b8A.AnotherLongerExampleHash', NOW()),
+('Compliance Officer', 'Del Pilar', 'Gregorio', 'gdelpilar', '$2a$12$M0A.C7d4.zR1vP0W9Z8g4wUHI4c9/T/E.d8G5hI7g4wUHI4c9A.YetAnotherLongerHashVal', NOW()),
+('New Accounts Specialist', 'Silang', 'Gabriela', 'gsilang', '$2a$12$N1B.D8e5.aS2wQ1X0A9h5xVI5d0/U/F.e9H6iJ8h5xVI5d0/A.AndFinalLongerHashVal', NOW());
 
 -- Sample Customers
 -- Customer 1: Juan Dela Cruz (Standard Profile)

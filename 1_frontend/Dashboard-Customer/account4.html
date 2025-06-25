@@ -25,11 +25,6 @@
               <a id="account-option" href="account1.html">Accounts</a>
             </div>
             <div class="customer-options-container">
-              <a id="transaction-option" href="transaction1.html"
-                >Transactions</a
-              >
-            </div>
-            <div class="customer-options-container">
               <a id="profile-option" href="profile.html">Profile</a>
             </div>
             <div class="customer-options-container">
@@ -42,7 +37,6 @@
 
         <div class="wrapper">
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
             <div class="icon-container">
               <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
             </div>
@@ -114,34 +108,16 @@
           <div class="page-body">
             <div class="account-info">
               <div class="transaction-info">
-                <div class="top-label">
-                  <h2>Accounts</h2>
-                  <div class="top-label-2">
-                    <label>Account Number</label>
-                    <label>Currency</label>
-                    <label>Balance</label>
-                  </div>
-                  <div class="top-label-3">
-                    <label>Status</label>
-                  </div>
+                <div class="top-label" style="display: flex; align-items: center; width: 100%; min-height: 4em; margin-bottom: 1.5em; padding: 0 1.5em; box-sizing: border-box;">
+                  <h2 style="margin-right: 2.5em;">Accounts</h2>
+                  <label style="flex: 1; text-align: left; min-width: 8em;">Account Number</label>
+                  <label style="flex: 1; text-align: left; min-width: 6em;">Currency</label>
+                  <label style="flex: 1; text-align: left; min-width: 6em;">Balance</label>
+                  <label style="flex: 1; text-align: left; min-width: 8em;">Status</label>
                 </div>
 
                 <div class="account-info-card">
-                  <div id="savings" class="account">
-                    <img src="/assets/investment.png" alt="" />
-                    <div class="account-name">
-                      <h2 class="account-title">BDO Investments</h2>
-                      <h4>Future</h4>
-                    </div>
-                    <div class="top-label-2">
-                      <label>*******9963</label>
-                      <label class="blue-text">USD</label>
-                      <label>50, 000</label>
-                    </div>
-                    <div class="top-label-3">
-                      <label>Active</label>
-                    </div>
-                  </div>
+                  <!-- Account cards will be rendered here by JS if any exist -->
                 </div>
               </div>
             </div>
@@ -178,26 +154,10 @@
                   <label>Current Balance</label>
                   <textarea></textarea>
                 </div>
-
-                <div class="biometrics-type">
-                  <label>Biometrics Type</label>
-                  <textarea></textarea>
-                </div>
               </div>
 
               <div class="button">
-                <button
-                  onclick="location.href='add-account1.html'"
-                  id="add-existing-button"
-                >
-                  + Add Existing Account
-                </button>
-                <button
-                  onclick="location.href='apply-account1.html'"
-                  id="apply-existing-button"
-                >
-                  + Apply Existing Account
-                </button>
+                <!-- Removed Add Existing Account and Apply Existing Account buttons as requested -->
               </div>
 
               <img src="/assets/account-page-logo.png" alt="Account Logo" />
@@ -206,5 +166,6 @@
         </div>
       </div>
     </div>
+    <script src="accounts4.js"></script>
   </body>
 </html>

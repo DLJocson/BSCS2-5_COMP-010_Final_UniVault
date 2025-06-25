@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cifNumber) {
         loadCustomerProfile(cifNumber);
         loadCustomerAccounts(cifNumber);
-        loadProfileValidation(cifNumber);
         setupEventListeners();
     } else {
         console.error('No CIF number provided');
@@ -54,17 +53,15 @@ function setupEventListeners() {
 // Load customer profile data
 async function loadCustomerProfile(cifNumber) {
     try {
-        const response = await fetch(`/admin/customers/${cifNumber}`);
+        // Use the detailed endpoint
+        const response = await fetch(`/api/customer/all/${cifNumber}`);
         if (!response.ok) {
             throw new Error('Customer not found');
         }
-        
         const data = await response.json();
-        currentCustomerData = data.customer;
-        
-        displayCustomerProfile(data.customer);
+        currentCustomerData = data;
+        displayCustomerProfile(data);
         populateStatusDropdown(data.customer.customer_status);
-        
     } catch (error) {
         console.error('Error loading customer profile:', error);
         alert('Failed to load customer profile');
@@ -72,57 +69,176 @@ async function loadCustomerProfile(cifNumber) {
     }
 }
 
+// Helper to display N/A for null/empty
+function displayValue(val) {
+    if (val === null || val === undefined || val === '') return 'N/A';
+    return val;
+}
+
 // Display customer profile information
-function displayCustomerProfile(customer) {
+function displayCustomerProfile(data) {
+    const customer = data.customer || {};
+    const addresses = data.addresses || [];
+    const contacts = data.contacts || [];
+    const employment = data.employment && data.employment[0] ? data.employment[0] : {};
+    const fundSources = data.fundSources && data.fundSources[0] ? data.fundSources[0] : {};
+    const aliases = data.aliases && data.aliases[0] ? data.aliases[0] : {};
+
     // Update customer name in header
     const nameElement = document.getElementById('customer-name');
-    nameElement.textContent = `${customer.customer_last_name}, ${customer.customer_first_name} ${customer.customer_middle_name || ''}`.trim();
-    
-    // Populate account information
-    document.getElementById('cif-number').value = customer.cif_number || '';
-    document.getElementById('customer-type').value = 'Individual'; // Default for now
-    document.getElementById('account-type').value = 'Savings'; // Default for now
-    
-    // Populate personal information
-    document.getElementById('first-name').value = customer.customer_first_name || '';
-    document.getElementById('middle-name').value = customer.customer_middle_name || '';
-    document.getElementById('last-name').value = customer.customer_last_name || '';
-    document.getElementById('suffix-name').value = customer.customer_suffix || '';
-    
-    // Biographical information
-    document.getElementById('date').value = customer.birth_date ? formatDate(customer.birth_date) : '';
-    document.getElementById('country-of-birth').value = customer.birth_country || '';
-    document.getElementById('citizenship').value = customer.citizenship || '';
-    document.getElementById('gender').value = customer.gender || '';
-    document.getElementById('civil-status').value = customer.civil_status || '';
-    document.getElementById('residency').value = customer.residency_status || '';
-    
+    nameElement.textContent = `${displayValue(customer.customer_last_name)}, ${displayValue(customer.customer_first_name)} ${displayValue(customer.customer_middle_name)}`.trim();
+
+    // Account info
+    document.getElementById('cif-number').value = displayValue(customer.cif_number);
+    document.getElementById('customer-type').value = displayValue(customer.customer_type);
+    document.getElementById('account-type').value = displayValue((data.accounts && data.accounts[0] && data.accounts[0].product_type_name));
+
+    // Personal info
+    document.getElementById('first-name').value = displayValue(customer.customer_first_name);
+    document.getElementById('middle-name').value = displayValue(customer.customer_middle_name);
+    document.getElementById('last-name').value = displayValue(customer.customer_last_name);
+    document.getElementById('suffix-name').value = displayValue(customer.customer_suffix_name);
+
+    // Biographical info
+    document.getElementById('date').value = customer.birth_date ? formatDate(customer.birth_date) : 'N/A';
+    document.getElementById('country-of-birth').value = displayValue(customer.birth_country);
+    document.getElementById('citizenship').value = displayValue(customer.citizenship);
+    document.getElementById('gender').value = displayValue(customer.gender);
+    document.getElementById('civil-status').value = displayValue(customer.civil_status_code);
+    document.getElementById('residency').value = displayValue(customer.residency_status);
+
     // Contact details
-    document.getElementById('mobile-number').value = customer.phone_number || '';
-    document.getElementById('landline-number').value = customer.landline_number || '';
-    document.getElementById('email-address').value = customer.email_address || '';
-    
-    // Address information
-    populateAddress(customer, 'home');
-    populateAddress(customer, 'work');
-    
-    // Employment data
-    document.getElementById('work-email-address').value = customer.work_email || '';
-    document.getElementById('work-landline-number').value = customer.work_phone || '';
-    document.getElementById('tin-number').value = customer.tin_number || '';
-    document.getElementById('primary-employer').value = customer.employer_name || '';
-    document.getElementById('position').value = customer.job_title || '';
-    document.getElementById('monthly-income').value = customer.monthly_income || '';
-    
+    const getContact = (type) => {
+        const found = contacts.find(c => c.contact_type_code === type);
+        return displayValue(found ? found.contact_value : null);
+    };
+    document.getElementById('mobile-number').value = getContact('CT01');
+    document.getElementById('landline-number').value = getContact('CT02');
+    document.getElementById('email-address').value = getContact('CT04');
+    document.getElementById('work-email-address').value = getContact('CT05');
+    document.getElementById('work-landline-number').value = getContact('CT03');
+
+    // Address info
+    const getAddress = (type) => addresses.find(a => a.address_type_code === type) || {};
+    const home = getAddress('AD01');
+    const alt = getAddress('AD02');
+    // Home address
+    document.getElementById('unit').value = displayValue(home.address_unit);
+    document.getElementById('building').value = displayValue(home.address_building);
+    document.getElementById('street').value = displayValue(home.address_street);
+    document.getElementById('subdivision').value = displayValue(home.address_subdivision);
+    document.getElementById('barangay').value = displayValue(home.address_barangay);
+    document.getElementById('city').value = displayValue(home.address_city);
+    document.getElementById('province').value = displayValue(home.address_province);
+    document.getElementById('country').value = displayValue(home.address_country);
+    document.getElementById('zip-code').value = displayValue(home.address_zip_code);
+    // Alternate address
+    document.getElementById('alt-unit').value = displayValue(alt.address_unit);
+    document.getElementById('alt-building').value = displayValue(alt.address_building);
+    document.getElementById('alt-street').value = displayValue(alt.address_street);
+    document.getElementById('alt-subdivision').value = displayValue(alt.address_subdivision);
+    document.getElementById('alt-barangay').value = displayValue(alt.address_barangay);
+    document.getElementById('alt-city').value = displayValue(alt.address_city);
+    document.getElementById('alt-province').value = displayValue(alt.address_province);
+    document.getElementById('alt-country').value = displayValue(alt.address_country);
+    document.getElementById('alt-zip-code').value = displayValue(alt.address_zip_code);
+
+    // ACCOUNTS SECTION: Only show the accounts list, never a no-accounts message
+    const accounts = data.accounts || [];
+    const accountsList = document.getElementById('accounts-list');
+    if (accounts.length > 0) {
+        accountsList.style.display = 'block';
+        accountsList.innerHTML = accounts.map(acc => `
+            <div class="account-card">
+                <div class="account-header">
+                    <div class="account-number">${displayValue(acc.account_number)}</div>
+                    <div class="account-status ${displayValue(acc.account_status).toLowerCase().replace(' ', '-')}">
+                        ${displayValue(acc.account_status)}
+                    </div>
+                </div>
+                <div class="account-details">
+                    <div class="account-detail">
+                        <div class="account-detail-label">Account Type</div>
+                        <div class="account-detail-value">${displayValue(acc.product_type_name)}</div>
+                    </div>
+                    <div class="account-detail">
+                        <div class="account-detail-label">Opening Date</div>
+                        <div class="account-detail-value">${acc.account_open_date ? formatDate(acc.account_open_date) : 'N/A'}</div>
+                    </div>
+                    <div class="account-detail">
+                        <div class="account-detail-label">Status</div>
+                        <div class="account-detail-value">${displayValue(acc.account_status)}</div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    } else {
+        accountsList.style.display = 'none';
+    }
+
+    // EMPLOYMENT & FINANCIAL DATA: Revert to text-based fields
+    // (Assume you have containers/fields in HTML for these, e.g. with IDs: employmentType, companyName, occupation, monthlyIncome, fundSource)
+    const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.value = displayValue(value);
+    };
+    setText('employmentType', employment.employment_type);
+    setText('companyName', employment.employer_business_name);
+    setText('occupation', employment.job_title);
+    setText('monthlyIncome', employment.income_monthly_gross !== undefined && employment.income_monthly_gross !== null ? '₱' + parseFloat(employment.income_monthly_gross).toLocaleString() : 'N/A');
+    setText('fundSource', fundSources.fund_source);
+
     // Work nature and fund source
-    document.getElementById('work-business-nature').value = customer.business_nature || '';
-    document.getElementById('source-of-fund').value = customer.fund_source || '';
-    
+    document.getElementById('work-business-nature').value = displayValue((data.workNaturesDescriptions && data.workNaturesDescriptions[0]));
+    document.getElementById('source-of-fund').value = displayValue(fundSources.fund_source_code);
+
     // Aliases
-    document.getElementById('alias-first-name').value = customer.alias_first_name || '';
-    document.getElementById('alias-middle-name').value = customer.alias_middle_name || '';
-    document.getElementById('alias-last-name').value = customer.alias_last_name || '';
-    
+    document.getElementById('alias-first-name').value = displayValue(aliases.alias_first_name);
+    document.getElementById('alias-middle-name').value = displayValue(aliases.alias_middle_name);
+    document.getElementById('alias-last-name').value = displayValue(aliases.alias_last_name);
+
+    // Uploaded Valid ID Image
+    const validIdContainer = document.getElementById('valid-id-image-container');
+    if (validIdContainer) {
+        validIdContainer.innerHTML = '';
+        const validIdPath = data.valid_id_path;
+        if (validIdPath) {
+            const img = document.createElement('img');
+            img.src = validIdPath;
+            img.alt = 'Uploaded Valid ID';
+            img.style.maxWidth = '350px';
+            img.style.maxHeight = '220px';
+            img.style.display = 'block';
+            img.style.margin = '16px 0';
+            img.style.borderRadius = '8px';
+            img.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+            validIdContainer.appendChild(img);
+        } else {
+            validIdContainer.innerHTML = '<div style="color:#888; font-size:16px; margin:12px 0;">No image uploaded.</div>';
+        }
+    }
+
+    // Uploaded Alias Documentation Image
+    const aliasDocContainer = document.getElementById('alias-doc-image-container');
+    if (aliasDocContainer) {
+        aliasDocContainer.innerHTML = '';
+        const aliasDocPath = data.alias_doc_path;
+        if (aliasDocPath) {
+            const img = document.createElement('img');
+            img.src = aliasDocPath;
+            img.alt = 'Uploaded Alias Documentation';
+            img.style.maxWidth = '350px';
+            img.style.maxHeight = '220px';
+            img.style.display = 'block';
+            img.style.margin = '16px 0';
+            img.style.borderRadius = '8px';
+            img.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+            aliasDocContainer.appendChild(img);
+        } else {
+            aliasDocContainer.innerHTML = '<div style="color:#888; font-size:16px; margin:12px 0;">No image uploaded.</div>';
+        }
+    }
+
     // Make all inputs readonly except status
     const inputs = document.querySelectorAll('input[type="text"]');
     inputs.forEach(input => {
@@ -130,21 +246,6 @@ function displayCustomerProfile(customer) {
         input.style.backgroundColor = '#f9f9f9';
         input.style.color = '#666';
     });
-}
-
-// Populate address fields
-function populateAddress(customer, type) {
-    const prefix = type === 'home' ? '' : type + '-';
-    
-    document.getElementById(prefix + 'unit').value = customer[`${type}_unit`] || '';
-    document.getElementById(prefix + 'building').value = customer[`${type}_building`] || '';
-    document.getElementById(prefix + 'street').value = customer.street_address || '';
-    document.getElementById(prefix + 'subdivision').value = customer[`${type}_subdivision`] || '';
-    document.getElementById(prefix + 'barangay').value = customer.barangay || '';
-    document.getElementById(prefix + 'city').value = customer.city || '';
-    document.getElementById(prefix + 'province').value = customer.province_or_state || '';
-    document.getElementById(prefix + 'country').value = customer.country || '';
-    document.getElementById(prefix + 'zip-code').value = customer.postal_code || '';
 }
 
 // Populate status dropdown with available options
@@ -240,146 +341,6 @@ function displayCustomerAccounts(accounts) {
     `).join('');
 }
 
-// Load profile validation
-async function loadProfileValidation(cifNumber) {
-    try {
-        document.getElementById('validation-loading').style.display = 'block';
-        
-        // Calculate profile completeness based on available data
-        const validationData = calculateProfileCompleteness(currentCustomerData);
-        
-        document.getElementById('validation-loading').style.display = 'none';
-        displayProfileValidation(validationData);
-        document.getElementById('validation-content').style.display = 'block';
-        
-    } catch (error) {
-        console.error('Error loading profile validation:', error);
-        document.getElementById('validation-loading').style.display = 'none';
-    }
-}
-
-// Calculate profile completeness
-function calculateProfileCompleteness(customer) {
-    if (!customer) return null;
-    
-    const sections = {
-        personal: {
-            name: 'Personal Information',
-            fields: [
-                'customer_first_name', 'customer_last_name', 'birth_date', 
-                'gender', 'citizenship', 'civil_status'
-            ]
-        },
-        contact: {
-            name: 'Contact Information',
-            fields: [
-                'phone_number', 'email_address', 'street_address', 
-                'city', 'province_or_state', 'country'
-            ]
-        },
-        employment: {
-            name: 'Employment Information',
-            fields: [
-                'employer_name', 'job_title', 'monthly_income', 'tin_number'
-            ]
-        },
-        verification: {
-            name: 'Identity Verification',
-            fields: [
-                'customer_username', 'customer_status'
-            ]
-        }
-    };
-    
-    let totalFields = 0;
-    let completedFields = 0;
-    let sectionResults = {};
-    
-    Object.keys(sections).forEach(sectionKey => {
-        const section = sections[sectionKey];
-        let sectionCompleted = 0;
-        let sectionTotal = section.fields.length;
-        
-        const fieldResults = section.fields.map(field => {
-            const isComplete = customer[field] && customer[field].toString().trim() !== '';
-            if (isComplete) {
-                sectionCompleted++;
-                completedFields++;
-            }
-            totalFields++;
-            
-            return {
-                name: formatFieldName(field),
-                complete: isComplete
-            };
-        });
-        
-        sectionResults[sectionKey] = {
-            name: section.name,
-            completed: sectionCompleted,
-            total: sectionTotal,
-            percentage: Math.round((sectionCompleted / sectionTotal) * 100),
-            fields: fieldResults,
-            status: sectionCompleted === sectionTotal ? 'complete' : 
-                    sectionCompleted > 0 ? 'partial' : 'incomplete'
-        };
-    });
-    
-    const overallPercentage = Math.round((completedFields / totalFields) * 100);
-    
-    return {
-        overall: {
-            completed: completedFields,
-            total: totalFields,
-            percentage: overallPercentage,
-            status: overallPercentage === 100 ? 'complete' : 
-                    overallPercentage > 50 ? 'partial' : 'incomplete'
-        },
-        sections: sectionResults
-    };
-}
-
-// Display profile validation
-function displayProfileValidation(validation) {
-    if (!validation) return;
-    
-    const validationContent = document.getElementById('validation-content');
-    
-    validationContent.innerHTML = `
-        <div class="validation-summary">
-            <div class="validation-metric ${validation.overall.status}">
-                <div class="validation-metric-value">${validation.overall.percentage}%</div>
-                <div class="validation-metric-label">Overall Complete</div>
-            </div>
-            <div class="validation-metric ${validation.overall.completed === validation.overall.total ? 'complete' : 'incomplete'}">
-                <div class="validation-metric-value">${validation.overall.completed}/${validation.overall.total}</div>
-                <div class="validation-metric-label">Fields Complete</div>
-            </div>
-        </div>
-        
-        <div class="validation-details">
-            ${Object.keys(validation.sections).map(sectionKey => {
-                const section = validation.sections[sectionKey];
-                return `
-                    <div class="validation-section ${section.status}">
-                        <div class="validation-section-title">
-                            ${section.name} (${section.completed}/${section.total} - ${section.percentage}%)
-                        </div>
-                        <div class="validation-fields">
-                            ${section.fields.map(field => `
-                                <div class="validation-field ${field.complete ? 'complete' : 'incomplete'}">
-                                    <div class="validation-field-icon"></div>
-                                    <div class="validation-field-name">${field.name}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }).join('')}
-        </div>
-    `;
-}
-
 // Update customer status
 async function updateCustomerStatus() {
     const statusDropdown = document.getElementById('status-dropdown');
@@ -392,7 +353,7 @@ async function updateCustomerStatus() {
         return;
     }
     
-    if (newStatus === currentCustomerData.customer_status) {
+    if (newStatus === currentCustomerData.customer.customer_status) {
         alert('No change in status');
         return;
     }
@@ -425,7 +386,7 @@ async function updateCustomerStatus() {
         messageElement.style.display = 'block';
         
         // Update current customer data
-        currentCustomerData.customer_status = newStatus;
+        currentCustomerData.customer.customer_status = newStatus;
         
         // Disable update button
         document.getElementById('update-status-btn').disabled = true;

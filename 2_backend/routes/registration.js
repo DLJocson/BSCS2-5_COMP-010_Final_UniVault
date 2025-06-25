@@ -692,7 +692,17 @@ router.post('/register', async (req, res, next) => {
                 const sourceList = fundSources.split(',').map(s => s.trim()).filter(s => s);
                 for (const source of sourceList) {
                     // Map fund source text to database code
-                    const mapped_fund_source = fundSourceMap[(source || '').toLowerCase().trim()] || 'FS001';
+                    let key = (source || '').toLowerCase().trim();
+                    let mapped_fund_source = fundSourceMap[key];
+                    if (!mapped_fund_source) {
+                        // Fallback for remittances/remittance
+                        if (key === 'remittances' || key === 'remittance') {
+                            mapped_fund_source = 'FS004';
+                        } else {
+                            mapped_fund_source = 'FS001';
+                            console.warn('Unmapped fund source:', source, 'Defaulting to FS001');
+                        }
+                    }
                     console.log('Fund source mapping:', { original: source, mapped: mapped_fund_source });
                     
                     try {

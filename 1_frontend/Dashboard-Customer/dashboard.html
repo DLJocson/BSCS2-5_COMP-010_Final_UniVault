@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniVault Customer Dashboard</title>
+    <style>
+        body {
+            font-family: 'Manjari', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loading-container {
+            text-align: center;
+            color: white;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .login-link {
+            color: white;
+            text-decoration: underline;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <h2>Loading Customer Dashboard...</h2>
+        <p>Please wait while we verify your session.</p>
+        <div id="error-container" style="display: none;" class="error-message">
+            <h3>Authentication Required</h3>
+            <p>You need to log in to access the customer dashboard.</p>
+            <a href="/Registration-Customer/login.html" class="login-link">Go to Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is authenticated
+            const cifNumber = localStorage.getItem('cif_number') || sessionStorage.getItem('cif_number');
+            
+            if (!cifNumber) {
+                // No CIF number found, show error
+                document.querySelector('.spinner').style.display = 'none';
+                document.querySelector('h2').textContent = 'Authentication Required';
+                document.querySelector('p').textContent = '';
+                document.getElementById('error-container').style.display = 'block';
+                return;
+            }
+            
+            // Verify the CIF number is valid by making a quick API call
+            fetch(`/api/customer/${cifNumber}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Invalid session');
+                    }
+                    return response.json();
+                })
+                .then(customer => {
+                    // Valid customer, redirect to profile page
+                    window.location.href = `profile.html?cif=${cifNumber}`;
+                })
+                .catch(error => {
+                    console.error('Authentication error:', error);
+                    // Clear invalid session data
+                    localStorage.removeItem('cif_number');
+                    sessionStorage.removeItem('cif_number');
+                    
+                    // Show error
+                    document.querySelector('.spinner').style.display = 'none';
+                    document.querySelector('h2').textContent = 'Session Expired';
+                    document.querySelector('p').textContent = 'Your session has expired. Please log in again.';
+                    document.getElementById('error-container').style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html> 

@@ -364,6 +364,7 @@ CREATE TABLE BANK_EMPLOYEE (
     employee_suffix_name   VARCHAR(255),
     employee_username      VARCHAR(50) NOT NULL UNIQUE,
     employee_password      VARCHAR(255) NOT NULL,
+    created_at             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     
     -- CHECK CONSTRAINTS
     CONSTRAINT check_employee_position       CHECK (employee_position REGEXP '^[A-Za-z ]+$'),

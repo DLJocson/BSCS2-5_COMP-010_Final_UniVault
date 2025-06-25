@@ -1,0 +1,253 @@
+/* Close Account Confirmation Page Styles */
+
+.page-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.page-header h1 {
+    color: #2a4d8f;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.confirmation-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.warning-banner {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.warning-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.warning-text h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.warning-text p {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.account-details,
+.confirmation-checklist,
+.authentication-section {
+    padding: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.account-details h3,
+.confirmation-checklist h3,
+.authentication-section h3 {
+    color: #2a4d8f;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.account-info-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid #2a4d8f;
+}
+
+.account-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+}
+
+.account-detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.account-detail-row label {
+    font-weight: 600;
+    color: #555;
+}
+
+.account-detail-row span {
+    font-weight: 500;
+    color: #2a4d8f;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+    background: #e3f2fd;
+    border-color: #2a4d8f;
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #2a4d8f;
+}
+
+.checklist-item label {
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+}
+
+.authentication-section p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.auth-form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group input {
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2a4d8f;
+    box-shadow: 0 0 0 3px rgba(42, 77, 143, 0.1);
+}
+
+.form-group input.error {
+    border-color: #ff3860;
+}
+
+.error-message {
+    color: #ff3860;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.action-buttons {
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.btn-cancel,
+.btn-close-account {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.btn-close-account {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-close-account:hover:not(:disabled) {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+.btn-close-account:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Loading state */
+.loading {
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .confirmation-container {
+        margin: 1rem;
+    }
+    
+    .account-details,
+    .confirmation-checklist,
+    .authentication-section {
+        padding: 1.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .account-detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

@@ -128,7 +128,7 @@ app.use('/', authRoutes);
 app.use('/', customerRoutes);
 app.use('/', registrationRoutes);
 app.use('/', uploadRoutes);
-app.use('/', adminRoutes);
+app.use('/api', adminRoutes);
 
 // FORCE EXPRESS ROUTER INITIALIZATION
 console.log('🔧 Forcing Express router initialization...');

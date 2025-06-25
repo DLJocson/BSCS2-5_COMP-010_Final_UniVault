@@ -25,11 +25,6 @@
               <a id="account-option" href="account1.html">Accounts</a>
             </div>
             <div class="customer-options-container">
-              <a id="transaction-option" href="transaction1.html"
-                >Transactions</a
-              >
-            </div>
-            <div class="customer-options-container">
               <a id="profile-option" href="profile.html">Profile</a>
             </div>
             <div class="customer-options-container">
@@ -42,7 +37,6 @@
 
         <div class="wrapper">
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
             <div class="icon-container">
               <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
             </div>
@@ -122,21 +116,7 @@
                 </div>
 
                 <div class="account-info-card">
-                  <div id="savings" class="account">
-                    <img src="/assets/card.png" alt="" />
-                    <div class="account-name">
-                      <h2 class="account-title">BDO Card Account</h2>
-                      <h4>Grocery Fund</h4>
-                    </div>
-                    <div class="top-label-2">
-                      <label>*******9914</label>
-                      <label class="blue-text">USD</label>
-                      <label>65, 000</label>
-                    </div>
-                    <div class="top-label-3">
-                      <label>Active</label>
-                    </div>
-                  </div>
+                  <!-- Account cards will be rendered here by JS if any exist -->
                 </div>
               </div>
             </div>
@@ -173,26 +153,10 @@
                   <label>Current Balance</label>
                   <textarea></textarea>
                 </div>
-
-                <div class="biometrics-type">
-                  <label>Biometrics Type</label>
-                  <textarea></textarea>
-                </div>
               </div>
 
               <div class="button">
-                <button
-                  onclick="location.href='add-account1.html'"
-                  id="add-existing-button"
-                >
-                  + Add Existing Account
-                </button>
-                <button
-                  onclick="location.href='apply-account1.html'"
-                  id="apply-existing-button"
-                >
-                  + Apply Existing Account
-                </button>
+                <!-- Removed Add Existing Account and Apply Existing Account buttons as requested -->
               </div>
 
               <img src="/assets/account-page-logo.png" alt="Account Logo" />
@@ -201,5 +165,6 @@
         </div>
       </div>
     </div>
+    <script src="accounts2.js"></script>
   </body>
 </html>

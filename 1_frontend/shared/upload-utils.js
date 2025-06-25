@@ -105,15 +105,44 @@ class ImageUploadHandler {
         // Store file path in localStorage
         localStorage.setItem(`${id}_path`, result.filePath);
         localStorage.setItem(`${id}_filename`, file.name);
-        
         // Show success message
         this.showSuccess(id, file.name);
-        
-        // Show image preview
-        this.showImagePreview(id, file);
-        
+        // Set image as background of upload box
+        this.setUploadBoxBackground(id, file);
         // Remove upload box error state
         this.clearUploadBoxError(id);
+    }
+
+    // Set the background image of the upload box
+    setUploadBoxBackground(id, file) {
+        const uploadBox = this.getUploadBox(id);
+        if (uploadBox && file.type.startsWith('image/')) {
+            const url = URL.createObjectURL(file);
+            uploadBox.style.backgroundImage = `url('${url}')`;
+            uploadBox.style.backgroundSize = 'contain';
+            uploadBox.style.backgroundRepeat = 'no-repeat';
+            uploadBox.style.backgroundPosition = 'center';
+            uploadBox.classList.add('has-image');
+            // Optionally hide icon and direction
+            const icon = uploadBox.querySelector('.icon');
+            if (icon) icon.style.opacity = '0.2';
+            const direction = uploadBox.querySelector('.direction');
+            if (direction) direction.style.opacity = '0.2';
+        }
+    }
+
+    // Remove the background image and .has-image class
+    clearUploadBoxBackground(id) {
+        const uploadBox = this.getUploadBox(id);
+        if (uploadBox) {
+            uploadBox.style.backgroundImage = '';
+            uploadBox.classList.remove('has-image');
+            // Restore icon and direction
+            const icon = uploadBox.querySelector('.icon');
+            if (icon) icon.style.opacity = '';
+            const direction = uploadBox.querySelector('.direction');
+            if (direction) direction.style.opacity = '';
+        }
     }
 
     // Handle upload failure
@@ -189,48 +218,15 @@ class ImageUploadHandler {
 
     // Image preview functionality
     setupPreviewContainer(input, id) {
-        let preview = document.getElementById(`preview-${id}`);
-        if (!preview) {
-            preview = document.createElement('div');
-            preview.id = `preview-${id}`;
-            preview.className = 'image-preview-container';
-            preview.style.cssText = `
-                display: none;
-                margin-top: 15px;
-                padding: 10px;
-                border: 2px solid #e0e0e0;
-                border-radius: 8px;
-                background: #f9f9f9;
-                text-align: center;
-            `;
-            
-            const uploadBox = input.closest('.upload-box');
-            if (uploadBox) {
-                uploadBox.appendChild(preview);
-            }
-        }
+        // Do nothing
     }
 
     showImagePreview(id, file) {
-        const preview = document.getElementById(`preview-${id}`);
-        if (preview && file.type.startsWith('image/')) {
-            preview.innerHTML = `
-                <img src="${URL.createObjectURL(file)}" 
-                     alt="Preview" 
-                     style="max-width: 200px; max-height: 150px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <p style="margin: 8px 0 0 0; font-size: 12px; color: #666;">${file.name}</p>
-                <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">${this.formatFileSize(file.size)}</p>
-            `;
-            preview.style.display = 'block';
-        }
+        // Do nothing
     }
 
     hideImagePreview(id) {
-        const preview = document.getElementById(`preview-${id}`);
-        if (preview) {
-            preview.style.display = 'none';
-            preview.innerHTML = '';
-        }
+        this.clearUploadBoxBackground(id);
     }
 
     // Utility methods

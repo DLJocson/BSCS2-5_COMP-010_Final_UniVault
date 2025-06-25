@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load closed accounts
     loadClosedAccounts();
     
-    // Initialize search functionality
-    initializeClosedSearch();
-    
     // Logout functionality is handled by logout-fix.js
 });
 
@@ -21,18 +18,19 @@ async function loadClosedAccounts() {
     const loadingState = document.getElementById('loadingState');
     const errorState = document.getElementById('errorState');
     const container = document.getElementById('accountInfoContainer');
-    
     try {
-        // Show loading state
         loadingState.style.display = 'block';
         errorState.style.display = 'none';
-        
-        const response = await fetch('/api/admin/closed-accounts');
-        const data = await response.json();
-        
+        const response = await fetch('/api/admin/accounts/closed');
+        let data;
+        try {
+            data = await response.json();
+        } catch (err) {
+            throw new Error('Server returned invalid JSON.');
+        }
         if (response.ok) {
-            allClosedAccountsData = data.customers; // Store for search functionality
-            displayClosedAccounts(data.customers);
+            allClosedAccountsData = data.accounts;
+            displayClosedAccounts(data.accounts);
             loadingState.style.display = 'none';
         } else {
             throw new Error(data.message || 'Failed to load closed accounts');
@@ -48,70 +46,102 @@ async function loadClosedAccounts() {
 function displayClosedAccounts(accounts) {
     const container = document.getElementById('accountInfoContainer');
     if (!container) return;
-    
-    // Clear existing content
     container.innerHTML = '';
-    
-    if (accounts.length === 0) {
+    if (!accounts || accounts.length === 0) {
         showNoClosedAccountsFound();
         return;
     }
-    
-    accounts.forEach(account => {
-        const accountCard = createClosedAccountCard(account);
-        container.appendChild(accountCard);
+    // Table columns: Account Number, CIF Number, Customer Name, Account Type, Account Status, Date Closed, Email/Phone
+    const table = document.createElement('table');
+    table.className = 'closed-accounts-table';
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const columns = [
+        { key: 'account_number', label: 'Account Number' },
+        { key: 'cif_number', label: 'CIF Number' },
+        { key: 'customer_name', label: 'Customer Name' },
+        { key: 'account_type', label: 'Account Type' },
+        { key: 'account_status', label: 'Account Status' },
+        { key: 'account_close_date', label: 'Date Closed' },
+        { key: 'email_address', label: 'Email' }, // or phone_number if preferred
+    ];
+    columns.forEach(col => {
+        const th = document.createElement('th');
+        th.textContent = col.label;
+        headerRow.appendChild(th);
     });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    accounts.forEach(acc => {
+        const row = document.createElement('tr');
+        // Account Number
+        let val = acc['account_number'] || 'N/A';
+        row.appendChild(createCell(val));
+        // CIF Number
+        val = acc['cif_number'] || 'N/A';
+        row.appendChild(createCell(val));
+        // Customer Name
+        val = (acc['last_name'] && acc['first_name']) ? `${acc['last_name']}, ${acc['first_name']}${acc['middle_name'] ? ' ' + acc['middle_name'] : ''}${acc['suffix'] ? ' ' + acc['suffix'] : ''}` : 'N/A';
+        row.appendChild(createCell(val));
+        // Account Type
+        val = acc['account_type'] || 'N/A';
+        row.appendChild(createCell(val));
+        // Account Status
+        val = acc['account_status'] || 'N/A';
+        const statusCell = document.createElement('td');
+        statusCell.textContent = val;
+        if (val.toLowerCase() === 'closed') statusCell.className = 'status-closed';
+        row.appendChild(statusCell);
+        // Date Closed
+        val = acc['account_close_date'] ? new Date(acc['account_close_date']).toLocaleString() : 'N/A';
+        row.appendChild(createCell(val));
+        // Email
+        val = acc['email_address'] || 'N/A';
+        row.appendChild(createCell(val));
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
 }
 
-function createClosedAccountCard(customer) {
+function createCell(value) {
+    const td = document.createElement('td');
+    td.textContent = value;
+    return td;
+}
+
+function createClosedAccountCard(account) {
     const card = document.createElement('div');
     card.className = 'account';
     
-    // Format the status change date
-    const statusDate = customer.status_changed_date ? 
-        new Date(customer.status_changed_date).toLocaleString() : 
-        new Date(customer.created_at).toLocaleString();
-    
-    // Determine customer type (this would need to be added to the database query)
-    const customerType = 'Individual'; // Default for now
+    // Format the closed date
+    const closedDate = account.account_close_date ? 
+        new Date(account.account_close_date).toLocaleString() : 'N/A';
     
     // Format status with proper styling
-    const statusClass = customer.customer_status === 'Inactive' ? 'inactive-status' : 
-                       customer.customer_status === 'Suspended' ? 'suspended-status' : 
-                       'dormant-status';
+    const statusClass = account.account_status === 'Closed' ? 'inactive-status' : 'dormant-status';
     
     card.innerHTML = `
         <div class="top-label-2">
-            <label>${customer.cif_number}</label>
-            <label>${statusDate}</label>
-            <label>${customerType}</label>
-            <label>${customer.customer_last_name}</label>
-            <label>${customer.customer_first_name}</label>
-            <label>${customer.customer_middle_name || 'N/A'}</label>
-            <label>${customer.customer_suffix || 'N/A'}</label>
-            <label class="${statusClass}">${customer.customer_status}</label>
+            <label>${account.cif_number}</label>
+            <label>${closedDate}</label>
+            <label>Account</label>
+            <label colspan="3">${account.account_number}</label>
+            <label class="${statusClass}">${account.account_status}</label>
         </div>
     `;
     
-    // Add click handler to show more details
-    card.addEventListener('click', () => {
-        showCustomerDetails(customer);
-    });
-    
-    card.style.cursor = 'pointer';
+    card.style.cursor = 'default';
     card.style.transition = 'all 0.3s ease';
-    
-    // Add hover effects
     card.addEventListener('mouseenter', () => {
         card.style.backgroundColor = '#f8faff';
         card.style.transform = 'translateX(4px)';
     });
-    
     card.addEventListener('mouseleave', () => {
         card.style.backgroundColor = '';
         card.style.transform = '';
     });
-    
     return card;
 }
 
@@ -285,62 +315,6 @@ function formatAddress(customer) {
 }
 
 let allClosedAccountsData = [];
-let closedSearchDebounceTimer;
-
-function initializeClosedSearch() {
-    const searchInput = document.getElementById('closedSearchBar');
-    if (!searchInput) {
-        console.error('Closed search input not found');
-        return;
-    }
-    
-    searchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.trim();
-        
-        // Clear previous timer
-        clearTimeout(closedSearchDebounceTimer);
-        
-        // Debounce the search
-        closedSearchDebounceTimer = setTimeout(() => {
-            if (searchTerm.length === 0) {
-                // Show all closed accounts when search is empty
-                displayClosedAccounts(allClosedAccountsData);
-            } else if (searchTerm.length >= 2) {
-                // Perform search
-                performClosedSearch(searchTerm);
-            }
-        }, 300);
-    });
-    
-    // Clear search when input is cleared
-    searchInput.addEventListener('keyup', function(e) {
-        if (e.target.value === '') {
-            displayClosedAccounts(allClosedAccountsData);
-        }
-    });
-}
-
-function performClosedSearch(searchTerm) {
-    const searchLower = searchTerm.toLowerCase();
-    
-    const filteredAccounts = allClosedAccountsData.filter(account => {
-        return (
-            (account.cif_number && account.cif_number.toString().includes(searchLower)) ||
-            (account.customer_first_name && account.customer_first_name.toLowerCase().includes(searchLower)) ||
-            (account.customer_last_name && account.customer_last_name.toLowerCase().includes(searchLower)) ||
-            (account.customer_middle_name && account.customer_middle_name.toLowerCase().includes(searchLower)) ||
-            (account.customer_suffix && account.customer_suffix.toLowerCase().includes(searchLower)) ||
-            (account.customer_username && account.customer_username.toLowerCase().includes(searchLower))
-        );
-    });
-    
-    displayClosedAccounts(filteredAccounts);
-    
-    // Show no results message if needed
-    if (filteredAccounts.length === 0) {
-        showNoClosedAccountsFound();
-    }
-}
 
 function showNoClosedAccountsFound() {
     const container = document.getElementById('accountInfoContainer');

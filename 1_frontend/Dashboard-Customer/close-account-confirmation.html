@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Close Account Confirmation - UniVault</title>
+    <link rel="stylesheet" href="../shared/style.css" />
+    <link rel="stylesheet" href="close-account-confirmation.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="left-sidebar">
+            <div class="logo">
+                <span class="uni">Uni</span><span class="vault">vault</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a id="accounts-option" href="accounts_display.html">Accounts</a></li>
+                    <li><a id="profile-option" href="profile.html">Profile</a></li>
+                    <li><a id="close-account-option" href="close-account.html" class="active">Close Accounts</a></li>
+                </ul>
+            </nav>
+            <div class="logout-btn">
+                <button id="log-out">Log Out</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <div class="search-container">
+                    <input type="text" id="search" placeholder="Search..." />
+                </div>
+                <div class="header-info">
+                    <div class="date-time">
+                        <span id="current-date-time"></span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="page-header">
+                    <h1>Account Closure Confirmation</h1>
+                    <p>Please review the details below and confirm your account closure</p>
+                </div>
+
+                <div class="confirmation-container">
+                    <div class="warning-banner">
+                        <div class="warning-icon">⚠️</div>
+                        <div class="warning-text">
+                            <h3>Important Notice</h3>
+                            <p>Closing your account is a permanent action and cannot be undone. Please ensure you have transferred any remaining funds before proceeding.</p>
+                        </div>
+                    </div>
+
+                    <div class="account-details">
+                        <h3>Account to be Closed</h3>
+                        <div class="account-info-card">
+                            <div class="account-detail-row">
+                                <label>Account Number:</label>
+                                <span id="account-number">Loading...</span>
+                            </div>
+                            <div class="account-detail-row">
+                                <label>Account Type:</label>
+                                <span id="account-type">Loading...</span>
+                            </div>
+                            <div class="account-detail-row">
+                                <label>Current Balance:</label>
+                                <span id="account-balance">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="confirmation-checklist">
+                        <h3>Confirmation Checklist</h3>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="funds-transferred">
+                            <label for="funds-transferred">I have transferred all funds from this account or understand that any remaining balance will be forfeited</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="understand-permanent">
+                            <label for="understand-permanent">I understand that this action is permanent and cannot be reversed</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="no-pending-transactions">
+                            <label for="no-pending-transactions">I confirm there are no pending transactions on this account</label>
+                        </div>
+                    </div>
+
+                    <div class="authentication-section">
+                        <h3>Authentication Required</h3>
+                        <p>Please enter your credentials to confirm the account closure:</p>
+                        <div class="auth-form">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" required>
+                                <div class="error-message" id="username-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" required>
+                                <div class="error-message" id="password-error"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="button" class="btn-cancel" id="cancel-btn">Cancel</button>
+                        <button type="button" class="btn-close-account" id="close-account-btn" disabled>Close Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="close-account-confirmation.js"></script>
+    <script>
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date-time').textContent = now.toLocaleString();
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>

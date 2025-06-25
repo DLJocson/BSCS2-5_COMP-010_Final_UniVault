@@ -456,7 +456,7 @@ if (proceedBtn) {
     let sourceOfFundsMultiValue = "";
     if (sourceOfFundsMulti && sourceOfFundsMulti.offsetParent !== null) {
       // Native <select multiple>
-      const selected = Array.from(sourceOfFundsMulti.selectedOptions).map(opt => opt.value);
+      const selected = Array.from(sourceOfFundsMulti.selectedOptions).map(opt => opt.value.trim());
       sourceOfFundsMultiValue = selected.join(",");
       localStorage.setItem("source-of-funds-multi", sourceOfFundsMultiValue);
       
@@ -465,7 +465,7 @@ if (proceedBtn) {
       const dropdownMenu = document.getElementById("dropdownMenu");
       if (dropdownMenu && dropdownMenu.offsetParent !== null) {
         const checked = Array.from(dropdownMenu.querySelectorAll('input[type="checkbox"]:checked'));
-        const values = checked.map(cb => cb.value);
+        const values = checked.map(cb => cb.value.trim());
         sourceOfFundsMultiValue = values.join(",");
         localStorage.setItem("source-of-funds-multi", sourceOfFundsMultiValue);
         

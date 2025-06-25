@@ -635,3 +635,42 @@ select {
   color: red;
   margin-left: 4px;
 }
+
+/* Image preview container styles for upload box */
+.image-preview-container {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 10px 0 0 0;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+}
+
+.image-preview-container img {
+  max-width: 90%;
+  max-height: 180px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/* Upload box with image background */
+.upload-box.has-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.upload-box.has-image .icon,
+.upload-box.has-image .direction {
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}

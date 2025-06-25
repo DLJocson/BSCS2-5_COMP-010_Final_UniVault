@@ -49,11 +49,59 @@ document.addEventListener("DOMContentLoaded", () => {
   username.addEventListener("input", validate);
   password.addEventListener("input", validate);
 
-  proceedBtn.addEventListener("click", (e) => {
+  proceedBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    
     if (!validate()) {
-      e.preventDefault();
-    } else {
-      window.location.href = "update-profile8.html";
+      return;
+    }
+    
+    // Show loading state
+    proceedBtn.textContent = 'Processing...';
+    proceedBtn.disabled = true;
+    
+    try {
+      // Get the pending changes from localStorage
+      const pendingChanges = localStorage.getItem('pendingProfileChanges');
+      const originalData = localStorage.getItem('originalCustomerData');
+      
+      if (!pendingChanges || !originalData) {
+        throw new Error('No pending changes found. Please start from the profile page.');
+      }
+      
+      const changes = JSON.parse(pendingChanges);
+      const customerData = JSON.parse(originalData);
+      const cif = customerData.customer.cif_number;
+      
+      console.log('Applying changes:', changes);
+      
+      // Send the changes to the backend
+      const response = await fetch(`/api/customer/${cif}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(changes)
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`HTTP ${response.status}: ${errorData.message || 'Update failed'}`);
+      }
+      
+      // Clear the temporary data
+      localStorage.removeItem('pendingProfileChanges');
+      localStorage.removeItem('originalCustomerData');
+      
+      // Show success and redirect
+      alert('Profile updated successfully!');
+      window.location.href = "profile-update-success.html"; // or wherever you want to redirect
+      
+    } catch (error) {
+      console.error('Error saving profile changes:', error);
+      alert(`Failed to update profile: ${error.message}`);
+      
+      // Reset button
+      proceedBtn.textContent = 'Proceed';
+      proceedBtn.disabled = false;
     }
   });
 });

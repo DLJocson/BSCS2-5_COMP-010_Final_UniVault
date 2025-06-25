@@ -66,7 +66,7 @@ async function loadDashboardStats() {
       console.log("⏰ Dashboard request timed out");
     }, 10000); // 10 second timeout
 
-    const response = await fetch("/admin/dashboard-stats", {
+    const response = await fetch("/api/admin/dashboard-stats", {
       signal: controller.signal,
       headers: {
         'Accept': 'application/json',

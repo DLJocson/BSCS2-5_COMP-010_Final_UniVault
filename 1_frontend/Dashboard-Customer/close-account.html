@@ -23,11 +23,6 @@
               <a id="account-option" href="account1.html">Accounts</a>
             </div>
             <div class="customer-options-container">
-              <a id="transaction-option" href="transaction1.html"
-                >Transactions</a
-              >
-            </div>
-            <div class="customer-options-container">
               <a id="profile-option" href="profile.html">Profile</a>
             </div>
             <div class="customer-options-container">
@@ -40,7 +35,6 @@
 
         <div class="wrapper">
           <nav class="nav-bar">
-            <input type="text" id="search" placeholder="Search" />
             <div class="icon-container">
               <img id="log-out" src="/assets/log-out-logo.png" alt="Log Out" />
             </div>
@@ -53,149 +47,11 @@
                 <span class="blue-text">Accounts</span>
               </h1>
             </div>
-            <button id="delete-account">- Delete Account</button>
           </header>
 
-          <div class="page-body">
-            <div class="account-info">
-              <div class="top-label">
-                <h2>Accounts</h2>
-                <div class="top-label-2">
-                  <label>Account Number</label>
-                  <label>Currency</label>
-                  <label>Balance</label>
-                </div>
-                <div class="top-label-3">
-                  <label>Status</label>
-                </div>
-              </div>
-
-              <div class="account-info-card">
-                <div
-                  onclick="location.href='close-account2.html'"
-                  id="investment"
-                  class="account"
-                >
-                  <img src="/assets/investment.png" alt="" />
-                  <div class="account-name">
-                    <h2 class="account-title">BDO Investments</h2>
-                    <h4>Future</h4>
-                  </div>
-                  <div class="top-label-2">
-                    <label>*******9963</label>
-                    <label class="blue-text">USD</label>
-                    <label>50, 000</label>
-                  </div>
-                  <div class="top-label-3">
-                    <label>Active</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="account-info-card">
-                <div
-                  onclick="location.href='close-account2.html'"
-                  id="savings"
-                  class="account"
-                >
-                  <img src="/assets/savings.png" alt="" />
-                  <div class="account-name">
-                    <h2 class="account-title">BDO Savings Account</h2>
-                    <h4>Emergency Fund</h4>
-                  </div>
-                  <div class="top-label-2">
-                    <label>*******9713</label>
-                    <label class="blue-text">USD</label>
-                    <label>120, 000</label>
-                  </div>
-                  <div class="top-label-3">
-                    <label>Active</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="account-info-card">
-                <div
-                  onclick="location.href='close-account2.html'"
-                  id="loan"
-                  class="account"
-                >
-                  <img src="/assets/loan.png" alt="" />
-                  <div class="account-name">
-                    <h2 class="account-title">BDO Loan Account</h2>
-                    <h4>Mortgage</h4>
-                  </div>
-                  <div class="top-label-2">
-                    <label>*******8731</label>
-                    <label class="blue-text">USD</label>
-                    <label>800, 000</label>
-                  </div>
-                  <div class="top-label-3">
-                    <label>Active</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="account-info-card">
-                <div
-                  onclick="location.href='close-account2.html'"
-                  id="card"
-                  class="account"
-                >
-                  <img src="/assets/card.png" alt="" />
-                  <div class="account-name">
-                    <h2 class="account-title">BDO Card Account</h2>
-                    <h4>Groceries</h4>
-                  </div>
-                  <div class="top-label-2">
-                    <label>*******9914</label>
-                    <label class="blue-text">USD</label>
-                    <label>65, 000</label>
-                  </div>
-                  <div class="top-label-3">
-                    <label>Active</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="account-info-card">
-                <div
-                  onclick="location.href='close-account2.html'"
-                  id="insurance"
-                  class="account"
-                >
-                  <img src="/assets/insurance.png" alt="" />
-                  <div class="account-name">
-                    <h2 class="account-title">BDO Insurance</h2>
-                    <h4>Health-Related</h4>
-                  </div>
-                  <div class="top-label-2">
-                    <label>*******7752</label>
-                    <label class="blue-text">USD</label>
-                    <label>60, 000</label>
-                  </div>
-                  <div class="top-label-3">
-                    <label>Active</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="right-container">
-              <div class="account-status">
-                <h2>Account Status</h2>
-                <div class="title-label">
-                  <label>Account Type & Number</label>
-                  <label>Status</label>
-                </div>
-                <div class="account-status-card">
-                  <div class="account-status-name">
-                    <h2 class="account-title">BDO Investments</h2>
-                    <h4>*********9963</h4>
-                  </div>
-                  <label class="red-text">Pending</label>
-                </div>
-              </div>
+          <div class="page-body" style="width: 100%;">
+            <div class="account-info" style="width: 100%;">
+              <!-- Account cards will be rendered here by JS -->
             </div>
           </div>
         </div>

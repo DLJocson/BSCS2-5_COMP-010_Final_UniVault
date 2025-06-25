@@ -4,6 +4,14 @@ const { pool } = require('../config/database');
 
 console.log('Admin routes module loaded!');
 
+// Example session check for all admin API endpoints
+function requireAdminSession(req, res, next) {
+    // For now, allow all requests since we're using localStorage-based auth
+    // The frontend handles authentication checks
+    // TODO: Implement proper session management if needed
+    next();
+}
+
 // Test route
 router.get('/admin/test', (req, res) => {
     res.json({ message: 'Admin routes are working!' });
@@ -239,43 +247,31 @@ router.post('/admin/login', async (req, res) => {
 */
 
 // Admin user management - get all customers
-router.get('/admin/customers', async (req, res) => {
+router.get('/admin/customers', requireAdminSession, async (req, res) => {
     console.log('👥 Customer list request received');
     let connection;
-    
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 50;
+        let limit = parseInt(req.query.limit, 10);
+        if (isNaN(limit) || limit <= 0) limit = 50;
+        let page = parseInt(req.query.page, 10);
+        if (isNaN(page) || page <= 0) page = 1;
         const offset = (page - 1) * limit;
-        const status = req.query.status;
-        const search = req.query.search;
+        const { status } = req.query;
+        
+        console.log('📊 Customer query parameters:', { limit, page, offset, status });
         
         connection = await pool.getConnection();
         
-        // Build dynamic WHERE clause
-        let whereConditions = ['is_deleted = FALSE'];
-        let queryParams = [];
+        // First check if customer table has any data
+        const [customerCheck] = await connection.execute('SELECT COUNT(*) as count FROM customer WHERE is_deleted = FALSE');
+        console.log('📊 Customer table has', customerCheck[0].count, 'active records');
         
-        if (status && status !== 'all') {
-            whereConditions.push('customer_status = ?');
-            queryParams.push(status);
+        if (customerCheck[0].count === 0) {
+            console.log('ℹ️ No customers found, returning empty response');
+            return res.json({ customers: [], total: 0 });
         }
         
-        if (search) {
-            whereConditions.push(`(
-                customer_first_name LIKE ? OR 
-                customer_last_name LIKE ? OR 
-                customer_username LIKE ? OR 
-                cif_number LIKE ?
-            )`);
-            const searchTerm = `%${search}%`;
-            queryParams.push(searchTerm, searchTerm, searchTerm, searchTerm);
-        }
-        
-        const whereClause = whereConditions.join(' AND ');
-        
-        // Get customers with pagination and filtering
-        const [customers] = await connection.execute(`
+        let query = `
             SELECT 
                 cif_number,
                 customer_first_name,
@@ -287,35 +283,31 @@ router.get('/admin/customers', async (req, res) => {
                 gender,
                 citizenship
             FROM customer 
-            WHERE ${whereClause}
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?
-        `, [...queryParams, limit, offset]);
+            WHERE is_deleted = FALSE
+        `;
+        const params = [];
+        if (status && status !== 'all') {
+            query += ' AND customer_status = ?';
+            params.push(status);
+        }
+        query += ` ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
         
-        // Get total count with same filters
-        const [countResult] = await connection.execute(`
-            SELECT COUNT(*) as total 
-            FROM customer 
-            WHERE ${whereClause}
-        `, queryParams);
-        
-        const total = countResult[0].total;
-        
-        res.json({
-            customers,
-            pagination: {
-                page,
-                limit,
-                total,
-                totalPages: Math.ceil(total / limit)
-            }
-        });
-        
+        console.log('🔍 Executing customer query:', query, params);
+        const [customers] = await connection.execute(query, params);
+        console.log(`✅ Retrieved ${customers.length} customers`);
+        res.json({ customers, total: customers.length });
     } catch (error) {
-        console.error('Error fetching customers:', error);
+        console.error('❌ Error fetching customers:', error);
+        console.error('❌ Error details:', {
+            message: error.message,
+            code: error.code,
+            errno: error.errno,
+            sqlState: error.sqlState,
+            sqlMessage: error.sqlMessage
+        });
         res.status(500).json({ 
-            message: 'Failed to fetch customers',
-            error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            error: 'Error Loading Customers',
+            message: process.env.NODE_ENV === 'development' ? error.message : 'Internal Server Error'
         });
     } finally {
         if (connection) {
@@ -325,7 +317,7 @@ router.get('/admin/customers', async (req, res) => {
 });
 
 // Admin customer verification - update customer status
-router.put('/admin/customers/:cif_number/status', async (req, res) => {
+router.put('/admin/customers/:cif_number/status', requireAdminSession, async (req, res) => {
     try {
         const { cif_number } = req.params;
         const { status, employee_id } = req.body;
@@ -392,86 +384,180 @@ router.put('/admin/customers/:cif_number/status', async (req, res) => {
 });
 
 // Admin review queue management - get all pending reviews
-router.get('/admin/review-queue', async (req, res) => {
+router.get('/admin/review-queue', requireAdminSession, async (req, res) => {
+    let connection;
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 50;
+        console.log('🔍 Review queue request received:', {
+            query: req.query,
+            url: req.url,
+            method: req.method
+        });
+        
+        let page = parseInt(req.query.page, 10);
+        if (isNaN(page) || page <= 0) page = 1;
+        let limit = parseInt(req.query.limit, 10);
+        if (isNaN(limit) || limit <= 0) limit = 50;
         const offset = (page - 1) * limit;
-        const status = req.query.status || 'PENDING';
+        // Accept both 'status' and 'type' (for compatibility)
+        let status = req.query.status || req.query.type || 'PENDING';
+        // Normalize status if type=verification
+        if (status === 'verification') status = 'PENDING';
         
-        const connection = await pool.getConnection();
+        console.log('📊 Query parameters:', { page, limit, offset, status });
         
-        // Get review queue items with customer details
-        const [reviews] = await connection.execute(`
+        connection = await pool.getConnection();
+        console.log('✅ Database connection acquired');
+        
+        // Get pending customers for verification review
+        const query = `
             SELECT 
-                rq.review_id,
-                rq.cif_number,
-                rq.request_type,
-                rq.request_timestamp,
-                rq.request_details,
-                rq.review_status,
-                rq.reviewed_by_employee_id,
-                rq.review_date,
-                rq.review_comment,
-                c.customer_first_name,
-                c.customer_last_name,
+                c.cif_number,
+                c.customer_first_name as first_name,
+                c.customer_last_name as last_name,
+                c.customer_middle_name as middle_name,
+                c.customer_suffix_name as suffix,
                 c.customer_username,
-                c.customer_status,
-                c.created_at as customer_created_at
-            FROM review_queue rq
-            JOIN customer c ON rq.cif_number = c.cif_number
-            WHERE rq.review_status = ? AND c.is_deleted = FALSE
-            ORDER BY rq.request_timestamp DESC
-            LIMIT ? OFFSET ?
-        `, [status, limit, offset]);
+                c.customer_status as status,
+                c.customer_type,
+                c.created_at,
+                c.birth_date as date_of_birth,
+                c.gender,
+                c.civil_status_code,
+                c.tax_identification_number,
+                ad.account_number,
+                ad.account_status,
+                ad.account_open_date,
+                ad.product_type_code,
+                'VERIFICATION' as request_type,
+                c.created_at as request_timestamp,
+                'Customer account verification pending' as request_details,
+                'PENDING' as review_status,
+                NULL as reviewed_by_employee_id,
+                NULL as review_date,
+                NULL as review_comment,
+                c.cif_number as review_id,
+                c.cif_number as customer_id,
+                -- Get email and phone from contact details
+                (SELECT contact_value FROM customer_contact_details ccd 
+                 WHERE ccd.cif_number = c.cif_number AND ccd.contact_type_code = 'CT04' LIMIT 1) as email,
+                (SELECT contact_value FROM customer_contact_details ccd 
+                 WHERE ccd.cif_number = c.cif_number AND ccd.contact_type_code = 'CT01' LIMIT 1) as phone_number,
+                -- Get address information
+                (SELECT CONCAT(ca.address_street, ', ', ca.address_city, ', ', ca.address_province) 
+                 FROM customer_address ca 
+                 WHERE ca.cif_number = c.cif_number AND ca.address_type_code = 'AD01' LIMIT 1) as street_address,
+                (SELECT ca.address_city FROM customer_address ca 
+                 WHERE ca.cif_number = c.cif_number AND ca.address_type_code = 'AD01' LIMIT 1) as city,
+                (SELECT ca.address_province FROM customer_address ca 
+                 WHERE ca.cif_number = c.cif_number AND ca.address_type_code = 'AD01' LIMIT 1) as state_province,
+                (SELECT ca.address_country FROM customer_address ca 
+                 WHERE ca.cif_number = c.cif_number AND ca.address_type_code = 'AD01' LIMIT 1) as country,
+                (SELECT ca.address_zip_code FROM customer_address ca 
+                 WHERE ca.cif_number = c.cif_number AND ca.address_type_code = 'AD01' LIMIT 1) as zip_code
+            FROM customer c
+            INNER JOIN customer_account ca ON c.cif_number = ca.cif_number
+            INNER JOIN account_details ad ON ca.account_number = ad.account_number
+            WHERE (c.customer_status = 'Pending Verification' OR c.customer_status = 'Pending')
+                AND (c.is_deleted = FALSE OR c.is_deleted IS NULL)
+                AND (ad.account_status = 'Pending Verification' OR ad.account_status = 'Pending')
+            ORDER BY c.created_at DESC
+            LIMIT ${limit} OFFSET ${offset}
+        `;
+        
+        console.log('🔍 Executing pending customers query');
+        const [pendingCustomers] = await connection.execute(query);
+        console.log('✅ Query executed successfully, found', pendingCustomers.length, 'pending customers');
+        
+        // Normalize status fields for frontend compatibility
+        function normalizeStatus(val) {
+            if (!val) return 'PENDING';
+            const map = {
+                'Pending Verification': 'PENDING',
+                'Pending': 'PENDING',
+                'Approved': 'APPROVED',
+                'Rejected': 'REJECTED',
+                'Under Review': 'UNDER_REVIEW',
+                'Completed': 'COMPLETED',
+            };
+            return map[val] || val.toUpperCase().replace(/ /g, '_');
+        }
+        pendingCustomers.forEach(cust => {
+            cust.status = normalizeStatus(cust.status);
+            if (cust.account_status) cust.account_status = normalizeStatus(cust.account_status);
+        });
         
         // Get total count
-        const [countResult] = await connection.execute(`
+        const countQuery = `
             SELECT COUNT(*) as total 
-            FROM review_queue rq
-            JOIN customer c ON rq.cif_number = c.cif_number
-            WHERE rq.review_status = ? AND c.is_deleted = FALSE
-        `, [status]);
+            FROM customer c
+            INNER JOIN customer_account ca ON c.cif_number = ca.cif_number
+            INNER JOIN account_details ad ON ca.account_number = ad.account_number
+            WHERE (c.customer_status = 'Pending Verification' OR c.customer_status = 'Pending')
+                AND (c.is_deleted = FALSE OR c.is_deleted IS NULL)
+                AND (ad.account_status = 'Pending Verification' OR ad.account_status = 'Pending')
+        `;
         
+        console.log('🔍 Executing count query');
+        const [countResult] = await connection.execute(countQuery);
         const total = countResult[0].total;
+        console.log('✅ Count query executed, total:', total);
         
-        res.json({
-            reviews,
+        const response = {
+            success: true,
+            data: pendingCustomers,
             pagination: {
                 page,
                 limit,
                 total,
                 totalPages: Math.ceil(total / limit)
             }
+        };
+        
+        console.log('📤 Sending response:', {
+            success: response.success,
+            dataCount: response.data.length,
+            total: response.pagination.total
         });
         
+        res.json(response);
+        
     } catch (error) {
-        console.error('Error fetching review queue:', error);
+        console.error('❌ Error fetching review queue:', error);
+        console.error('❌ Error stack:', error.stack);
+        console.error('❌ Error details:', {
+            message: error.message,
+            code: error.code,
+            errno: error.errno,
+            sqlState: error.sqlState,
+            sqlMessage: error.sqlMessage
+        });
+        
         res.status(500).json({ 
+            success: false,
             message: 'Failed to fetch review queue',
             error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
         });
     } finally {
         if (connection) {
             connection.release();
+            console.log('🔓 Database connection released');
         }
     }
 });
 
 // Admin employee management - get all employees
-router.get('/admin/employees', async (req, res) => {
+router.get('/admin/employees', requireAdminSession, async (req, res) => {
     console.log('👨‍💼 Employee list request received');
     let connection;
-    
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 50;
+        let limit = parseInt(req.query.limit, 10);
+        if (isNaN(limit) || limit <= 0) limit = 50;
+        let page = parseInt(req.query.page, 10);
+        if (isNaN(page) || page <= 0) page = 1;
         const offset = (page - 1) * limit;
-        
         connection = await pool.getConnection();
-        
-        // Get employees with pagination
-        const [employees] = await connection.execute(`
+        let whereClause = 'is_deleted = FALSE';
+        const sql = `
             SELECT 
                 employee_id,
                 employee_first_name,
@@ -480,20 +566,15 @@ router.get('/admin/employees', async (req, res) => {
                 employee_position,
                 created_at
             FROM bank_employee 
-            WHERE is_deleted = FALSE
+            WHERE ${whereClause}
             ORDER BY created_at DESC
             LIMIT ? OFFSET ?
-        `, [limit, offset]);
-        
+        `;
+        const [employees] = await connection.execute(sql, [limit, offset]);
         // Get total count
-        const [countResult] = await connection.execute(`
-            SELECT COUNT(*) as total 
-            FROM bank_employee 
-            WHERE is_deleted = FALSE
-        `);
-        
+        const countSql = `SELECT COUNT(*) as total FROM bank_employee WHERE ${whereClause}`;
+        const [countResult] = await connection.execute(countSql);
         const total = countResult[0].total;
-        
         res.json({
             employees,
             pagination: {
@@ -503,12 +584,11 @@ router.get('/admin/employees', async (req, res) => {
                 totalPages: Math.ceil(total / limit)
             }
         });
-        
     } catch (error) {
         console.error('Error fetching employees:', error);
         res.status(500).json({ 
             message: 'Failed to fetch employees',
-            error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+            error: error.message
         });
     } finally {
         if (connection) {
@@ -518,7 +598,7 @@ router.get('/admin/employees', async (req, res) => {
 });
 
 // Admin customer profile - get detailed customer information
-router.get('/admin/customers/:cif_number', async (req, res) => {
+router.get('/admin/customers/:cif_number', requireAdminSession, async (req, res) => {
     console.log('🔍 Customer profile request for CIF:', req.params.cif_number);
     let connection;
     
@@ -548,13 +628,28 @@ router.get('/admin/customers/:cif_number', async (req, res) => {
             return res.status(404).json({ message: 'Customer not found' });
         }
         
-        console.log('✅ Customer found:', customerResult[0].customer_first_name, customerResult[0].customer_last_name);
-        
-        // Return simplified customer profile for now
+        // Get valid ID image path (latest by created/issue date)
+        const [idRows] = await connection.execute(`
+            SELECT id_storage FROM CUSTOMER_ID 
+            WHERE cif_number = ? AND id_storage IS NOT NULL AND id_storage != ''
+            ORDER BY id_issue_date DESC, id_number DESC LIMIT 1
+        `, [cif_number]);
+        const valid_id_path = idRows.length > 0 ? idRows[0].id_storage : null;
+
+        // Get alias doc image path (latest by issue date)
+        const [aliasDocRows] = await connection.execute(`
+            SELECT alias_doc_storage FROM ALIAS_DOCUMENTATION ad
+            JOIN CUSTOMER_ALIAS ca ON ad.customer_alias_id = ca.customer_alias_id
+            WHERE ca.cif_number = ? AND alias_doc_storage IS NOT NULL AND alias_doc_storage != ''
+            ORDER BY alias_doc_issue_date DESC, ad.alias_doc_number DESC LIMIT 1
+        `, [cif_number]);
+        const alias_doc_path = aliasDocRows.length > 0 ? aliasDocRows[0].alias_doc_storage : null;
+
+        // Return customer profile with image paths
         res.json({
             customer: customerResult[0],
-            accounts: [], // Will implement later when schema is confirmed
-            idDocuments: [] // Will implement later when schema is confirmed
+            valid_id_path,
+            alias_doc_path
         });
         
     } catch (error) {
@@ -571,7 +666,7 @@ router.get('/admin/customers/:cif_number', async (req, res) => {
 });
 
 // Admin review queue - update review status
-router.put('/admin/review-queue/:review_id', async (req, res) => {
+router.put('/admin/review-queue/:review_id', requireAdminSession, async (req, res) => {
     try {
         const { review_id } = req.params;
         const { review_status, review_comment, employee_id } = req.body;
@@ -621,7 +716,7 @@ router.put('/admin/review-queue/:review_id', async (req, res) => {
 });
 
 // Admin customer search
-router.get('/admin/customers/search/:query', async (req, res) => {
+router.get('/admin/customers/search/:query', requireAdminSession, async (req, res) => {
     try {
         const { query } = req.params;
         const limit = parseInt(req.query.limit) || 10;
@@ -678,139 +773,59 @@ router.get('/admin/customers/search/:query', async (req, res) => {
     }
 });
 
-// Admin closed accounts - get all closed/inactive accounts
-router.get('/admin/closed-accounts', async (req, res) => {
+// Admin closed accounts - get all closed accounts
+router.get('/admin/accounts/closed', requireAdminSession, async (req, res) => {
+    console.log('📄 Closed accounts request received');
+    let connection;
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 50;
+        let limit = parseInt(req.query.limit, 10);
+        if (isNaN(limit) || limit <= 0) limit = 100;
+        let page = parseInt(req.query.page, 10);
+        if (isNaN(page) || page <= 0) page = 1;
         const offset = (page - 1) * limit;
+        connection = await pool.getConnection();
         
-        const connection = await pool.getConnection();
-        
-        // Get closed/inactive customers
-        const [customers] = await connection.execute(`
-            SELECT 
-                c.cif_number,
-                c.customer_first_name,
-                c.customer_last_name,
-                c.customer_middle_name,
-                c.customer_suffix,
-                c.customer_username,
-                c.customer_status,
-                c.updated_at as status_changed_date,
-                c.created_at
-            FROM customer c
-            WHERE c.customer_status IN ('Inactive', 'Suspended', 'Dormant') 
-            AND c.is_deleted = FALSE
-            ORDER BY c.updated_at DESC
-            LIMIT ? OFFSET ?
-        `, [limit, offset]);
-        
-        // Get total count
-        const [countResult] = await connection.execute(`
-            SELECT COUNT(*) as total 
-            FROM customer 
-            WHERE customer_status IN ('Inactive', 'Suspended', 'Dormant') 
-            AND is_deleted = FALSE
+        // First check if there are any closed accounts
+        const [accountCheck] = await connection.execute(`
+            SELECT COUNT(*) as count 
+            FROM ACCOUNT_DETAILS 
+            WHERE account_status = 'Closed'
         `);
+        console.log('📊 Found', accountCheck[0].count, 'closed accounts');
         
-        const total = countResult[0].total;
+        if (accountCheck[0].count === 0) {
+            // No closed accounts, return empty response
+            console.log('ℹ️ No closed accounts found, returning empty response');
+            return res.json({ accounts: [] });
+        }
         
-        res.json({
-            customers,
-            pagination: {
-                page,
-                limit,
-                total,
-                totalPages: Math.ceil(total / limit)
-            }
-        });
-        
+        let whereClause = "a.account_status = 'Closed'";
+        const sql = `
+            SELECT 
+                ca.cif_number,
+                a.account_number,
+                a.account_status,
+                a.account_open_date,
+                a.account_close_date,
+                a.product_type_code,
+                p.product_type_name,
+                c.customer_first_name,
+                c.customer_last_name
+            FROM CUSTOMER_ACCOUNT ca
+            JOIN ACCOUNT_DETAILS a ON ca.account_number = a.account_number
+            LEFT JOIN CUSTOMER c ON ca.cif_number = c.cif_number
+            LEFT JOIN CUSTOMER_PRODUCT_TYPE p ON a.product_type_code = p.product_type_code
+            WHERE ${whereClause}
+            ORDER BY a.account_close_date DESC
+            LIMIT ${limit} OFFSET ${offset}
+        `;
+        const [accounts] = await connection.execute(sql);
+        res.json({ accounts });
     } catch (error) {
         console.error('Error fetching closed accounts:', error);
         res.status(500).json({ 
             message: 'Failed to fetch closed accounts',
-            error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
-        });
-    } finally {
-        if (connection) {
-            connection.release();
-        }
-    }
-});
-
-// API endpoints for frontend compatibility
-// GET /api/employees - For admin-user-management2.html
-router.get('/api/employees', async (req, res) => {
-    console.log('👨‍💼 API Employee list request received');
-    let connection;
-    
-    try {
-        connection = await pool.getConnection();
-        
-        // Get all employees with essential information
-        const [employees] = await connection.execute(`
-            SELECT 
-                employee_id,
-                employee_first_name,
-                employee_last_name,
-                employee_username,
-                employee_position,
-                created_at
-            FROM bank_employee 
-            WHERE is_deleted = FALSE
-            ORDER BY created_at DESC
-        `);
-        
-        console.log(`✅ Retrieved ${employees.length} employees`);
-        res.json(employees);
-        
-    } catch (error) {
-        console.error('❌ Error fetching employees:', error);
-        res.status(500).json({ 
-            error: 'Failed to load employees',
-            message: process.env.NODE_ENV === 'development' ? error.message : 'Internal Server Error'
-        });
-    } finally {
-        if (connection) {
-            connection.release();
-        }
-    }
-});
-
-// GET /api/customers - For admin-user-management.html  
-router.get('/api/customers', async (req, res) => {
-    console.log('👥 API Customer list request received');
-    let connection;
-    
-    try {
-        connection = await pool.getConnection();
-        
-        // Get all customers with essential information
-        const [customers] = await connection.execute(`
-            SELECT 
-                cif_number,
-                customer_first_name,
-                customer_last_name,
-                customer_username,
-                customer_status,
-                created_at,
-                birth_date,
-                gender,
-                citizenship
-            FROM customer 
-            WHERE is_deleted = FALSE
-            ORDER BY created_at DESC
-        `);
-        
-        console.log(`✅ Retrieved ${customers.length} customers`);
-        res.json(customers);
-        
-    } catch (error) {
-        console.error('❌ Error fetching customers:', error);
-        res.status(500).json({ 
-            error: 'Error Loading Customers',
-            message: process.env.NODE_ENV === 'development' ? error.message : 'Internal Server Error'
+            error: error.message
         });
     } finally {
         if (connection) {
@@ -821,14 +836,14 @@ router.get('/api/customers', async (req, res) => {
 
 // Employee CRUD Operations
 // Create new employee
-router.post('/admin/employees', async (req, res) => {
+router.post('/admin/employees', requireAdminSession, async (req, res) => {
     console.log('👨‍💼 Creating new employee:', req.body);
     let connection;
     
     try {
-        const { username, firstName, lastName, position } = req.body;
+        const { username, password, firstName, lastName, position } = req.body;
         
-        if (!username || !firstName || !lastName || !position) {
+        if (!username || !password || !firstName || !lastName || !position) {
             return res.status(400).json({ message: 'All fields are required' });
         }
         
@@ -844,17 +859,18 @@ router.post('/admin/employees', async (req, res) => {
             return res.status(400).json({ message: 'Username already exists' });
         }
         
-        // Insert new employee
+        // Insert new employee (now includes password)
         const [result] = await connection.execute(`
             INSERT INTO bank_employee (
                 employee_username,
+                employee_password,
                 employee_first_name,
                 employee_last_name,
                 employee_position,
                 created_at,
                 is_deleted
-            ) VALUES (?, ?, ?, ?, NOW(), FALSE)
-        `, [username, firstName, lastName, position]);
+            ) VALUES (?, ?, ?, ?, ?, NOW(), FALSE)
+        `, [username, password, firstName, lastName, position]);
         
         console.log('✅ Employee created with ID:', result.insertId);
         
@@ -878,13 +894,13 @@ router.post('/admin/employees', async (req, res) => {
 });
 
 // Update existing employee
-router.put('/admin/employees/:employee_id', async (req, res) => {
+router.put('/admin/employees/:employee_id', requireAdminSession, async (req, res) => {
     console.log('🔧 Updating employee:', req.params.employee_id, req.body);
     let connection;
     
     try {
         const { employee_id } = req.params;
-        const { username, firstName, lastName, position } = req.body;
+        const { username, password, firstName, lastName, position } = req.body;
         
         if (!username || !firstName || !lastName || !position) {
             return res.status(400).json({ message: 'All fields are required' });
@@ -902,15 +918,32 @@ router.put('/admin/employees/:employee_id', async (req, res) => {
             return res.status(400).json({ message: 'Username already exists' });
         }
         
+        let updateQuery, updateParams;
+        if (password && password.trim() !== '') {
+            updateQuery = `
+                UPDATE bank_employee 
+                SET employee_username = ?, 
+                    employee_password = ?,
+                    employee_first_name = ?, 
+                    employee_last_name = ?, 
+                    employee_position = ?
+                WHERE employee_id = ? AND is_deleted = FALSE
+            `;
+            updateParams = [username, password, firstName, lastName, position, employee_id];
+        } else {
+            updateQuery = `
+                UPDATE bank_employee 
+                SET employee_username = ?, 
+                    employee_first_name = ?, 
+                    employee_last_name = ?, 
+                    employee_position = ?
+                WHERE employee_id = ? AND is_deleted = FALSE
+            `;
+            updateParams = [username, firstName, lastName, position, employee_id];
+        }
+        
         // Update employee
-        const [result] = await connection.execute(`
-            UPDATE bank_employee 
-            SET employee_username = ?, 
-                employee_first_name = ?, 
-                employee_last_name = ?, 
-                employee_position = ?
-            WHERE employee_id = ? AND is_deleted = FALSE
-        `, [username, firstName, lastName, position, employee_id]);
+        const [result] = await connection.execute(updateQuery, updateParams);
         
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Employee not found' });
@@ -937,7 +970,7 @@ router.put('/admin/employees/:employee_id', async (req, res) => {
 });
 
 // Delete employee (soft delete)
-router.delete('/admin/employees/:employee_id', async (req, res) => {
+router.delete('/admin/employees/:employee_id', requireAdminSession, async (req, res) => {
     console.log('🗑️ Deleting employee:', req.params.employee_id);
     let connection;
     

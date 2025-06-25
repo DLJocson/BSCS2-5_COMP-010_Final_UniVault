@@ -2,20 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const cif = localStorage.getItem('cif_number');
   if (!cif) return;
 
-  // Fetch and display customer name and last login
   fetch(`/api/customer/${cif}`)
     .then(res => res.json())
     .then(customer => {
-      // Set welcome message
       document.querySelector('.welcome .blue-text').textContent = customer.customer_first_name || 'Customer';
-      // Set last login
       const lastLogin = localStorage.getItem('last_login');
       if (lastLogin) {
         document.querySelector('.welcome-message p span').textContent = lastLogin;
       } else {
         document.querySelector('.welcome-message p span').textContent = '';
       }
-      // Set customer name in profile section
       document.getElementById('customer-name').textContent = 
         [customer.customer_first_name, customer.customer_middle_name, customer.customer_last_name, customer.customer_suffix_name]
           .filter(Boolean).join(' ');
@@ -25,10 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`/api/accounts/${cif}`)
       .then(res => res.json())
       .then(accounts => {
-        // Flexible filter: allow both 'Deposit Account' and 'Deposits'
-        const filtered = accounts.filter(acc =>
-          acc.account_type === 'Deposit Account' || acc.account_type === 'Deposits'
-        );
+        const filtered = accounts.filter(acc => acc.account_type === accountType);
         const cardContainer = document.querySelector('.account-info-card');
         cardContainer.innerHTML = '';
 
@@ -61,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
           `;
           cardContainer.appendChild(card);
 
-          // Update the details panel with the first account
           if (idx === 0) {
             document.querySelector('.account-nickname textarea').value = acc.account_nickname || '';
             document.querySelector('.account-number textarea').value = acc.account_number || '';
@@ -73,8 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  // Render deposit accounts
-  renderAccountsByType('Deposit Account', '/assets/savings.png');
+  renderAccountsByType('Wealth Management Account', '/assets/investment.png');
 
   // Logout functionality
   const logoutBtn = document.getElementById('log-out');

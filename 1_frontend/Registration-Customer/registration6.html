@@ -356,7 +356,7 @@
       "Voter's ID",
       "Senior Citizen ID",
       "Seaman's Book",
-      "Gov’t / GOCC ID",
+      "Gov't / GOCC ID",
       "DSWD Certification",
       "NCWDP Certification",
       "PWD ID"
@@ -438,6 +438,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    // Add asterisks to First Name and Last Name
     const firstNameLabel = document.querySelector('label[for="first-name"]');
     const lastNameLabel = document.querySelector('label[for="last-name"]');
     [firstNameLabel, lastNameLabel].forEach(label => {
@@ -446,22 +447,52 @@
       }
     });
 
-    const id1IssueDate = document.querySelector('.id1-issue-date .subtitle');
-    const id2IssueDate = document.querySelector('.id2-issue-date .subtitle');
-    [id1IssueDate, id2IssueDate].forEach(label => {
+    // Add asterisks to ID 1 Type and ID 1 Number
+    const id1TypeLabel = document.querySelector('.second-container .select-id label[for="select-id1"]');
+    const id1NumLabel = document.querySelector('.second-container .id-num label');
+    [id1TypeLabel, id1NumLabel].forEach(label => {
       if (label && !label.querySelector('.required-asterisk')) {
         label.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
       }
     });
 
-    // Add red asterisk to "ID 1" and "ID 2" headings
+    // Add asterisks to ID 2 Type and ID 2 Number
+    const id2TypeLabel = document.querySelector('.third-container .select-id label[for="select-id2"]');
+    const id2NumLabel = document.querySelector('.third-container .id-num label');
+    [id2TypeLabel, id2NumLabel].forEach(label => {
+      if (label && !label.querySelector('.required-asterisk')) {
+        label.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+      }
+    });
+
+    // Add asterisks to Month and Year for ID 1 Issue Date
+    const id1IssueMonthLabel = document.querySelector('.id1-issue-date label[for="issue-month-id1"]');
+    const id1IssueYearLabel = document.querySelector('.id1-issue-date label[for="issue-year-id1"]');
+    [id1IssueMonthLabel, id1IssueYearLabel].forEach(label => {
+      if (label && !label.querySelector('.required-asterisk')) {
+        label.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+      }
+    });
+
+    // Add asterisks to Month and Year for ID 2 Issue Date
+    const id2IssueMonthLabel = document.querySelector('.id2-issue-date label[for="issue-month-id2"]');
+    const id2IssueYearLabel = document.querySelector('.id2-issue-date label[for="issue-year-id2"]');
+    [id2IssueMonthLabel, id2IssueYearLabel].forEach(label => {
+      if (label && !label.querySelector('.required-asterisk')) {
+        label.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+      }
+    });
+
+    // Remove asterisks from ID 1 and ID 2 headings if present
     const id1Heading = document.querySelector('.second-container > .subtitle');
-    if (id1Heading && !id1Heading.querySelector('.required-asterisk')) {
-      id1Heading.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+    if (id1Heading) {
+      const asterisk = id1Heading.querySelector('.required-asterisk');
+      if (asterisk) asterisk.remove();
     }
     const id2Heading = document.querySelector('.third-container > h2');
-    if (id2Heading && !id2Heading.querySelector('.required-asterisk')) {
-      id2Heading.insertAdjacentHTML('beforeend', '<span class="required-asterisk">*</span>');
+    if (id2Heading) {
+      const asterisk = id2Heading.querySelector('.required-asterisk');
+      if (asterisk) asterisk.remove();
     }
 
     const uploadDirections = [

@@ -183,7 +183,7 @@ class UserManagement {
                 console.log('⏰ Customer request timed out');
             }, 10000); // 10 second timeout
             
-            const response = await fetch(`/api/customers?${params.toString()}`, {
+            const response = await fetch(`/api/admin/customers?${params.toString()}`, {
                 signal: controller.signal,
                 headers: {
                     'Accept': 'application/json',
@@ -497,7 +497,7 @@ class UserManagement {
         
         try {
             const promises = Array.from(this.selectedCustomers).map(async (cifNumber) => {
-                const response = await fetch(`/admin/customers/${cifNumber}/status`, {
+                const response = await fetch(`/api/admin/customers/${cifNumber}/status`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -535,7 +535,7 @@ class UserManagement {
     // Profile viewing
     async showCustomerProfile(cifNumber) {
         try {
-            const response = await fetch(`/admin/customers/${cifNumber}`);
+            const response = await fetch(`/api/admin/customers/${cifNumber}`);
             const customer = await response.json();
             
             if (response.ok) {

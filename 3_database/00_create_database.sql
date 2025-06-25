@@ -7,3 +7,6 @@ USE univault_schema;
 
 -- Verify database creation
 SELECT 'Database univault_schema created successfully' as status;
+
+-- Add created_at column to BANK_EMPLOYEE if missing
+ALTER TABLE BANK_EMPLOYEE ADD COLUMN IF NOT EXISTS created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;

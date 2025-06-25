@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Closed Successfully - UniVault</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .success-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .success-icon {
+            color: #28a745;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .success-title {
+            color: #2a4d8f;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .success-message {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        
+        .account-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .account-info h4 {
+            color: #2a4d8f;
+            margin: 0 0 10px 0;
+        }
+        
+        .account-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .btn {
+            background: #2a4d8f;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            background: #1e3a6f;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .logo {
+            margin-bottom: 20px;
+        }
+        
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo .uni {
+            color: #2a4d8f;
+        }
+        
+        .logo .vault {
+            color: #f4a261;
+        }
+        
+        .notice {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="logo">
+            <span class="uni">Uni</span><span class="vault">vault</span>
+        </div>
+        
+        <div class="success-icon">✓</div>
+        
+        <h1 class="success-title">Account Closed Successfully!</h1>
+        
+        <div class="account-info" id="account-info">
+            <h4>Closed Account Details</h4>
+            <p><strong>Account Number:</strong> <span id="account-number">-</span></p>
+            <p><strong>Account Type:</strong> <span id="account-type">-</span></p>
+            <p><strong>Date Closed:</strong> <span id="close-date">-</span></p>
+        </div>
+        
+        <p class="success-message">
+            Your account has been permanently closed. If you had any remaining balance, 
+            it has been processed according to your bank's closure policy.
+        </p>
+        
+        <div class="notice">
+            <strong>Important:</strong> This action cannot be undone. If you need to access 
+            any account statements or transaction history, please contact customer support.
+        </div>
+        
+        <div class="action-buttons">
+            <a href="accounts_display.html" class="btn" id="view-accounts-btn">View Remaining Accounts</a>
+            <a href="close-account.html" class="btn btn-secondary">Close Another Account</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get closed account details from URL parameters or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const accountNumber = urlParams.get('account') || localStorage.getItem('lastClosedAccount');
+            const accountType = urlParams.get('type') || localStorage.getItem('lastClosedAccountType');
+            
+            // Display account details
+            if (accountNumber) {
+                document.getElementById('account-number').textContent = '*'.repeat(8) + accountNumber.slice(-4);
+                // Clean up
+                localStorage.removeItem('lastClosedAccount');
+            }
+            
+            if (accountType) {
+                document.getElementById('account-type').textContent = accountType;
+                localStorage.removeItem('lastClosedAccountType');
+            }
+            
+            // Set close date to today
+            document.getElementById('close-date').textContent = new Date().toLocaleDateString();
+            
+            // Add CIF parameter to navigation links if available
+            const cifNumber = localStorage.getItem('cif_number') || sessionStorage.getItem('cif_number');
+            if (cifNumber) {
+                const viewAccountsBtn = document.getElementById('view-accounts-btn');
+                if (viewAccountsBtn) {
+                    viewAccountsBtn.href = `accounts_display.html?cif=${cifNumber}`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

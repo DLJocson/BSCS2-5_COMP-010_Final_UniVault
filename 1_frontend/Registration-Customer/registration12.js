@@ -363,6 +363,11 @@ document.addEventListener("DOMContentLoaded", () => {
       registrationData.emailAddress = localStorage.getItem('emailAddress') || localStorage.getItem('email') || 'test@example.com';
     }
     
+    // Ensure alias_doc_storage is set from supportingDocPath if present
+    if (!registrationData.alias_doc_storage && localStorage.getItem('supporting-doc_path')) {
+      registrationData.alias_doc_storage = localStorage.getItem('supporting-doc_path');
+    }
+    
     return registrationData;
   }
 

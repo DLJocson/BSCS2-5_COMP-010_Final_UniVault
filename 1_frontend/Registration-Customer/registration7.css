@@ -676,3 +676,16 @@ select,
   color: red;
   margin-left: 4px;
 }
+
+/* Upload box with image background */
+.upload-box.has-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.upload-box.has-image .icon,
+.upload-box.has-image .direction {
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}

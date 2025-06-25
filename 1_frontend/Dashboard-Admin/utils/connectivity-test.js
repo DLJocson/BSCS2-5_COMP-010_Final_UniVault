@@ -5,7 +5,7 @@ class ConnectivityTest {
         
         try {
             // Test the basic admin test endpoint
-            const response = await fetch('/admin/test', {
+            const response = await fetch('/api/admin/test', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -44,7 +44,7 @@ class ConnectivityTest {
         
         try {
             // Test dashboard stats endpoint which requires database
-            const response = await fetch('/admin/dashboard-stats', {
+            const response = await fetch('/api/admin/dashboard-stats', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',

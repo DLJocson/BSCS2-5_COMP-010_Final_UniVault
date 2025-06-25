@@ -75,20 +75,6 @@
             <div id="accounts-list" class="accounts-list" style="display: none;">
               <!-- Account cards will be populated by JavaScript -->
             </div>
-            <div id="no-accounts-message" class="no-accounts-message" style="display: none;">
-              <p>No accounts found for this customer.</p>
-            </div>
-          </div>
-          
-          <!-- Profile Validation Section -->
-          <div class="profile-validation-container">
-            <h1 class="title">Profile Completeness Validation</h1>
-            <div id="validation-loading" class="validation-loading" style="display: none;">
-              <p>Loading validation information...</p>
-            </div>
-            <div id="validation-content" class="validation-content" style="display: none;">
-              <!-- Validation content will be populated by JavaScript -->
-            </div>
           </div>
           
           <div class="personal-information-container">
@@ -398,6 +384,34 @@
                   <input type="text" id="alias-last-name" />
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Uploaded Documents Section (Valid ID + Alias Doc) -->
+          <div class="uploaded-doc-container">
+            <div class="uploaded-id-section">
+              <h1 class="title">Uploaded Valid ID</h1>
+              <div id="valid-id-image-container">
+                <!-- Image or fallback will be rendered by JS -->
+              </div>
+            </div>
+            <div class="uploaded-alias-doc-section">
+              <h1 class="title">Uploaded Alias Documentation</h1>
+              <div id="alias-doc-image-container">
+                <!-- Image or fallback will be rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="customer-options">
+            <div class="customer-options-container">
+              <a id="dashboard-option" href="admin-dashboard.html">Dashboard</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="user-management-option" href="admin-user-management.html">User Management</a>
+            </div>
+            <div class="customer-options-container">
+              <a id="closed-account-option" href="admin-closed-account.html">Closed Accounts</a>
             </div>
           </div>
         </div>
